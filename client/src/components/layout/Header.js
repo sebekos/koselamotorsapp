@@ -1,17 +1,19 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
         <header>
             <div className="container">
                 <div id="branding">
-                    <h1>Kosela Motors</h1>
+                    <h1><span className='highlight'>Kosela</span> Motors</h1>
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Services</a></li>
+                        <li className='current'><Link to="/">Home</Link></li>
+                        <li><Link to='/about'>About</Link></li>
+                        <li><Link to='/services'>Services</Link></li>
+                        <li><Link to='/gallery'>Gallery</Link></li>
                     </ul>
                 </nav>
             </div>
