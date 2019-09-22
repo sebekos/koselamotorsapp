@@ -8,17 +8,17 @@ const Boxes = () => {
         <section id='boxes'>
             <div className="container">
                 <div className="box">
-                    <img src="https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/custom.jpg" alt="Custom" />
+                    <i class="fas fa-car-crash fa-4x"></i>
                     <h3>Maintenance</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis mollitia nemo eum quibusdam quaerat repellendus, beatae tenetur at voluptate inventore?</p>
                 </div>
                 <div className="box">
-                    <img src="https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/custom.jpg" alt="Custom" />
+                    <i class="fas fa-tools fa-4x"></i>
                     <h3>Engine Work</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis mollitia nemo eum quibusdam quaerat repellendus, beatae tenetur at voluptate inventore?</p>
                 </div>
                 <div className="box">
-                    <img src="https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/custom.jpg" alt="Custom" />
+                    <i class="fas fa-toolbox fa-4x"></i>
                     <h3>Custom Builds</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis mollitia nemo eum quibusdam quaerat repellendus, beatae tenetur at voluptate inventore?</p>
                 </div>

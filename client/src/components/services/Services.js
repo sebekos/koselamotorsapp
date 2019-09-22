@@ -6,8 +6,8 @@ const Services = () => {
             <div className="container">
                 <div className="services-container">
                     <div className="servicebox">
-                        <div className="service-img">
-                            <img src="https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/custom.jpg" alt="Custom" />
+                        <div className="service-icon">
+                            <i class="fas fa-car-crash fa-7x"></i>
                         </div>
                         <div className="service-description">
                             <h3>Maintenance</h3>
@@ -15,8 +15,8 @@ const Services = () => {
                         </div>
                     </div>
                     <div className="servicebox">
-                        <div className="service-img">
-                            <img src="https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/custom.jpg" alt="Custom" />
+                        <div className="service-icon">
+                            <i class="fas fa-tools fa-7x"></i>
                         </div>
                         <div className="service-description">
                             <h3>Engine Work</h3>
@@ -24,8 +24,8 @@ const Services = () => {
                         </div>
                     </div>
                     <div className="servicebox">
-                        <div className="service-img">
-                            <img src="https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/custom.jpg" alt="Custom" />
+                        <div className="service-icon">
+                            <i class="fas fa-toolbox fa-7x"></i>
                         </div>
                         <div className="service-description">
                             <h3>Custom Builds</h3>
