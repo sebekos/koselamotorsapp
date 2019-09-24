@@ -25,7 +25,7 @@ const Services = () => {
                     </div>
                     <div className="servicebox">
                         <div className="service-icon">
-                            <i class="fas fa-toolbox fa-7x"></i>
+                            <i className="fas fa-toolbox fa-7x"></i>
                         </div>
                         <div className="service-description">
                             <h3>Custom Builds</h3>

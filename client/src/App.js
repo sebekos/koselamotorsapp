@@ -6,11 +6,11 @@ import Home from './components/home/Home';
 import Services from './components/services/Services';
 import Gallery from './components/gallery/Gallery';
 import About from './components/about/About';
+import Login from './components/auth/Login';
 
 //Redux
 import { Provider } from 'react-redux';
 import store from './Redux/store';
-
 
 import './App.css';
 
@@ -24,6 +24,7 @@ const App = () =>
           <Route exact path='/about' component={About} />
           <Route exact path='/services' component={Services} />
           <Route exact path='/gallery' component={Gallery} />
+          <Route exact path='/login' component={Login} />
         </Switch>
         <Footer />
       </Fragment>

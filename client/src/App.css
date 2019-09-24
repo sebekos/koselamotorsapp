@@ -65,8 +65,7 @@ header .highlight, header .current a{
 }
 
 header a:hover{
-  color: #cccccc;
-  font-weight: bold;
+  color: #ffffff;
 }
 
 /* Showcase */
@@ -175,6 +174,12 @@ article#main-col{
   padding: 20px;
   height: 100%;
   box-sizing: border-box;
+}
+
+#main{
+  margin: 20px auto;
+  max-width: 1200px;
+
 }
 
 @media(max-width: 815px){
