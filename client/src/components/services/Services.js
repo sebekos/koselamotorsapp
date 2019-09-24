@@ -7,7 +7,7 @@ const Services = () => {
                 <div className="services-container">
                     <div className="servicebox">
                         <div className="service-icon">
-                            <i class="fas fa-car-crash fa-7x"></i>
+                            <i className="fas fa-car-crash fa-7x"></i>
                         </div>
                         <div className="service-description">
                             <h3>Maintenance</h3>
@@ -16,7 +16,7 @@ const Services = () => {
                     </div>
                     <div className="servicebox">
                         <div className="service-icon">
-                            <i class="fas fa-tools fa-7x"></i>
+                            <i className="fas fa-tools fa-7x"></i>
                         </div>
                         <div className="service-description">
                             <h3>Engine Work</h3>
