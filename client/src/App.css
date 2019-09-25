@@ -197,6 +197,9 @@ header a:hover{
 #boxes .box{
   padding: 30px;
   width: 30%;
+  border: darkgrey solid 1px;
+  margin: 0 10px 5px;
+  background: #e6e6e6;
 }
 
 /* Footer */
@@ -301,6 +304,12 @@ button {
   font: inherit;
 }
 
+.image-gallery {
+  border: darkgrey solid 1px;
+  background: #e6e6e6;
+  padding: 2px;
+}
+
 @media(max-width: 815px){
   header #branding, 
   header nav, 
@@ -328,8 +337,10 @@ button {
   }
 
   #boxes .box{
-    padding: 0;
-    margin-top: 20px;
+    padding: 20px;
+    border: darkgrey solid 1px;
+    background: #e6e6e6;
+    box-sizing: border-box;
   }
 
   .servicebox{
