@@ -7,6 +7,7 @@ import Services from './components/services/Services';
 import Gallery from './components/gallery/Gallery';
 import About from './components/about/About';
 import Login from './components/auth/Login';
+import Alert from './components/layout/Alert';
 
 //Redux
 import { Provider } from 'react-redux';
@@ -19,6 +20,7 @@ const App = () =>
     <Router>
       <Fragment>
         <Header />
+        <Alert />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/about' component={About} />
