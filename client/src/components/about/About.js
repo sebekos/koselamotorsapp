@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import InlineEdit from 'react-edit-inline2'
 
-const About = () => {
+
+const About = ({ isAuthenticated }) => {
+
+    const [message, setMessage] = useState('Test');
+
+    const dataChanged = (data) => {
+        setMessage(data.message)
+    }
+
+    const customValidateText = (text) => {
+        return (text.length > 10 && text.length < 64);
+    }
+
     return (
         <section id='main'>
             <div className="container">
@@ -17,6 +32,13 @@ const About = () => {
                     <div className="dark">
                         <h3>What We Do</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quo quae blanditiis eaque omnis dolorem ipsa commodi amet quidem labore?</p>
+                        <InlineEdit
+                            isDisabled={!isAuthenticated}
+                            validate={customValidateText}
+                            text={message}
+                            paramName="message"
+                            change={dataChanged}
+                        />
                     </div>
                 </aside>
             </div>
@@ -24,4 +46,12 @@ const About = () => {
     )
 }
 
-export default About
+About.propTypes = {
+    isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, null)(About);

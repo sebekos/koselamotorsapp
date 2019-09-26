@@ -1,22 +1,23 @@
 import React, { Fragment, useState } from 'react';
-import { setAlert } from '../../Redux/actions/alert';
+import { Redirect } from 'react-router-dom';
+import { login } from '../../Redux/actions/auth';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const Login = ({ setAlert }) => {
+const Login = ({ login, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
-
     const { email, password } = formData;
-
     const onChangeHandler = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-
     const onSubmitHandler = async e => {
         e.preventDefault();
-        console.log(formData);
-        setAlert('Test', 'danger');
+        login(email, password);
+    }
+
+    if (isAuthenticated) {
+        return <Redirect to='/dashboard' />
     }
 
     return (
@@ -55,7 +56,12 @@ const Login = ({ setAlert }) => {
 }
 
 Login.propTypes = {
-    setAlert: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
 }
 
-export default connect(null, { setAlert })(Login);
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { login })(Login);
