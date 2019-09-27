@@ -12,7 +12,7 @@ import About from './components/about/About';
 import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
-
+import EditModal from './components/modal/EditModal';
 
 //Redux
 import { Provider } from 'react-redux';
@@ -33,6 +33,8 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
+
+          <EditModal />
           <Header />
           <Alert />
           <Switch>

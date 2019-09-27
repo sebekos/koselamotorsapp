@@ -1,4 +1,5 @@
 import React from 'react'
+import EditModal from '../modal/EditModal'
 
 const Dashboard = () => {
     return (
@@ -8,6 +9,7 @@ const Dashboard = () => {
                     <h1>Instructions</h1>
                     <p>Go to any page, double click on any text box then save.</p>
                 </div>
+                <EditModal />
             </div>
         </section>
     )

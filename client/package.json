@@ -30,7 +30,5 @@
     ]
   },
   "proxy": "http://localhost:5000",
-  "devDependencies": {
-    "react-edit-inline2": "^1.0.2"
-  }
+  "devDependencies": {}
 }
