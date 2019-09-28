@@ -1,26 +1,28 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import { closeModal } from './modal';
 import {
-    OPEN_MODAL,
-    CLOSE_MODAL,
+    GET_TEXT,
     TEXT_SUCCESS,
     TEXT_FAILURE
 } from './types';
 
-
-// Open modal
-export const openModal = (data) => dispatch => {
-    dispatch({
-        type: OPEN_MODAL,
-        payload: data
-    });
-}
-
-// Close modal
-export const closeModal = () => dispatch => {
-    dispatch({
-        type: CLOSE_MODAL
-    });
+// Get all text
+export const getText = () => async dispatch => {
+    try {
+        const res = await axios.get(`/api/text`);
+        let textObj = {};
+        res.data.forEach(item => { textObj[item.name] = item.text });
+        dispatch({
+            type: GET_TEXT,
+            payload: textObj
+        })
+    } catch (err) {
+        dispatch({
+            type: TEXT_FAILURE,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
 }
 
 // Add Text or Update
@@ -32,12 +34,13 @@ export const updateText = (formData) => async dispatch => {
             }
         }
         const res = await axios.post('/api/text', formData, config);
+        console.log(res.data);
         dispatch({
             type: TEXT_SUCCESS,
             payload: res.data
         })
         dispatch(setAlert('Text Updated', 'success'));
-        closeModal();
+        dispatch(closeModal());
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {

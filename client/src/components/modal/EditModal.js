@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { closeModal } from '../../Redux/actions/modal'
+import { updateText } from '../../Redux/actions/text'
 
 Modal.setAppElement(document.getElementById('root'))
 
-const EditModal = ({ closeModal, isAuthenticated, modal: { modalIsOpen } }) => {
+const EditModal = ({ closeModal, modal: { modalIsOpen, text, name }, updateText }) => {
+    const [formText, setFormText] = useState(text);
+
+    const onChangeHandler = e => setFormText(e.target.value);
 
     const customStyles = {
         content: {
@@ -15,13 +19,25 @@ const EditModal = ({ closeModal, isAuthenticated, modal: { modalIsOpen } }) => {
             right: 'auto',
             bottom: 'auto',
             marginRight: '-50%',
-            transform: 'translate(-50%, -50%)'
+            transform: 'translate(-50%, -50%)',
+            width: '500px',
+            height: 'fit-content'
         },
         overlay: { zIndex: 10 }
     };
 
-    const textBtn = () => {
-        console.log(modalIsOpen);
+    const onSave = e => {
+        e.preventDefault();
+        let form = {
+            name: name,
+            text: (formText === '' ? text : formText)
+        }
+        updateText(form);
+        console.log(form);
+    }
+
+    const onClose = () => {
+        closeModal();
     }
 
     return (
@@ -29,17 +45,16 @@ const EditModal = ({ closeModal, isAuthenticated, modal: { modalIsOpen } }) => {
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={customStyles}
-            contentLabel="Example Modal">
-            <h2>Hello</h2>
-            <button onClick={closeModal}>close</button>
-            <button onClick={textBtn}>text</button>
-            <div>I am a modal</div>
-            <form>
-                <input />
-                <button>tab navigation</button>
-                <button>stays</button>
-                <button>inside</button>
-                <button>the modal</button>
+        >
+            <h2>{name}</h2>
+            <form className='form'>
+                <div className="form-group">
+                    <textarea name='formText' onChange={onChangeHandler} defaultValue={text}></textarea>
+                </div>
+                <div className="form-group">
+                    <button onClick={onSave} className="btn btn-success">Save</button>
+                    <button onClick={onClose} className="btn btn-primary">Close</button>
+                </div>
             </form>
         </Modal>
     )
@@ -48,12 +63,11 @@ const EditModal = ({ closeModal, isAuthenticated, modal: { modalIsOpen } }) => {
 EditModal.propTypes = {
     closeModal: PropTypes.func.isRequired,
     modal: PropTypes.object.isRequired,
-    isAuthenticated: PropTypes.bool
+    updateText: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
     modal: state.modal
 });
 
-export default connect(mapStateToProps, { closeModal })(EditModal)
+export default connect(mapStateToProps, { closeModal, updateText })(EditModal)

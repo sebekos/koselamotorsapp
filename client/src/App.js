@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { loadUser } from './Redux/actions/auth';
+import { getText } from './Redux/actions/text';
 import setAuthToken from './Redux/utils/setAuthToken';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Header from "./components/layout/Header";
@@ -27,6 +28,7 @@ if (localStorage.token) {
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
+    store.dispatch(getText());
   }, []);
 
   return (

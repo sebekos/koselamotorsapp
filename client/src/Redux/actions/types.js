@@ -11,5 +11,6 @@ export const LOGOUT = 'LOGOUT';
 export const CLEAR_PROFILE = 'CLEARPROFILE';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
+export const GET_TEXT = 'GET_TEXT';
 export const TEXT_SUCCESS = 'UPDATE_TEXT';
 export const TEXT_FAILURE = 'TEXT_FAILURE';

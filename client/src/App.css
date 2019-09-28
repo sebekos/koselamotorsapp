@@ -52,6 +52,7 @@ ul{
   cursor: pointer;
   transition: opacity 0.2s ease-in;
   outline: none;
+  margin-right: 10px;
 }
 
 .btn-primary,
@@ -297,6 +298,11 @@ article#main-col{
   font-size: 1.2rem;
   border: 1px solid #ccc;
   box-sizing: border-box;
+}
+
+.form textarea {
+  height: 375px;
+  width: 100%;
 }
 
 .form input[type='submit'],

@@ -1,8 +1,6 @@
 import {
     OPEN_MODAL,
-    CLOSE_MODAL,
-    TEXT_SUCCESS,
-    TEXT_FAILURE
+    CLOSE_MODAL
 } from '../actions/types';
 
 const initialState = {
