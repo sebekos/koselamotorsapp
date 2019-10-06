@@ -6,6 +6,7 @@ const fileType = require('file-type');
 const bluebird = require('bluebird');
 const multiparty = require('multiparty');
 const auth = require('../../middleware/auth');
+const Photos = require('../../models/Photos');
 const dotenv = require('dotenv');
 require('dotenv').config();
 
@@ -47,14 +48,37 @@ router.post('/', [auth], (req, res) => {
             const timestamp = Date.now().toString();
             const fileName = `gallery/${timestamp}`;
             const data = await uploadFile(buffer, fileName, type);
-            // if (data) {
-            //     await Profile.findOneAndUpdate({ user: req.user.id }, { $set: { "photo": Object.entries(data)[1][1] } }, { new: true });
-            // }
-            return res.status(200).send(data);
+
+            const photos = await Photos.findOne();
+            if (photos && data) {
+                const photoArray = [...photos.photos, Object.entries(data)[1][1]];
+                await Photos.findByIdAndUpdate(photos._id, { $set: { "photos": photoArray } }, { new: true });
+                return res.status(200).send(Object.entries(data)[1][1]);
+            }
+
+            // Build text object
+            const photosFields = {};
+            if (data) photosFields.photos = [Object.entries(data)[1][1]];
+            field = new Photos(photosFields);
+            await field.save();
+            res.json(field);
         } catch (error) {
             return res.status(400).send(error);
         }
     });
+});
+
+// GET api/photo
+// Photos route
+// Public
+router.get('/', async (req, res) => {
+    try {
+        const photos = await Photos.find();
+        console.log(photos[0].photos);
+        res.json(photos[0].photos);
+    } catch (err) {
+        res.status(500).send('Server Error');
+    }
 });
 
 module.exports = router;

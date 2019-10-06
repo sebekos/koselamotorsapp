@@ -1,9 +1,12 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import ImageUploader from 'react-images-upload';
-import { resizeBulkArray } from '../../utils/photo';
 import { uploadPhotos } from '../../Redux/actions/photo';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bulkResize } from '../../utils/photo'
 
-const AddPhotos = () => {
+
+const AddPhotos = ({ uploadPhotos, photo }) => {
     const [pictures, setPictures] = useState([]);
     const [uploadBtn, setUploadBtn] = useState(false);
 
@@ -17,9 +20,16 @@ const AddPhotos = () => {
     }
 
     const onUpload = async e => {
-        const res = await resizeBulkArray(pictures);
-        console.log(res);
+        let res = await bulkResize(pictures);
+        Promise.all(res.map(picture => {
+            return new Promise((resolve, reject) => resolve(uploadPhotos(picture)));
+        }))
+            .then(results => {
+                setUploadBtn(false);
+                setPictures([]);
+            });
     }
+
     return (
         <div className='container'>
             <div className="upload-images">
@@ -28,7 +38,7 @@ const AddPhotos = () => {
                     buttonText='Choose images'
                     onChange={pictures => onDrop(pictures)}
                     imgExtension={['.jpg', '.gif', '.png', '.gif', 'jpeg']}
-                    maxFileSize={10485760}
+                    maxFileSize={30485760}
                     withPreview={true}
                 />
                 {uploadBtn ? <button onClick={onUpload}>
@@ -39,4 +49,12 @@ const AddPhotos = () => {
     )
 }
 
-export default AddPhotos
+AddPhotos.propTypes = {
+    uploadPhotos: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+    photo: state.photo
+});
+
+export default connect(mapStateToProps, { uploadPhotos })(AddPhotos)
