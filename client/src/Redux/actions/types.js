@@ -14,3 +14,6 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const GET_TEXT = 'GET_TEXT';
 export const TEXT_SUCCESS = 'UPDATE_TEXT';
 export const TEXT_FAILURE = 'TEXT_FAILURE';
+export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
+export const UPLOAD_FAILURE = 'UPLOAD_FAILURE';
+export const UPLOAD_PROGRESS = 'UPLOAD_PROGRESS';

@@ -47,12 +47,14 @@ const Header = ({ auth: { isAuthenticated, loading }, logout, history }) => {
     return (
         <header>
             <div className="container">
-                <div id="branding">
-                    <h1><span className='highlight'>Kosela</span> Motors</h1>
+                <div className="navbar">
+                    <div id='branding'>
+                        <h1><span className='highlight'>Kosela</span> Motors</h1>
+                    </div>
+                    <nav>
+                        {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
+                    </nav>
                 </div>
-                <nav>
-                    {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
-                </nav>
             </div>
         </header>
     )

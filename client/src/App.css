@@ -125,17 +125,8 @@ header li{
   padding: 0 20px 0 20px;
 }
 
-header #branding{
-  float: left;
-}
-
 header #branding h1{
   margin: 0;
-}
-
-header nav{
-  float: right;
-  margin-top: 10px;
 }
 
 header .highlight, header .current a{
@@ -145,6 +136,19 @@ header .highlight, header .current a{
 
 header a:hover{
   color: #ffffff;
+}
+
+.navbar{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: end;
+}
+
+ul{
+  white-space: nowrap;
+  overflow: hidden;
+  float: right;
 }
 
 /* Showcase */
@@ -261,6 +265,16 @@ article#main-col{
   box-sizing: border-box;
 }
 
+.instructions{
+  border: darkgrey solid 1px;
+  margin-bottom: 5px;
+  background: #e6e6e6;
+  padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
 #main{
   margin: 20px auto;
   max-width: 1200px;
@@ -316,10 +330,45 @@ button {
   padding: 2px;
 }
 
-@media(max-width: 815px){
-  header #branding, 
-  header nav, 
-  header nav li,
+.upload-images{
+  border: darkgrey solid 1px;
+  background: #e6e6e6;
+  padding: 2px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.fileContainer {
+  border-radius: 0px !important;
+  border: none;
+  background: #e6e6e6 !important;
+  padding: 2px;
+  padding: 0px;
+  margin: 0px;
+  box-shadow: none;
+}
+
+@media(max-width: 1147px){
+  #branding{
+    white-space: nowrap;
+  }
+
+  .navbar{
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .navbar ul{
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .navbar li{
+    margin-top: .2rem;
+    padding: 0 10px 0 10px;
+  }
+
   #boxes .box,
   article#main-col,
   aside#sidebar{

@@ -20,6 +20,7 @@ import { Provider } from 'react-redux';
 import store from './Redux/store';
 
 import './App.css';
+import AddPhotos from './components/gallery/AddPhotos';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -35,7 +36,6 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-
           <EditModal />
           <Header />
           <Alert />
@@ -46,6 +46,7 @@ const App = () => {
             <Route exact path='/gallery' component={Gallery} />
             <Route exact path='/login' component={Login} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            <PrivateRoute exact path='/addphotos' component={AddPhotos} />
           </Switch>
           <Footer />
         </Fragment>
