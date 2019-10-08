@@ -19,12 +19,12 @@ const About = ({ isAuthenticated, openModal, text }) => {
         <section id='main'>
             <div className="container">
                 <article id='main-col'>
-                    <h1 className='page-title'>About</h1>
+                    <h1 onClick={editText} name='abouttitle' className='page-title'>{text.fields.abouttitle}</h1>
                     <p onClick={editText} name='about'>{text.fields.about}</p>
                 </article>
                 <aside id='sidebar'>
                     <div className="dark">
-                        <h3>What We Do</h3>
+                        <h3 onClick={editText} name='whatwedotitle'>{text.fields.whatwedotitle}</h3>
                         <p onClick={editText} name='whatwedo'>{text.fields.whatwedo}</p>
                     </div>
                 </aside>

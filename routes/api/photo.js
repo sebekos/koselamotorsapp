@@ -51,9 +51,11 @@ router.post('/', [auth], (req, res) => {
 
             const photos = await Photos.findOne();
             if (photos && data) {
-                const photoArray = [...photos.photos, Object.entries(data)[1][1]];
+                const newPhoto = Object.entries(data)[1][1];
+                const photoArray = [...photos.photos, newPhoto];
                 await Photos.findByIdAndUpdate(photos._id, { $set: { "photos": photoArray } }, { new: true });
-                return res.status(200).send(Object.entries(data)[1][1]);
+                console.log(newPhoto);
+                return res.status(200).send(newPhoto);
             }
 
             // Build text object
@@ -68,13 +70,28 @@ router.post('/', [auth], (req, res) => {
     });
 });
 
+// @route       Post api/upload/
+// @description Delete photos
+// @access      Private
+router.post('/delete', [auth], async (req, res) => {
+    try {
+        const photos = await Photos.findOne();
+        if (photos) {
+            await Photos.findByIdAndUpdate(photos._id, { $set: { "photos": req.body } }, { new: true });
+            return res.status(200).send(req.body);
+        }
+        return res.status(400).send('Server Error');
+    } catch (error) {
+        return res.status(400).send(error);
+    }
+});
+
 // GET api/photo
 // Photos route
 // Public
 router.get('/', async (req, res) => {
     try {
         const photos = await Photos.find();
-        console.log(photos[0].photos);
         res.json(photos[0].photos);
     } catch (err) {
         res.status(500).send('Server Error');

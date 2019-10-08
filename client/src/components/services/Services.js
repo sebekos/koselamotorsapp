@@ -1,6 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { openModal } from '../../Redux/actions/modal'
+import PropTypes from 'prop-types'
 
-const Services = () => {
+const Services = ({ isAuthenticated, openModal, text }) => {
+
+    const editText = e => {
+        if (!isAuthenticated) {
+            return;
+        }
+        const data = {
+            name: e.target.getAttribute('name'),
+            text: e.target.textContent
+        }
+        openModal(data);
+    }
+
     return (
         <section id='services'>
             <div className="container">
@@ -10,8 +25,8 @@ const Services = () => {
                             <i className="fas fa-car-crash fa-7x"></i>
                         </div>
                         <div className="service-description">
-                            <h3>Maintenance</h3>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita delectus unde provident accusantium saepe, inventore excepturi magni incidunt? Laborum blanditiis praesentium eius quaerat quam consectetur debitis saepe soluta eveniet, cum deserunt pariatur odio esse eos laboriosam temporibus, ipsum quae repellendus amet recusandae. Ea nesciunt quaerat ab, reiciendis harum dolores nulla.</p>
+                            <h3 onClick={editText} name='servicetitle1'>{text.fields.servicetitle1}</h3>
+                            <p onClick={editText} name='service1'>{text.fields.service1}</p>
                         </div>
                     </div>
                     <div className="servicebox">
@@ -19,8 +34,8 @@ const Services = () => {
                             <i className="fas fa-tools fa-7x"></i>
                         </div>
                         <div className="service-description">
-                            <h3>Engine Work</h3>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita delectus unde provident accusantium saepe, inventore excepturi magni incidunt? Laborum blanditiis praesentium eius quaerat quam consectetur debitis saepe soluta eveniet, cum deserunt pariatur odio esse eos laboriosam temporibus, ipsum quae repellendus amet recusandae. Ea nesciunt quaerat ab, reiciendis harum dolores nulla.</p>
+                            <h3 onClick={editText} name='servicetitle2'>{text.fields.servicetitle2}</h3>
+                            <p onClick={editText} name='service2'>{text.fields.service2}</p>
                         </div>
                     </div>
                     <div className="servicebox">
@@ -28,8 +43,8 @@ const Services = () => {
                             <i className="fas fa-toolbox fa-7x"></i>
                         </div>
                         <div className="service-description">
-                            <h3>Custom Builds</h3>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita delectus unde provident accusantium saepe, inventore excepturi magni incidunt? Laborum blanditiis praesentium eius quaerat quam consectetur debitis saepe soluta eveniet, cum deserunt pariatur odio esse eos laboriosam temporibus, ipsum quae repellendus amet recusandae. Ea nesciunt quaerat ab, reiciendis harum dolores nulla.</p>
+                            <h3 onClick={editText} name='servicetitle3'>{text.fields.servicetitle3}</h3>
+                            <p onClick={editText} name='service3'>{text.fields.service3}</p>
                         </div>
                     </div>
                 </div>
@@ -38,4 +53,15 @@ const Services = () => {
     )
 }
 
-export default Services
+Services.propTypes = {
+    openModal: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
+    text: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    text: state.text
+});
+
+export default connect(mapStateToProps, { openModal })(Services)

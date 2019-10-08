@@ -3,7 +3,8 @@ import {
     UPLOAD_FAILURE,
     UPLOAD_PROGRESS,
     GET_PHOTOS,
-    GET_PHOTOS_FAILURE
+    GET_PHOTOS_FAILURE,
+    DELETE_PHOTOS
 } from '../actions/types';
 
 const initialState = {
@@ -27,6 +28,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 progressbar: 1,
+                photos: [...state.photos, payload],
                 loading: false
             };
         case UPLOAD_PROGRESS:
@@ -35,6 +37,12 @@ export default function (state = initialState, action) {
                 progressbar: 1,
                 loading: false
             };
+        case DELETE_PHOTOS:
+            return {
+                ...state,
+                photos: payload,
+                loading: false
+            }
         case UPLOAD_FAILURE:
             return {
                 ...state,

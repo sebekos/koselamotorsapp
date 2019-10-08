@@ -1,4 +1,4 @@
-import { UPLOAD_SUCCESS, UPLOAD_FAILURE, GET_PHOTOS, GET_PHOTOS_FAILURE } from "./types";
+import { UPLOAD_SUCCESS, UPLOAD_FAILURE, GET_PHOTOS, GET_PHOTOS_FAILURE, DELETE_PHOTOS } from "./types";
 import axios from 'axios';
 import { setAlert } from './alert'
 
@@ -21,18 +21,45 @@ export const getPhotos = () => async dispatch => {
 // Upload all photos
 export const uploadPhotos = (formData) => async dispatch => {
     try {
-        await axios.post(`/api/photo`, formData, {
+        const res = await axios.post(`/api/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             },
             onUploadProgress: progressEvent => {
-                console.log(progressEvent);
                 let percentCompleted = Math.floor((progressEvent.loaded * 100) / progressEvent.total);
-                console.log(percentCompleted);
             }
         })
         dispatch({
-            type: UPLOAD_SUCCESS
+            type: UPLOAD_SUCCESS,
+            payload: res.data
+        })
+    } catch (err) {
+        const errors = err.response.data.errors;
+        if (errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+        dispatch({
+            type: UPLOAD_FAILURE,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}
+
+// Delete photos
+export const deletePhotos = (photos) => async dispatch => {
+    console.log('delete');
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        console.log('here');
+        console.log(photos);
+        const res = await axios.post('/api/photo/delete', photos, config);
+        dispatch({
+            type: DELETE_PHOTOS,
+            payload: res.data
         })
     } catch (err) {
         const errors = err.response.data.errors;

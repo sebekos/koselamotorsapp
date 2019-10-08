@@ -1,11 +1,11 @@
-import React, { useEffect, Fragment, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import DeleteItem from './DeleteItem';
-import { getPhotos } from '../../Redux/actions/photo'
+import { getPhotos, deletePhotos } from '../../Redux/actions/photo'
 import { connect } from 'react-redux'
 
 
-const DeletePhotos = ({ getPhotos, photo: { photos, loading } }) => {
+const DeletePhotos = ({ getPhotos, deletePhotos, photo: { photos, loading } }) => {
     const [delphotos, setDelphotos] = useState([]);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const DeletePhotos = ({ getPhotos, photo: { photos, loading } }) => {
 
     const onSave = e => {
         e.preventDefault();
-        console.log(delphotos);
+        deletePhotos(delphotos);
         //reOrderPhotos(photos, match.params.id);
     }
 
@@ -40,11 +40,12 @@ const DeletePhotos = ({ getPhotos, photo: { photos, loading } }) => {
 }
 
 DeletePhotos.propTypes = ({
-    getPhotos: PropTypes.func.isRequired
+    getPhotos: PropTypes.func.isRequired,
+    deletePhotos: PropTypes.func.isRequired
 });
 
 const mapStateToProps = state => ({
     photo: state.photo
 });
 
-export default connect(mapStateToProps, { getPhotos })(DeletePhotos)
+export default connect(mapStateToProps, { getPhotos, deletePhotos })(DeletePhotos)
