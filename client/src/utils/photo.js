@@ -18,12 +18,12 @@ export const reSizer = picture => {
 }
 
 export const bulkResize = async pictures => {
-    return new Promise (async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         await Promise.all(pictures.map(picture => {
             return new Promise((resolve, reject) => resolve(reSizer(picture)));
         }))
-        .then(results => {
-            resolve(results);
-        })
+            .then(results => {
+                resolve(results);
+            })
     });
 }

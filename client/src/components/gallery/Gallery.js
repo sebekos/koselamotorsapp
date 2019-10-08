@@ -1,30 +1,29 @@
-import React from 'react'
-import ImageGallery from 'react-image-gallery';
-import "react-image-gallery/styles/css/image-gallery.css";
+import React, { useState, useEffect } from 'react'
+import ImageGallery from 'react-image-gallery'
+import "react-image-gallery/styles/css/image-gallery.css"
+import { connect } from 'react-redux'
 
-const Gallery = () => {
-    const images = [
-        {
-            original: 'https://picsum.photos/id/1018/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1018/250/150/',
-        },
-        {
-            original: 'https://picsum.photos/id/1015/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1015/250/150/',
-        },
-        {
-            original: 'https://picsum.photos/id/1019/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1019/250/150/',
-        },
-    ];
+const Gallery = ({ photo: { photos } }) => {
+    const [gallery, setGallery] = useState([]);
+
+    useEffect(() => {
+        if (photos.length > 0) {
+            const test = photos.map(photo => { return { original: photo, thumbnail: photo } });
+            setGallery(test);
+        }
+    }, [photos]);
 
     return (
         <section id='main'>
             <div className="container">
-                <ImageGallery items={images} />
+                {photos.length === 0 ? "Loading..." : <ImageGallery items={gallery} />}
             </div>
         </section>
     )
 }
 
-export default Gallery
+const mapStateToProps = state => ({
+    photo: state.photo
+})
+
+export default connect(mapStateToProps, null)(Gallery);

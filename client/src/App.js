@@ -22,6 +22,7 @@ import store from './Redux/store';
 
 import './App.css';
 import AddPhotos from './components/gallery/AddPhotos';
+import DeletePhotos from './components/gallery/DeletePhotos';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -49,6 +50,7 @@ const App = () => {
             <Route exact path='/login' component={Login} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute exact path='/addphotos' component={AddPhotos} />
+            <PrivateRoute exact path='/deletephotos' component={DeletePhotos} />
           </Switch>
           <Footer />
         </Fragment>

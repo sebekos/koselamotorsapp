@@ -348,6 +348,30 @@ button {
   box-shadow: none;
 }
 
+/* Delete photos */
+.delete-container{
+  margin:20px auto 0;
+  width: fit-content;
+  text-align: center;
+  border: darkgrey solid 1px;
+  background: #e6e6e6;
+  padding: 2px;
+}
+
+.img-delete-item{
+  display: block;
+  margin: 1rem;
+}
+
+.img-delete-img{
+  width: 200px;
+}
+
+.img-delete-btn{
+  position: absolute;
+  margin-left: -53px;
+}
+
 @media(max-width: 1147px){
   #branding{
     white-space: nowrap;

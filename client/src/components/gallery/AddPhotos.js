@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ImageUploader from 'react-images-upload';
 import { uploadPhotos } from '../../Redux/actions/photo';
 import PropTypes from 'prop-types'
