@@ -33,6 +33,10 @@ ul{
   margin-bottom: 10px;
 }
 
+a{
+  text-decoration: none;
+}
+
 /* Alerts and buttons */
 .alert {
   padding: 0.8rem;
@@ -372,6 +376,33 @@ button {
   margin-left: -53px;
 }
 
+/* Sortable */
+.sortable-container{
+  max-width: fit-content;
+  margin:auto;
+  border: darkgrey solid 1px;
+  background: #e6e6e6;
+  padding: 4px;
+}
+
+.sortable-img{
+  width: 200px;
+}
+
+#sortbtn{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#sortbtn button, #sortbtn a{
+  margin-right: 0px;
+}
+
+.login{
+  color:#C0C0C0;
+}
+
 @media(max-width: 1147px){
   #branding{
     white-space: nowrap;
@@ -441,5 +472,12 @@ button {
 
   .form-container{
     margin: minmax(10px, auto);
+  }
+
+  .instructions a{
+    display: block;
+    width: 120px;
+    text-align: center;
+    margin: 10px auto;
   }
 }

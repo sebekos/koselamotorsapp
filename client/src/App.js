@@ -23,6 +23,7 @@ import store from './Redux/store';
 import './App.css';
 import AddPhotos from './components/gallery/AddPhotos';
 import DeletePhotos from './components/gallery/DeletePhotos';
+import PhotoSortable from './components/reorder/PhotoSortable';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -51,6 +52,7 @@ const App = () => {
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute exact path='/addphotos' component={AddPhotos} />
             <PrivateRoute exact path='/deletephotos' component={DeletePhotos} />
+            <PrivateRoute exact path='/sortphotos' component={PhotoSortable} />
           </Switch>
           <Footer />
         </Fragment>

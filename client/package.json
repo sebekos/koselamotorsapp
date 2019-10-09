@@ -8,6 +8,7 @@
     "react-image-file-resizer": "^0.2.0",
     "react-images-upload": "^1.2.7",
     "react-scripts": "3.1.2",
+    "react-sortable-hoc": "^1.10.1",
     "uuid": "^3.3.3"
   },
   "scripts": {

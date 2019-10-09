@@ -13,7 +13,7 @@ const Dashboard = () => {
                 <div className="instructions">
                     <h1>Photo Tools</h1>
                     <Link className='btn btn-success' to='/addphotos'>Add Photos</Link>
-                    <Link className='btn btn-primary' to='/reorderphotos'>Reorder Photos</Link>
+                    <Link className='btn btn-primary' to='/sortphotos'>Reorder Photos</Link>
                     <Link className='btn btn-danger' to='/deletephotos'>Delete Photos</Link>
                 </div>
                 <EditModal />

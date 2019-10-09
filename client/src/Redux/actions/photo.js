@@ -32,7 +32,8 @@ export const uploadPhotos = (formData) => async dispatch => {
         dispatch({
             type: UPLOAD_SUCCESS,
             payload: res.data
-        })
+        });
+        dispatch(setAlert('Photo uploaded', 'success'));
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
@@ -47,20 +48,18 @@ export const uploadPhotos = (formData) => async dispatch => {
 
 // Delete photos
 export const deletePhotos = (photos) => async dispatch => {
-    console.log('delete');
     try {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
             }
         }
-        console.log('here');
-        console.log(photos);
         const res = await axios.post('/api/photo/delete', photos, config);
         dispatch({
             type: DELETE_PHOTOS,
             payload: res.data
-        })
+        });
+        dispatch(setAlert('Photos updated', 'success'));
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
