@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react"
-import { arrayMove } from 'react-sortable-hoc'
+import arrayMove from 'array-move'
 import ImgContainer from './ImgContainer'
 import { deletePhotos } from '../../Redux/actions/photo'
 import PropTypes from 'prop-types'
