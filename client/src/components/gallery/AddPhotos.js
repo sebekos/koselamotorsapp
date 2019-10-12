@@ -1,16 +1,23 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import ImageUploader from 'react-images-upload';
-import { uploadPhotos } from '../../Redux/actions/photo';
+import React, { useState, useEffect, Fragment } from 'react'
+import ImageUploader from 'react-images-upload'
+import { uploadPhotos } from '../../Redux/actions/photo'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bulkResize } from '../../utils/photo'
 import Groups from './Groups'
+import { getPhotos } from '../../Redux/actions/photo'
 
 
-const AddPhotos = ({ uploadPhotos, photo }) => {
+
+
+const AddPhotos = ({ uploadPhotos, getPhotos, photo }) => {
     const [pictures, setPictures] = useState([]);
     const [uploadBtn, setUploadBtn] = useState(false);
     const [group, setGroup] = useState([]);
+
+    useEffect(() => {
+        getPhotos();
+    }, []);
 
     const onDrop = picture => {
         setPictures(picture);
@@ -45,7 +52,7 @@ const AddPhotos = ({ uploadPhotos, photo }) => {
                 />
                 {uploadBtn ?
                     <Fragment>
-                        <Groups />
+                        <Groups photo={photo} />
                         <button onClick={onUpload}>
                             Upload images
                         </button>
@@ -57,11 +64,12 @@ const AddPhotos = ({ uploadPhotos, photo }) => {
 }
 
 AddPhotos.propTypes = {
-    uploadPhotos: PropTypes.func.isRequired
+    uploadPhotos: PropTypes.func.isRequired,
+    getPhotos: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     photo: state.photo
 });
 
-export default connect(mapStateToProps, { uploadPhotos })(AddPhotos)
+export default connect(mapStateToProps, { uploadPhotos, getPhotos })(AddPhotos)

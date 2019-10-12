@@ -1,4 +1,5 @@
 import Resizer from 'react-image-file-resizer';
+import React from 'react';
 
 export const reSizer = picture => {
     return new Promise((resolve, reject) => Resizer.imageFileResizer(
@@ -26,4 +27,8 @@ export const bulkResize = async pictures => {
                 resolve(results);
             })
     });
+}
+
+export const options = groups => {
+    return groups.map(group => { return <option>{group}</option> });
 }

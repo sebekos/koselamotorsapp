@@ -5,6 +5,7 @@
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --offset-color:#353839;
 }
 
 body{
@@ -114,7 +115,7 @@ header{
   color: #C0C0C0;
   padding-top: 30px;
   min-height: 70px;
-  border-bottom: #e8491d 3px solid;
+  border-bottom: var(--offset-color) 3px solid;
 }
 
 header a{
@@ -134,7 +135,7 @@ header #branding h1{
 }
 
 header .highlight, header .current a{
-  color: #e8491d;
+  color: var(--offset-color);
   font-weight: bold;
 }
 
@@ -216,7 +217,7 @@ footer{
   padding: 20px;
   margin-top: 20px;
   color: #C0C0C0;
-  background-color: #e8491d;
+  background-color: var(--offset-color);
   text-align: center;
 }
 
