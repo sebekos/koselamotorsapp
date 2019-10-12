@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import ImageUploader from 'react-images-upload';
 import { uploadPhotos } from '../../Redux/actions/photo';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bulkResize } from '../../utils/photo'
+import Groups from './Groups'
 
 
 const AddPhotos = ({ uploadPhotos, photo }) => {
     const [pictures, setPictures] = useState([]);
     const [uploadBtn, setUploadBtn] = useState(false);
+    const [group, setGroup] = useState([]);
 
     const onDrop = picture => {
         setPictures(picture);
@@ -41,9 +43,14 @@ const AddPhotos = ({ uploadPhotos, photo }) => {
                     maxFileSize={30485760}
                     withPreview={true}
                 />
-                {uploadBtn ? <button onClick={onUpload}>
-                    Upload images
-                </button> : null}
+                {uploadBtn ?
+                    <Fragment>
+                        <Groups />
+                        <button onClick={onUpload}>
+                            Upload images
+                        </button>
+                    </Fragment>
+                    : null}
             </div>
         </div>
     )

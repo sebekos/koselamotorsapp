@@ -403,6 +403,20 @@ button {
   color:#C0C0C0;
 }
 
+.add-group{
+  max-width: 400px;
+  margin: auto;
+}
+
+.add-group-input{
+  display: flex;
+  width: 100%;
+}
+
+.add-group-input button{
+  margin-right: 0;
+}
+
 @media(max-width: 1147px){
   #branding{
     white-space: nowrap;
