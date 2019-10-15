@@ -1,20 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Select from './Select'
+
 
 const Groups = () => {
+    const [text, setText] = useState('');
+    const [groups, setGroups] = useState(['Subaru', 'Engine']);
+
+    const onChange = e => {
+        setText(e.target.value);
+    }
+
+    const onAdd = () => {
+        if (text.length < 1)
+            return console.log('too short');
+        setGroups([...groups, text]);
+        setText('');
+    }
+
     return (
         <div className="form add-group">
             <div className="form-group add-group-input">
-                <input type="text" placeholder='New Group Name' />
-                <button className="btn btn-success">Add</button>
+                <input onChange={onChange} type="text" placeholder='New Group Name' value={text} />
+                <button onClick={onAdd} className="btn btn-success">Add</button>
             </div>
-            <div className="form-group">
-                <select>
-                    <option value="" defaultValue disabled>Existing Photo Groups</option>
-                    <option value="">Engine</option>
-                    <option value="">Audi S4 1997</option>
-                    <option value="">Subaru Impreza</option>
-                </select>
-            </div>
+            <Select groups={groups} />
         </div>
     )
 }
