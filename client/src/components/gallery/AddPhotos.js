@@ -7,9 +7,6 @@ import { bulkResize } from '../../utils/photo'
 import Groups from './Groups'
 import { getPhotos } from '../../Redux/actions/photo'
 
-
-
-
 const AddPhotos = ({ uploadPhotos, getPhotos, photo }) => {
     const [pictures, setPictures] = useState([]);
     const [uploadBtn, setUploadBtn] = useState(false);
@@ -39,6 +36,10 @@ const AddPhotos = ({ uploadPhotos, getPhotos, photo }) => {
             });
     }
 
+    const onGroup = e => {
+        setGroup(e.target.value);
+    }
+
     return (
         <div className='container'>
             <div className="upload-images">
@@ -52,7 +53,7 @@ const AddPhotos = ({ uploadPhotos, getPhotos, photo }) => {
                 />
                 {uploadBtn ?
                     <Fragment>
-                        <Groups photo={photo} />
+                        <Groups photo={photo} ongroup={onGroup} />
                         <button onClick={onUpload}>
                             Upload images
                         </button>

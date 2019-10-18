@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Select = ({ groups }) => {
+const Select = ({ groups, ongroup }) => {
     return (
         <div className="form-group">
-            <select>
+            <select onChange={ongroup}>
                 {groups.map((item, index) => {
                     return <option key={"select-" + index}>{item}</option>
                 })}

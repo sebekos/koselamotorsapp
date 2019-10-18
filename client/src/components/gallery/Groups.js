@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Select from './Select'
 
 
-const Groups = () => {
+const Groups = ({ ongroup }) => {
     const [text, setText] = useState('');
     const [groups, setGroups] = useState(['Subaru', 'Engine']);
 
@@ -23,7 +23,7 @@ const Groups = () => {
                 <input onChange={onChange} type="text" placeholder='New Group Name' value={text} />
                 <button onClick={onAdd} className="btn btn-success">Add</button>
             </div>
-            <Select groups={groups} />
+            <Select groups={groups} ongroup={ongroup} />
         </div>
     )
 }
