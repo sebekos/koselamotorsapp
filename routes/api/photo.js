@@ -34,10 +34,11 @@ const uploadFile = (buffer, name, type) => {
     return s3.upload(params).promise();
 };
 
-// @route       POST api/upload/avatar
-// @description Upload user avatar
+// @route       POST api/upload
+// @description Upload photo
 // @access      Private
 router.post('/', [auth], (req, res) => {
+    console.log(req.body);
     const form = new multiparty.Form();
     form.parse(req, async (error, fields, files) => {
         if (error) throw new Error(error);
@@ -49,17 +50,18 @@ router.post('/', [auth], (req, res) => {
             const fileName = `gallery/${timestamp}`;
             const data = await uploadFile(buffer, fileName, type);
 
-            const photos = await Photos.findOne();
-            if (photos && data) {
-                const newPhoto = Object.entries(data)[1][1];
-                const photoArray = [...photos.photos, newPhoto];
-                await Photos.findByIdAndUpdate(photos._id, { $set: { "photos": photoArray } }, { new: true });
-                console.log(newPhoto);
-                return res.status(200).send(newPhoto);
-            }
+            // const photos = await Photos.findOne();
+            // if (photos && data) {
+            //     const newPhoto = Object.entries(data)[1][1];
+            //     const photoArray = [...photos.photos, newPhoto];
+            //     await Photos.findByIdAndUpdate(photos._id, { $set: { "photos": photoArray } }, { new: true });
+            //     return res.status(200).send(newPhoto);
+            // }
 
-            // Build text object
+            // Build photo object
             const photosFields = {};
+            if (data) photosFields.name = 'Test Name';
+            if (data) photosFields.description = 'Test Description';
             if (data) photosFields.photos = [Object.entries(data)[1][1]];
             field = new Photos(photosFields);
             await field.save();
@@ -92,7 +94,8 @@ router.post('/delete', [auth], async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const photos = await Photos.find();
-        res.json(photos[0].photos);
+        console.log(photos);
+        res.json(photos);
     } catch (err) {
         res.status(500).send('Server Error');
     }

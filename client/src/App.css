@@ -418,6 +418,41 @@ button {
   margin-right: 0;
 }
 
+.gallery-overview{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.gallery-item{
+  margin: 10px auto;
+  height: 300px;
+  width: 300px;
+  text-align: center;
+  padding: 5px;
+  border: darkgrey solid 1px;
+  background: #e6e6e6;
+}
+
+.gallery-item img{
+  max-width: 300px;
+  max-height: 260px;
+}
+
+@media(max-width: 1440px){
+  .gallery-overview{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width: 800px){
+  .gallery-overview{
+    grid-template-columns: 1fr;
+  }
+}
+
 @media(max-width: 1147px){
   #branding{
     white-space: nowrap;

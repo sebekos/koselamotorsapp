@@ -15,15 +15,17 @@ import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import EditModal from './components/modal/EditModal';
+import AddPhotos from './components/gallery/AddPhotos';
+import DeletePhotos from './components/gallery/DeletePhotos';
+import PhotoSortable from './components/reorder/PhotoSortable';
+import GalleryOverview from './components/gallery/GalleryOverview';
 
 //Redux
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 
 import './App.css';
-import AddPhotos from './components/gallery/AddPhotos';
-import DeletePhotos from './components/gallery/DeletePhotos';
-import PhotoSortable from './components/reorder/PhotoSortable';
+
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -47,7 +49,8 @@ const App = () => {
             <Route exact path='/' component={Home} />
             <Route exact path='/about' component={About} />
             <Route exact path='/services' component={Services} />
-            <Route exact path='/gallery' component={Gallery} />
+            <Route exact path='/gallery' component={GalleryOverview} />
+            <Route exact path='/gallery/:id' component={Gallery} />
             <Route exact path='/login' component={Login} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute exact path='/addphotos' component={AddPhotos} />
