@@ -424,6 +424,7 @@ button {
   justify-items: center;
   align-items: center;
   margin: 20px auto;
+  max-width: 1300px;
 }
 
 .gallery-item{
@@ -444,6 +445,7 @@ button {
 @media(max-width: 1440px){
   .gallery-overview{
     grid-template-columns: 1fr 1fr;
+    max-width: 650px;
   }
 }
 

@@ -32,3 +32,7 @@ export const bulkResize = async pictures => {
 export const options = groups => {
     return groups.map(group => { return <option>{group}</option> });
 }
+
+export const galleryArray = photos => {
+    return photos.map(photo => { return { original: photo, thumbnail: photo } });
+}

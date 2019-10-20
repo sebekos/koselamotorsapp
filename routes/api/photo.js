@@ -94,7 +94,19 @@ router.post('/delete', [auth], async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const photos = await Photos.find();
-        console.log(photos);
+        res.json(photos);
+    } catch (err) {
+        res.status(500).send('Server Error');
+    }
+});
+
+// GET api/photo/:id
+// Photos route, get one gallery
+// Public
+router.get('/:id', async (req, res) => {
+    console.log(req.params.id);
+    try {
+        const photos = await Photos.findById(req.params.id);
         res.json(photos);
     } catch (err) {
         res.status(500).send('Server Error');

@@ -1,4 +1,4 @@
-import { UPLOAD_SUCCESS, UPLOAD_FAILURE, GET_PHOTOS, GET_PHOTOS_FAILURE, DELETE_PHOTOS } from "./types";
+import { UPLOAD_SUCCESS, UPLOAD_FAILURE, GET_PHOTOS, GET_PHOTOS_FAILURE, DELETE_PHOTOS, GET_ONE_GALLERY, PHOTO_LOADING } from "./types";
 import axios from 'axios';
 import { setAlert } from './alert'
 
@@ -8,6 +8,23 @@ export const getPhotos = () => async dispatch => {
         const res = await axios.get(`/api/photo`);
         dispatch({
             type: GET_PHOTOS,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: GET_PHOTOS_FAILURE,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}
+
+// Get one gallery
+export const getOneGallery = (id) => async dispatch => {
+    dispatch(setPhotoLoading);
+    try {
+        const res = await axios.get(`/api/photo/${id}`);
+        dispatch({
+            type: GET_ONE_GALLERY,
             payload: res.data
         })
     } catch (err) {
@@ -69,5 +86,12 @@ export const deletePhotos = (photos) => async dispatch => {
             type: UPLOAD_FAILURE,
             payload: { msg: err.response.statusText, status: err.response.status }
         });
+    }
+}
+
+// Set Loading State
+export const setPhotoLoading = () => {
+    return {
+        type: PHOTO_LOADING
     }
 }
