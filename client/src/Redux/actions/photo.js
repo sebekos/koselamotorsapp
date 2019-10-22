@@ -41,9 +41,6 @@ export const uploadPhotos = (formData) => async dispatch => {
         const res = await axios.post(`/api/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            },
-            onUploadProgress: progressEvent => {
-                let percentCompleted = Math.floor((progressEvent.loaded * 100) / progressEvent.total);
             }
         })
         dispatch({

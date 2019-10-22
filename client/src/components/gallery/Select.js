@@ -5,7 +5,7 @@ const Select = ({ groups, ongroup }) => {
         <div className="form-group">
             <select onChange={ongroup}>
                 {groups.map((item, index) => {
-                    return <option key={"select-" + index}>{item}</option>
+                    return <option groupname={item._id} key={"select-" + index}>{item}</option>
                 })}
             </select>
         </div>

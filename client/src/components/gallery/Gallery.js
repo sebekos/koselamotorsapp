@@ -1,32 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ImageGallery from 'react-image-gallery'
-import "react-image-gallery/styles/css/image-gallery.css"
 import { connect } from 'react-redux'
-import { getOneGallery } from '../../Redux/actions/photo'
 import { galleryArray } from '../../utils/photo'
-import PropTypes from 'prop-types'
+import "react-image-gallery/styles/css/image-gallery.css"
 
-const Gallery = ({ photo: { loading, oneGallery }, match, getOneGallery }) => {
+const Gallery = ({ photo: { photos, loading }, match }) => {
+    const [curGallery, setCurGallery] = useState([]);
 
     useEffect(() => {
-        getOneGallery(match.params.id);
-    }, [loading]);
+        setGalleryUp();
+    }, [match.params.id]);
+
+    const setGalleryUp = () => {
+        photos.forEach(gallery => {
+            if (gallery._id === match.params.id) {
+                setCurGallery(galleryArray(gallery.photos));
+            }
+        })
+    }
 
     return (
         <section id='main'>
             <div className="container">
-                {loading ? "Loading..." : <ImageGallery items={galleryArray(oneGallery.photos)} />}
+                {loading ? <p>Loading...</p> : <ImageGallery items={curGallery} />}
             </div>
         </section>
     )
-}
-
-Gallery.propTypes = {
-    getOneGallery: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     photo: state.photo
 });
 
-export default connect(mapStateToProps, { getOneGallery })(Gallery);
+export default connect(mapStateToProps, null)(Gallery);

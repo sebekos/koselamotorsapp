@@ -135,7 +135,7 @@ header #branding h1{
 }
 
 header .highlight, header .current a{
-  color: var(--offset-color);
+  color: white;
   font-weight: bold;
 }
 
@@ -427,19 +427,24 @@ button {
   max-width: 1300px;
 }
 
-.gallery-item{
-  margin: 10px auto;
-  height: 300px;
-  width: 300px;
+ .gallery-item{
   text-align: center;
-  padding: 5px;
   border: darkgrey solid 1px;
-  background: #e6e6e6;
+  background-color:white;
+  box-sizing: border-box;
+  margin: 5px auto;
 }
 
-.gallery-item img{
-  max-width: 300px;
-  max-height: 260px;
+.gallery-img{
+  background-color: black;
+  overflow: hidden;
+  margin: 5px;
+  height: 300px;
+  width:300px;
+}
+
+.gallery-img img {
+  max-height: 300px;
 }
 
 @media(max-width: 1440px){
