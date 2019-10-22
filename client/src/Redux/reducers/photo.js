@@ -6,7 +6,8 @@ import {
     GET_PHOTOS_FAILURE,
     DELETE_PHOTOS,
     GET_ONE_GALLERY,
-    PHOTO_LOADING
+    PHOTO_LOADING,
+    ADD_GALLERY
 } from '../actions/types';
 
 const initialState = {
@@ -21,6 +22,12 @@ export default function (state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
+        case ADD_GALLERY:
+            return {
+                ...state,
+                photos: payload,
+                loading: false
+            };
         case PHOTO_LOADING:
             return {
                 ...state,

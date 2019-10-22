@@ -1,4 +1,13 @@
-import { UPLOAD_SUCCESS, UPLOAD_FAILURE, GET_PHOTOS, GET_PHOTOS_FAILURE, DELETE_PHOTOS, GET_ONE_GALLERY, PHOTO_LOADING } from "./types";
+import {
+    UPLOAD_SUCCESS,
+    UPLOAD_FAILURE,
+    GET_PHOTOS,
+    GET_PHOTOS_FAILURE,
+    DELETE_PHOTOS,
+    GET_ONE_GALLERY,
+    PHOTO_LOADING,
+    ADD_GALLERY
+} from "./types";
 import axios from 'axios';
 import { setAlert } from './alert'
 
@@ -28,6 +37,32 @@ export const getOneGallery = (id) => async dispatch => {
             payload: res.data
         })
     } catch (err) {
+        dispatch({
+            type: GET_PHOTOS_FAILURE,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}
+
+// Add new gallery
+export const addGallery = (name) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        const res = await axios.post('/api/photo/gallery', name, config);
+        dispatch({
+            type: ADD_GALLERY,
+            payload: res.data
+        });
+        dispatch(setAlert('Gallery Added', 'success'));
+    } catch (err) {
+        const errors = err.response.data.errors;
+        if (errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
         dispatch({
             type: GET_PHOTOS_FAILURE,
             payload: { msg: err.response.statusText, status: err.response.status }

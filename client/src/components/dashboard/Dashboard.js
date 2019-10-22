@@ -1,5 +1,6 @@
 import React from 'react'
 import EditModal from '../modal/EditModal'
+import AddGallery from './AddGallery'
 import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
@@ -12,9 +13,7 @@ const Dashboard = () => {
                 </div>
                 <div className="instructions">
                     <h1>Photo Tools</h1>
-                    <Link className='btn btn-success' to='/addphotos'>Add Photos</Link>
-                    <Link className='btn btn-primary' to='/sortphotos'>Reorder Photos</Link>
-                    <Link className='btn btn-danger' to='/deletephotos'>Delete Photos</Link>
+                    <AddGallery />
                 </div>
                 <EditModal />
             </div>

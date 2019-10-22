@@ -28,6 +28,7 @@ const AddPhotos = ({ uploadPhotos, getPhotos, photo }) => {
     const onUpload = async e => {
         let res = await bulkResize(pictures);
         Promise.all(res.map(picture => {
+            picture.append('group', group);
             return new Promise((resolve, reject) => resolve(uploadPhotos(picture)));
         }))
             .then(results => {
@@ -38,6 +39,7 @@ const AddPhotos = ({ uploadPhotos, getPhotos, photo }) => {
 
     const onGroup = e => {
         setGroup(e.target.value);
+        console.log(e.target.value);
     }
 
     return (

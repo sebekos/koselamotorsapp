@@ -7,8 +7,7 @@ const bluebird = require('bluebird');
 const multiparty = require('multiparty');
 const auth = require('../../middleware/auth');
 const Photos = require('../../models/Photos');
-const dotenv = require('dotenv');
-require('dotenv').config();
+const { check, validationResult } = require('express-validator');
 
 // configure the keys for accessing AWS
 AWS.config.update({
@@ -50,6 +49,8 @@ router.post('/', [auth], (req, res) => {
             const fileName = `gallery/${timestamp}`;
             const data = await uploadFile(buffer, fileName, type);
 
+            console.log(fields);
+
             // const photos = await Photos.findOne();
             // if (photos && data) {
             //     const newPhoto = Object.entries(data)[1][1];
@@ -70,6 +71,28 @@ router.post('/', [auth], (req, res) => {
             return res.status(400).send(error);
         }
     });
+});
+
+// @route       POST api/upload/gallery
+// @description Add new gallery
+// @access      Private
+router.post('/gallery', [auth, [
+    check('group', 'Length must be greater than 1 and less than 32').isLength({ min: 1, max: 32 })
+]], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    try {
+        const photos = await Photos.findOne({ name: req.body.group });
+        if (photos) {
+            return res.status(400).json({ errors: ['Gallery name already exists'] });
+        }
+        return res.status(200).send('GG');
+    } catch (error) {
+        return res.status(400).send(error);
+    }
+    console.log(req.body);
 });
 
 // @route       Post api/upload/
