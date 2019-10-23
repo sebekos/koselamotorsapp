@@ -25,7 +25,7 @@ export default function (state = initialState, action) {
         case ADD_GALLERY:
             return {
                 ...state,
-                photos: [...state.photos, payload],
+                photos: [payload, ...state.photos],
                 loading: false
             };
         case PHOTO_LOADING:

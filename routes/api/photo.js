@@ -120,7 +120,8 @@ router.post('/delete', [auth], async (req, res) => {
 // Public
 router.get('/', async (req, res) => {
     try {
-        const photos = await Photos.find();
+        // const photos = await Photos.find();
+        const photos = await Photos.aggregate().sort({ date: -1 });
         res.json(photos);
     } catch (err) {
         res.status(500).send('Server Error');

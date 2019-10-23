@@ -51,13 +51,12 @@ a{
   display: inline-block;
   background: var(--light-color);
   color: #333;
-  padding: 0.2rem 1.3rem;
+  padding: 0.5rem 1.3rem;
   font-size: 1rem;
   border: none;
   cursor: pointer;
   transition: opacity 0.2s ease-in;
   outline: none;
-  margin-right: 10px;
 }
 
 .btn-primary,
@@ -449,6 +448,21 @@ button {
 
 .add-gallery{
   display: flex;
+}
+
+.edit-gallery-item{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+  background-color: #ccc;
+  margin: 5px auto;
+  border: 1px solid grey;
+}
+
+.edit-gallery-item button{
+  width: 180px;
 }
 
 @media(max-width: 1440px){
