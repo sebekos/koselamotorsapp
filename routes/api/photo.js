@@ -37,7 +37,6 @@ const uploadFile = (buffer, name, type) => {
 // @description Upload photo
 // @access      Private
 router.post('/', [auth], (req, res) => {
-    console.log(req.body);
     const form = new multiparty.Form();
     form.parse(req, async (error, fields, files) => {
         if (error) throw new Error(error);
@@ -86,13 +85,18 @@ router.post('/gallery', [auth, [
     try {
         const photos = await Photos.findOne({ name: req.body.group });
         if (photos) {
-            return res.status(400).json({ errors: ['Gallery name already exists'] });
+            return res.status(400).json({ errors: [{ msg: 'Gallery already exists' }] });
         }
-        return res.status(200).send('GG');
+        const photosFields = {};
+        photosFields.name = req.body.group;
+        photosFields.description = 'Test Description';
+        photosFields.photos = [];
+        const field = new Photos(photosFields);
+        await field.save();
+        res.json(field);
     } catch (error) {
         return res.status(400).send(error);
     }
-    console.log(req.body);
 });
 
 // @route       Post api/upload/
@@ -127,7 +131,6 @@ router.get('/', async (req, res) => {
 // Photos route, get one gallery
 // Public
 router.get('/:id', async (req, res) => {
-    console.log(req.params.id);
     try {
         const photos = await Photos.findById(req.params.id);
         res.json(photos);
