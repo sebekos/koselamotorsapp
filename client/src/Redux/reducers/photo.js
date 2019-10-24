@@ -49,7 +49,14 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 progressbar: 1,
-                photos: [...state.photos, payload],
+                photos: state.photos.map(group => {
+                    if (group._id === payload.group) {
+                        group.photos = payload.photos;
+                        return group;
+                    } else {
+                        return group;
+                    }
+                }),
                 loading: false
             };
         case UPLOAD_PROGRESS:

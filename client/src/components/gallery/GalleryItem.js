@@ -8,9 +8,6 @@ const GalleryItem = ({ data }) => {
                 <div className="gallery-title">
                     {data.name}
                 </div>
-                <div className="gallery-description">
-                    {data.description}
-                </div>
                 <div className="gallery-img">
                     <img src={data.photos[0]} alt="Error" />
                 </div>

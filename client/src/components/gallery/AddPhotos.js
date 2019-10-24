@@ -1,16 +1,14 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import ImageUploader from 'react-images-upload'
 import { uploadPhotos } from '../../Redux/actions/photo'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bulkResize } from '../../utils/photo'
-import Groups from './Groups'
 import { getPhotos } from '../../Redux/actions/photo'
 
-const AddPhotos = ({ uploadPhotos, getPhotos, photo }) => {
+const AddPhotos = ({ uploadPhotos, getPhotos, photo, match }) => {
     const [pictures, setPictures] = useState([]);
     const [uploadBtn, setUploadBtn] = useState(false);
-    const [group, setGroup] = useState([]);
 
     useEffect(() => {
         getPhotos();
@@ -28,18 +26,13 @@ const AddPhotos = ({ uploadPhotos, getPhotos, photo }) => {
     const onUpload = async e => {
         let res = await bulkResize(pictures);
         Promise.all(res.map(picture => {
-            picture.append('group', group);
+            picture.append('group', match.params.id);
             return new Promise((resolve, reject) => resolve(uploadPhotos(picture)));
         }))
             .then(results => {
-                setUploadBtn(false);
-                setPictures([]);
+                // setUploadBtn(false);
+                // setPictures([]);
             });
-    }
-
-    const onGroup = e => {
-        setGroup(e.target.value);
-        console.log(e.target.value);
     }
 
     return (
@@ -54,12 +47,9 @@ const AddPhotos = ({ uploadPhotos, getPhotos, photo }) => {
                     withPreview={true}
                 />
                 {uploadBtn ?
-                    <Fragment>
-                        <Groups photo={photo} ongroup={onGroup} />
-                        <button onClick={onUpload}>
-                            Upload images
+                    <button onClick={onUpload}>
+                        Upload images
                         </button>
-                    </Fragment>
                     : null}
             </div>
         </div>

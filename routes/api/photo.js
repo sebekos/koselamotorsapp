@@ -41,31 +41,29 @@ router.post('/', [auth], (req, res) => {
     form.parse(req, async (error, fields, files) => {
         if (error) throw new Error(error);
         try {
+            const photos = await Photos.findById(fields.group[0]);
+            if (!photos) {
+                return res.status(400).json({ errors: [{ msg: 'Gallery ID Error' }] });
+            }
+
             const path = files.file[0].path;
             const buffer = fs.readFileSync(path);
             const type = fileType(buffer);
             const timestamp = Date.now().toString();
             const fileName = `gallery/${timestamp}`;
             const data = await uploadFile(buffer, fileName, type);
+            if (!data) {
+                return res.status(400).json({ errors: [{ msg: 'S3 Error' }] });
+            }
 
-            console.log(fields);
-
-            // const photos = await Photos.findOne();
-            // if (photos && data) {
-            //     const newPhoto = Object.entries(data)[1][1];
-            //     const photoArray = [...photos.photos, newPhoto];
-            //     await Photos.findByIdAndUpdate(photos._id, { $set: { "photos": photoArray } }, { new: true });
-            //     return res.status(200).send(newPhoto);
-            // }
-
-            // Build photo object
-            const photosFields = {};
-            if (data) photosFields.name = 'Test Name';
-            if (data) photosFields.description = 'Test Description';
-            if (data) photosFields.photos = [Object.entries(data)[1][1]];
-            field = new Photos(photosFields);
-            await field.save();
-            res.json(field);
+            const newPhoto = Object.entries(data)[1][1];
+            const photoArray = [...photos.photos, newPhoto];
+            const retObj = {
+                group: fields.group[0],
+                photos: photoArray
+            }
+            await Photos.findByIdAndUpdate(fields.group[0], { $set: { "photos": photoArray } }, { new: true });
+            return res.status(200).send(retObj);
         } catch (error) {
             return res.status(400).send(error);
         }
