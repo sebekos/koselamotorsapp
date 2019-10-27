@@ -5,7 +5,7 @@ import { getText } from './Redux/actions/text';
 import { getPhotos } from './Redux/actions/photo';
 import setAuthToken from './Redux/utils/setAuthToken';
 import PrivateRoute from './components/routing/PrivateRoute';
-import Header from "./components/layout/Header";
+import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './components/home/Home';
 import Services from './components/services/Services';
@@ -25,7 +25,6 @@ import { Provider } from 'react-redux';
 import store from './Redux/store';
 
 import './App.css';
-
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -61,9 +60,7 @@ const App = () => {
         </Fragment>
       </Router>
     </Provider>
-  )
-}
-
-
+  );
+};
 
 export default App;
