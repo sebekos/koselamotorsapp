@@ -6,6 +6,10 @@ import PropTypes from 'prop-types';
 
 const EditGalleryItem = ({ details, deleteGallery }) => {
   const onDelete = galleryid => {
+    var r = window.confirm(
+      'This will delete the entire gallery. Press OK to continue'
+    );
+    if (r != true) return;
     deleteGallery(galleryid);
   };
 
@@ -21,10 +25,7 @@ const EditGalleryItem = ({ details, deleteGallery }) => {
           </Link>
         </div>
         <div>
-          <Link
-            to={'/reorderphotos/' + details._id}
-            className='btn btn-primary'
-          >
+          <Link to={'/sortphotos/' + details._id} className='btn btn-primary'>
             Reorder Photos
           </Link>
         </div>

@@ -77,7 +77,13 @@ export default function(state = initialState, action) {
     case DELETE_PHOTOS:
       return {
         ...state,
-        photos: payload,
+        photos: state.photos.map(gallery => {
+          if (gallery._id === payload._id) {
+            return payload;
+          } else {
+            return gallery;
+          }
+        }),
         loading: false
       };
     case UPLOAD_FAILURE:

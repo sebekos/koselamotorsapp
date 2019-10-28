@@ -58,7 +58,11 @@ const App = () => {
               path='/deletephotos/:id'
               component={DeletePhotos}
             />
-            <PrivateRoute exact path='/sortphotos' component={PhotoSortable} />
+            <PrivateRoute
+              exact
+              path='/sortphotos/:id'
+              component={PhotoSortable}
+            />
           </Switch>
           <Footer />
         </Fragment>

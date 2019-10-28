@@ -1,51 +1,77 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect, useState, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import DeleteItem from './DeleteItem';
-import { getPhotos, deletePhotos } from '../../Redux/actions/photo'
-import { connect } from 'react-redux'
+import { deletePhotos } from '../../Redux/actions/photo';
+import { connect } from 'react-redux';
 
+const DeletePhotos = ({ deletePhotos, photo: { photos, loading }, match }) => {
+  const [delphotos, setDelphotos] = useState([]);
 
-const DeletePhotos = ({ getPhotos, deletePhotos, photo: { photos, loading } }) => {
-    const [delphotos, setDelphotos] = useState([]);
+  useEffect(() => {
+    let group =
+      loading || !photos
+        ? []
+        : photos.filter(gallery => {
+            return gallery._id === match.params.id;
+          });
+    setDelphotos(loading || !photos ? [] : group[0].photos);
+  }, [loading, match.params.id]);
 
-    useEffect(() => {
-        getPhotos();
-        setDelphotos(loading || !photos ? [] : photos);
-    }, [loading]);
+  const onDelete = e => {
+    let newPhotos = [];
+    let image = e.target.getAttribute('image');
+    newPhotos = delphotos.filter(item => {
+      return item !== image;
+    });
+    setDelphotos(newPhotos);
+  };
 
-    const onDelete = e => {
-        let newPhotos = [];
-        let image = e.target.getAttribute('image');
-        newPhotos = delphotos.filter(item => { return item !== image });
-        setDelphotos(newPhotos);
-    }
+  const onSave = e => {
+    e.preventDefault();
+    const data = {
+      photos: delphotos,
+      id: match.params.id
+    };
+    deletePhotos(data);
+  };
 
-    const onSave = e => {
-        e.preventDefault();
-        deletePhotos(delphotos);
-        //reOrderPhotos(photos, match.params.id);
-    }
+  return (
+    <div className='container'>
+      <div></div>
+      <div className='delete-container'>
+        {!loading
+          ? delphotos.map((photo, index) => (
+              <Fragment key={'deletefrag-' + index}>
+                <button
+                  onClick={onSave}
+                  type='button'
+                  className='btn btn-success'
+                  key={'deletebtn-' + index}
+                >
+                  Save
+                </button>
+                <DeleteItem
+                  image={photo}
+                  ondelete={onDelete}
+                  key={'deletekey-' + index}
+                />
+              </Fragment>
+            ))
+          : 'Loading...'}
+      </div>
+    </div>
+  );
+};
 
-    return (
-        <div className="container">
-            <div>
-            </div>
-            <div className='delete-container'>
-                <button onClick={onSave} type='button' className='btn btn-success'>Save</button>
-
-                {!loading ? delphotos.map((photo, index) => (<DeleteItem image={photo} ondelete={onDelete} key={index} />)) : "Loading..."}
-            </div>
-        </div>
-    )
-}
-
-DeletePhotos.propTypes = ({
-    getPhotos: PropTypes.func.isRequired,
-    deletePhotos: PropTypes.func.isRequired
-});
+DeletePhotos.propTypes = {
+  deletePhotos: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
-    photo: state.photo
+  photo: state.photo
 });
 
-export default connect(mapStateToProps, { getPhotos, deletePhotos })(DeletePhotos)
+export default connect(
+  mapStateToProps,
+  { deletePhotos }
+)(DeletePhotos);

@@ -97,14 +97,14 @@ export const uploadPhotos = formData => async dispatch => {
 };
 
 // Delete photos
-export const deletePhotos = photos => async dispatch => {
+export const deletePhotos = data => async dispatch => {
   try {
     const config = {
       headers: {
         'Content-Type': 'application/json'
       }
     };
-    const res = await axios.post('/api/photo/delete', photos, config);
+    const res = await axios.post('/api/photo/delete', data, config);
     dispatch({
       type: DELETE_PHOTOS,
       payload: res.data

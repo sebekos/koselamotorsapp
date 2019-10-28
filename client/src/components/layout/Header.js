@@ -10,33 +10,22 @@ const Header = ({ auth: { isAuthenticated, loading }, logout }) => {
     logout();
   };
 
-  const onClick = e => {
-    if (e.target.closest('a')) {
-      document
-        .querySelectorAll('a')
-        .forEach(node => node.classList.remove('highlight'));
-      e.target.closest('a').classList.add('highlight');
-    }
-  };
-
   const authLinks = (
     <ul>
-      <li onClick={onClick}>
-        <Link to='/' className='highlight'>
-          Home
-        </Link>
+      <li>
+        <Link to='/'>Home</Link>
       </li>
 
-      <li onClick={onClick}>
+      <li>
         <Link to='/services'>Services</Link>
       </li>
-      <li onClick={onClick}>
+      <li>
         <Link to='/gallery'>Gallery</Link>
       </li>
-      <li onClick={onClick}>
+      <li>
         <Link to='/about'>About</Link>
       </li>
-      <li onClick={onClick}>
+      <li>
         <Link to='/dashboard'>Dashboard</Link>
       </li>
       <li>
@@ -50,18 +39,18 @@ const Header = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   const guestLinks = (
     <ul>
-      <li onClick={onClick}>
+      <li>
         <Link to='/' className='highlight'>
           Home
         </Link>
       </li>
-      <li onClick={onClick}>
+      <li>
         <Link to='/services'>Services</Link>
       </li>
-      <li onClick={onClick}>
+      <li>
         <Link to='/gallery'>Gallery</Link>
       </li>
-      <li onClick={onClick}>
+      <li>
         <Link to='/about'>About</Link>
       </li>
     </ul>
@@ -72,9 +61,11 @@ const Header = ({ auth: { isAuthenticated, loading }, logout }) => {
       <div className='container'>
         <div className='navbar'>
           <div id='branding'>
-            <h1>
-              <span className='highlight'>Kosela</span> Motors
-            </h1>
+            <Link to='/'>
+              <h1>
+                <span className='highlight'>Kosela</span> Motors
+              </h1>
+            </Link>
           </div>
           <nav>
             {!loading && (

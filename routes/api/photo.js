@@ -151,20 +151,19 @@ router.delete('/gallery/:id', auth, async (req, res) => {
   }
 });
 
-// -----------------------------------------------------------TODO
 // @route       Post api/photo/delete
-// @description Delete photos
+// @description Updates photo array
 // @access      Private
 router.post('/delete', [auth], async (req, res) => {
   try {
-    const photos = await Photos.findOne();
+    let photos = await Photos.findById(req.body.id);
     if (photos) {
-      await Photos.findByIdAndUpdate(
-        photos._id,
-        { $set: { photos: req.body } },
+      photos = await Photos.findByIdAndUpdate(
+        req.body.id,
+        { $set: { photos: req.body.photos } },
         { new: true }
       );
-      return res.status(200).send(req.body);
+      return res.status(200).send(photos);
     }
     return res.status(400).send('Server Error');
   } catch (error) {
