@@ -241,11 +241,15 @@ article#main-col {
 .servicebox {
   display: grid;
   grid-template-columns: 140px 2fr;
-  grid-gap: 20px;
+  grid-gap: 10px;
   margin: auto;
-  padding: 20px;
+  padding: 10px;
   align-items: center;
   max-width: 1200px;
+}
+
+.servicebox:first-child {
+  margin-top: 20px;
 }
 
 .service-icon {
@@ -498,7 +502,7 @@ button {
   margin-right: 10px;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1563px) {
   .gallery-overview {
     grid-template-columns: 1fr 1fr;
     max-width: 650px;

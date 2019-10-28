@@ -40,9 +40,7 @@ const Header = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to='/' className='highlight'>
-          Home
-        </Link>
+        <Link to='/'>Home</Link>
       </li>
       <li>
         <Link to='/services'>Services</Link>
