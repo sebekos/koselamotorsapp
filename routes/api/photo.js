@@ -33,34 +33,42 @@ const uploadFile = (buffer, name, type) => {
   return s3.upload(params).promise();
 };
 
-// @route       POST api/upload
-// @description Upload photo
+// @route       POST api/photo
+// @description Upload mutli photos
 // @access      Private
 router.post('/', [auth], (req, res) => {
   const form = new multiparty.Form();
   form.parse(req, async (error, fields, files) => {
     if (error) throw new Error(error);
     try {
-      console.log(fields);
-      console.log(files);
-      return res.status(400).json({ errors: [{ msg: 'Gallery ID Error' }] });
+      let returnUrls = [];
       const photos = await Photos.findById(fields.group[0]);
       if (!photos) {
         return res.status(400).json({ errors: [{ msg: 'Gallery ID Error' }] });
       }
 
-      const path = files.file[0].path;
-      const buffer = fs.readFileSync(path);
-      const type = fileType(buffer);
-      const timestamp = Date.now().toString();
-      const fileName = `gallery/${timestamp}`;
-      const data = await uploadFile(buffer, fileName, type);
-      if (!data) {
-        return res.status(400).json({ errors: [{ msg: 'S3 Error' }] });
-      }
+      await Promise.all(
+        Object.keys(files).map(photo => {
+          let path = files[photo][0].path;
+          let buffer = fs.readFileSync(path);
+          let type = fileType(buffer);
+          let timestamp = Date.now().toString();
+          let fileName = `gallery/${timestamp}`;
+          return new Promise((resolve, reject) =>
+            resolve(uploadFile(buffer, fileName, type))
+          );
+        })
+      )
+        .then(results => {
+          returnUrls = results.map(item => {
+            return item.Location;
+          });
+        })
+        .catch(err => {
+          return res.status(400).json({ errors: [{ msg: 'S3 Error' }] });
+        });
 
-      const newPhoto = Object.entries(data)[1][1];
-      const photoArray = [...photos.photos, newPhoto];
+      const photoArray = photos.photos.concat(returnUrls);
       const retObj = {
         group: fields.group[0],
         photos: photoArray
@@ -77,7 +85,19 @@ router.post('/', [auth], (req, res) => {
   });
 });
 
-// @route       POST api/upload/gallery
+// @route       GET api/photo
+// @description Gets all galleries
+// @access      Public
+router.get('/', async (req, res) => {
+  try {
+    const photos = await Photos.aggregate().sort({ date: -1 });
+    res.json(photos);
+  } catch (err) {
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route       POST api/photo/gallery
 // @description Add new gallery
 // @access      Private
 router.post(
@@ -115,7 +135,24 @@ router.post(
   }
 );
 
-// @route       Post api/upload/
+// @route       DELETE api/photo/gallery/:id
+// @description Delete gallery
+// @access      Private
+router.delete('/gallery/:id', auth, async (req, res) => {
+  try {
+    const photo = await Photos.findById(req.params.id);
+    if (!photo) {
+      return res.status(404).json({ msg: 'Gallery not found' });
+    }
+    await Photos.findByIdAndDelete(req.params.id);
+    res.json(req.params.id);
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+});
+
+// -----------------------------------------------------------TODO
+// @route       Post api/photo/delete
 // @description Delete photos
 // @access      Private
 router.post('/delete', [auth], async (req, res) => {
@@ -132,31 +169,6 @@ router.post('/delete', [auth], async (req, res) => {
     return res.status(400).send('Server Error');
   } catch (error) {
     return res.status(400).send(error);
-  }
-});
-
-// GET api/photo
-// Photos route
-// Public
-router.get('/', async (req, res) => {
-  try {
-    // const photos = await Photos.find();
-    const photos = await Photos.aggregate().sort({ date: -1 });
-    res.json(photos);
-  } catch (err) {
-    res.status(500).send('Server Error');
-  }
-});
-
-// GET api/photo/:id
-// Photos route, get one gallery
-// Public
-router.get('/:id', async (req, res) => {
-  try {
-    const photos = await Photos.findById(req.params.id);
-    res.json(photos);
-  } catch (err) {
-    res.status(500).send('Server Error');
   }
 });
 

@@ -1,6 +1,6 @@
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
-export const REMOVE_ALL_ALERTS = 'REMOVE_ALL_ALERTS'
+export const REMOVE_ALL_ALERTS = 'REMOVE_ALL_ALERTS';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
 export const USER_LOADED = 'USER_LOADED';
@@ -23,3 +23,4 @@ export const DELETE_PHOTOS = 'DELETE_PHOTOS';
 export const GET_ONE_GALLERY = 'GET_ONE_GALLERY';
 export const PHOTO_LOADING = 'PHOTO_LOADING';
 export const ADD_GALLERY = 'ADD_GALLERY';
+export const DELETE_GALLERY = 'DELETE_GALLERY';

@@ -53,7 +53,11 @@ const App = () => {
             <Route exact path='/login' component={Login} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute exact path='/addphotos/:id' component={AddPhotos} />
-            <PrivateRoute exact path='/deletephotos' component={DeletePhotos} />
+            <PrivateRoute
+              exact
+              path='/deletephotos/:id'
+              component={DeletePhotos}
+            />
             <PrivateRoute exact path='/sortphotos' component={PhotoSortable} />
           </Switch>
           <Footer />

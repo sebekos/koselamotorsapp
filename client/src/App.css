@@ -5,43 +5,44 @@
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
-  --offset-color:#353839;
+  --offset-color: #353839;
 }
 
-body{
-  font-family: Arial, Helvetica, sans-serif;
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
   padding: 0;
   margin: 0;
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
 }
 
 /* Global */
-.container{
+.container {
   width: 80%;
   margin: auto;
   overflow: hidden;
 }
 
-ul{
+ul {
   margin: 0;
   padding: 0;
 }
 
-.dark{
+.dark {
   padding: 15px;
   background: #003366;
-  color: #C0C0C0;
+  color: #c0c0c0;
   margin-bottom: 10px;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
 /* Alerts and buttons */
 .alert {
   padding: 0.8rem;
-  margin: .2rem 0;
+  margin: 0.2rem 0;
   opacity: 0.9;
   background: var(--light-color);
   color: #333;
@@ -109,63 +110,64 @@ a{
 }
 
 /* Header */
-header{
-  background:#003366;
-  color: #C0C0C0;
+header {
+  background: #003366;
+  color: #c0c0c0;
   padding-top: 30px;
   min-height: 70px;
   border-bottom: var(--offset-color) 3px solid;
 }
 
-header a{
-  color: #C0C0C0;
+header a {
+  color: #c0c0c0;
   text-decoration: none;
-  text-transform: uppercase;
   font-size: 16px;
 }
 
-header li{
+header li {
   display: inline;
   padding: 0 20px 0 20px;
 }
 
-header #branding h1{
+header #branding h1 {
   margin: 0;
 }
 
-header .highlight, header .current a{
+header .highlight,
+header .current a {
   color: white;
   font-weight: bold;
 }
 
-header a:hover{
+header a:hover {
   color: #ffffff;
 }
 
-.navbar{
+.navbar {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-content: end;
 }
 
-ul{
+ul {
   white-space: nowrap;
   overflow: hidden;
   float: right;
 }
 
 /* Showcase */
-#showcase{
+#showcase {
   min-height: 500px;
-  background: url('https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/showcase.jpg') no-repeat -50px -100px;
+  background: url('https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/showcase.jpg')
+    no-repeat -50px -100px;
   background-position: center center;
   text-align: center;
-  color:#C0C0C0;
+  color: #c0c0c0;
   position: relative;
 }
 
-#showcase::after{
+#showcase::after {
   content: '';
   position: absolute;
   top: 0;
@@ -173,37 +175,36 @@ ul{
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
 }
 
-.showcase-content{
+.showcase-content {
   z-index: 2;
   position: relative;
 }
 
-#showcase h1{
+#showcase h1 {
   margin-top: 150px;
   font-size: 45px;
   margin-bottom: 10px;
 }
 
-#showcase p{
+#showcase p {
   font-size: 20px;
-
 }
 
 /* Boxes */
-#boxes{
+#boxes {
   margin-top: 20px;
 }
 
-#boxes .container{
+#boxes .container {
   display: flex;
   text-align: center;
   max-width: 800px;
 }
 
-#boxes .box{
+#boxes .box {
   padding: 30px;
   width: 30%;
   border: darkgrey solid 1px;
@@ -212,23 +213,23 @@ ul{
 }
 
 /* Footer */
-footer{
+footer {
   padding: 20px;
   margin-top: 20px;
-  color: #C0C0C0;
+  color: #c0c0c0;
   background-color: var(--offset-color);
   text-align: center;
 }
 
 /* Sidebar */
-aside#sidebar{
+aside#sidebar {
   float: right;
   width: 30%;
 }
 
 /* Main col */
-article#main-col{
-  float:left;
+article#main-col {
+  float: left;
   width: 65%;
   border: darkgrey solid 1px;
   background: #e6e6e6;
@@ -237,7 +238,7 @@ article#main-col{
 }
 
 /* Services */
-.servicebox{
+.servicebox {
   display: grid;
   grid-template-columns: 140px 2fr;
   grid-gap: 20px;
@@ -247,20 +248,20 @@ article#main-col{
   max-width: 1200px;
 }
 
-.service-icon{
+.service-icon {
   width: 140px;
 }
 
-.servicebox div:first-child{
+.servicebox div:first-child {
   justify-self: center;
   width: auto;
 }
 
-.service-description h3{
+.service-description h3 {
   margin: 0;
 }
 
-.service-description{
+.service-description {
   border: darkgrey solid 1px;
   margin-bottom: 5px;
   background: #e6e6e6;
@@ -269,7 +270,7 @@ article#main-col{
   box-sizing: border-box;
 }
 
-.instructions{
+.instructions {
   border: darkgrey solid 1px;
   margin-bottom: 5px;
   background: #e6e6e6;
@@ -279,7 +280,7 @@ article#main-col{
   margin-top: 20px;
 }
 
-#main{
+#main {
   margin: 20px auto;
   max-width: 1200px;
 }
@@ -287,8 +288,8 @@ article#main-col{
 /* Login form */
 
 /* Forms */
-.form-container{
-  margin:20px auto 0;
+.form-container {
+  margin: 20px auto 0;
   padding: 20px;
   max-width: 400px;
   border: darkgrey solid 1px;
@@ -334,7 +335,7 @@ button {
   padding: 2px;
 }
 
-.upload-images{
+.upload-images {
   border: darkgrey solid 1px;
   background: #e6e6e6;
   padding: 2px;
@@ -353,8 +354,8 @@ button {
 }
 
 /* Delete photos */
-.delete-container{
-  margin:20px auto 0;
+.delete-container {
+  margin: 20px auto 0;
   width: fit-content;
   text-align: center;
   border: darkgrey solid 1px;
@@ -362,62 +363,63 @@ button {
   padding: 2px;
 }
 
-.img-delete-item{
+.img-delete-item {
   display: block;
   margin: 1rem;
 }
 
-.img-delete-img{
+.img-delete-img {
   width: 200px;
 }
 
-.img-delete-btn{
+.img-delete-btn {
   position: absolute;
   margin-left: -53px;
 }
 
 /* Sortable */
-.sortable-container{
+.sortable-container {
   max-width: fit-content;
-  margin:auto;
+  margin: auto;
   border: darkgrey solid 1px;
   background: #e6e6e6;
   padding: 4px;
 }
 
-.sortable-img{
+.sortable-img {
   width: 200px;
 }
 
-#sortbtn{
+#sortbtn {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-#sortbtn button, #sortbtn a{
+#sortbtn button,
+#sortbtn a {
   margin-right: 0px;
 }
 
-.login{
-  color:#C0C0C0;
+.login {
+  color: #c0c0c0;
 }
 
-.add-group{
+.add-group {
   max-width: 400px;
   margin: auto;
 }
 
-.add-group-input{
+.add-group-input {
   display: flex;
   width: 100%;
 }
 
-.add-group-input button{
+.add-group-input button {
   margin-right: 0;
 }
 
-.gallery-overview{
+.gallery-overview {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: center;
@@ -426,33 +428,38 @@ button {
   max-width: 1300px;
 }
 
- .gallery-item{
+.gallery-item {
   text-align: center;
   border: darkgrey solid 1px;
-  background-color:white;
+  background-color: white;
   box-sizing: border-box;
   margin: 5px auto;
 }
 
-.gallery-img{
+.gallery-img {
   background-color: black;
   overflow: hidden;
   margin: 5px;
-  height: 300px;
-  width:300px;
+  height: 250px;
+  width: 300px;
+  position: relative;
 }
 
 .gallery-img img {
-  max-height: 300px;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.add-gallery{
+.add-gallery {
   display: flex;
 }
 
-.edit-gallery-item{
+.edit-gallery-item {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
   justify-items: center;
   align-items: center;
@@ -461,74 +468,100 @@ button {
   border: 1px solid grey;
 }
 
-.edit-gallery-item button{
-  width: 180px;
+.edit-gallery-item-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  background-color: #ccc;
+  text-align: center;
+  margin: 0 5px;
 }
 
-@media(max-width: 1440px){
-  .gallery-overview{
+.edit-gallery-item a,
+.edit-gallery-item button {
+  width: 150px;
+  box-sizing: border-box;
+  margin: 0 1px;
+  white-space: nowrap;
+}
+
+.gallery-title {
+  color: var(--dark-color);
+  padding: 5px 2px;
+  font-size: 1.1rem;
+}
+
+.edit-modal-form {
+  min-width: 500px;
+}
+
+.edit-modal-buttons button {
+  margin-right: 10px;
+}
+
+@media (max-width: 1440px) {
+  .gallery-overview {
     grid-template-columns: 1fr 1fr;
     max-width: 650px;
   }
 }
 
-@media(max-width: 800px){
-  .gallery-overview{
+@media (max-width: 800px) {
+  .gallery-overview {
     grid-template-columns: 1fr;
   }
 }
 
-@media(max-width: 1147px){
-  #branding{
+@media (max-width: 1243px) {
+  #branding {
     white-space: nowrap;
   }
 
-  .navbar{
+  .navbar {
     grid-template-columns: 1fr;
     justify-items: center;
   }
 
-  .navbar ul{
+  .navbar ul {
     display: grid;
     justify-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
-  .navbar li{
-    margin-top: .2rem;
+  .navbar li {
+    margin-top: 0.2rem;
     padding: 0 10px 0 10px;
   }
 
   #boxes .box,
   article#main-col,
-  aside#sidebar{
+  aside#sidebar {
     float: none;
     text-align: center;
     width: 100%;
   }
 
-  #header{
+  #header {
     padding-bottom: 20px;
   }
 
-  #showcase h1{
+  #showcase h1 {
     margin-top: 100px;
   }
 
-  #boxes .container{
+  #boxes .container {
     display: flex;
     flex-direction: column;
     text-align: center;
   }
 
-  #boxes .box{
+  #boxes .box {
     padding: 20px;
     border: darkgrey solid 1px;
     background: #e6e6e6;
     box-sizing: border-box;
   }
 
-  .servicebox{
+  .servicebox {
     grid-template-columns: 1fr;
     text-align: center;
     margin-top: 20px;
@@ -537,22 +570,55 @@ button {
     padding: 0;
   }
 
-  .service-icon{
+  .service-icon {
     display: none;
   }
 
-  .dark{
+  .dark {
     margin-top: 10px;
   }
 
-  .form-container{
+  .form-container {
     margin: minmax(10px, auto);
   }
 
-  .instructions a{
+  .instructions .form div:first-child {
+    text-align: center;
+  }
+
+  .instructions a {
     display: block;
     width: 120px;
     text-align: center;
     margin: 10px auto;
+  }
+
+  .edit-gallery-item {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-gallery-item-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-gallery-item a,
+  .edit-gallery-item button {
+    width: 150px;
+    box-sizing: border-box;
+    margin: 1px 1px;
+    white-space: nowrap;
+  }
+
+  .edit-modal-form {
+    min-width: 300px;
+  }
+
+  .edit-modal-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .edit-modal-buttons button {
+    margin-right: 0;
   }
 }

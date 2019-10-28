@@ -31,14 +31,6 @@ const AddPhotos = ({ uploadPhotos, getPhotos, photo, match }) => {
       formData.append(`photo-${index}`, photo);
     });
     uploadPhotos(formData);
-    // Promise.all(res.map(picture => {
-    //     picture.append('group', match.params.id);
-    //     return new Promise((resolve, reject) => resolve(uploadPhotos(picture)));
-    // }))
-    //     .then(results => {
-    //         // setUploadBtn(false);
-    //         // setPictures([]);
-    //     });
   };
 
   return (

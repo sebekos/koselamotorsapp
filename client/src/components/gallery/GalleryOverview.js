@@ -1,34 +1,41 @@
-import React, { useEffect, useState, Fragment } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { getPhotos } from '../../Redux/actions/photo'
-import GalleryItem from './GalleryItem'
-
+import React, { useEffect, useState, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getPhotos } from '../../Redux/actions/photo';
+import GalleryItem from './GalleryItem';
 
 const GalleryOverview = ({ getPhotos, photo: { photos } }) => {
-    useEffect(() => {
-        getPhotos();
-    }, []);
+  useEffect(() => {
+    getPhotos();
+  }, []);
 
-    return (
-        <div className='gallery-overview container'>
-            {photos.length > 0 ? (
-                <Fragment>
-                    {photos.map((item, index) => {
-                        return <GalleryItem key={'gi-' + index} data={item} />
-                    })}
-                </Fragment>
-            ) : <p>No Photos</p>}
-        </div>
-    )
-}
+  return (
+    <div className='gallery-overview container'>
+      {photos.length > 0 ? (
+        <Fragment>
+          {photos.map((item, index) => {
+            if (item.photos.length === 0) {
+              return null;
+            }
+            return <GalleryItem key={'gi-' + index} data={item} />;
+          })}
+        </Fragment>
+      ) : (
+        <p>No Photos</p>
+      )}
+    </div>
+  );
+};
 
 GalleryOverview.propTypes = {
-    getPhotos: PropTypes.func.isRequired
-}
+  getPhotos: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
-    photo: state.photo
-})
+  photo: state.photo
+});
 
-export default connect(mapStateToProps, { getPhotos })(GalleryOverview)
+export default connect(
+  mapStateToProps,
+  { getPhotos }
+)(GalleryOverview);
