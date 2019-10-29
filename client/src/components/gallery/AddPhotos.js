@@ -35,13 +35,15 @@ const AddPhotos = ({
 
   const onUpload = async e => {
     setPhotoLoading();
+    setUploadBtn(false);
     let res = await bulkResize(pictures);
     let formData = new FormData();
     formData.append('group', match.params.id);
     res.map((photo, index) => {
       formData.append(`photo-${index}`, photo);
     });
-    uploadPhotos(formData);
+    await uploadPhotos(formData);
+    setUploadBtn(true);
   };
 
   return (

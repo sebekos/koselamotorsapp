@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPhotos } from '../../Redux/actions/photo';
 import GalleryItem from './GalleryItem';
+import Spinner from '../layout/Spinner';
 
-const GalleryOverview = ({ getPhotos, photo: { photos } }) => {
+const GalleryOverview = ({ getPhotos, photo: { photos, loading } }) => {
   useEffect(() => {
     getPhotos();
   }, []);
 
   return (
     <div className='gallery-overview container'>
+      {loading ? <Spinner /> : null}
       {photos.length > 0 ? (
         <Fragment>
           {photos.map((item, index) => {

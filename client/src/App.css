@@ -452,7 +452,7 @@ button {
 .gallery-item {
   text-align: center;
   border: darkgrey solid 1px;
-  background-color: white;
+  background-color: #e6e6e6;
   box-sizing: border-box;
   margin: 5px auto;
 }
@@ -525,7 +525,7 @@ button {
 
 .spinner {
   height: 100px;
-  position: absolute;
+  position: fixed;
   top: 150px;
   left: 50%;
   transform: translate(-50%, -50%);
