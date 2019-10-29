@@ -139,9 +139,9 @@ export const deleteGallery = id => async dispatch => {
   }
 };
 
-// Set Loading State
-export const setPhotoLoading = () => {
-  return {
+// Set photo loading true
+export const setPhotoLoading = () => async dispatch => {
+  dispatch({
     type: PHOTO_LOADING
-  };
+  });
 };

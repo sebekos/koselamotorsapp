@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import ImageUploader from 'react-images-upload';
-import { uploadPhotos } from '../../Redux/actions/photo';
+import {
+  uploadPhotos,
+  setPhotoLoading,
+  getPhotos
+} from '../../Redux/actions/photo';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bulkResize } from '../../utils/photo';
-import { getPhotos } from '../../Redux/actions/photo';
+import Spinner from '../layout/Spinner';
 
-const AddPhotos = ({ uploadPhotos, getPhotos, photo, match }) => {
+const AddPhotos = ({
+  uploadPhotos,
+  setPhotoLoading,
+  getPhotos,
+  match,
+  photo
+}) => {
   const [pictures, setPictures] = useState([]);
   const [uploadBtn, setUploadBtn] = useState(false);
 
@@ -24,6 +34,7 @@ const AddPhotos = ({ uploadPhotos, getPhotos, photo, match }) => {
   };
 
   const onUpload = async e => {
+    setPhotoLoading();
     let res = await bulkResize(pictures);
     let formData = new FormData();
     formData.append('group', match.params.id);
@@ -35,6 +46,7 @@ const AddPhotos = ({ uploadPhotos, getPhotos, photo, match }) => {
 
   return (
     <div className='container'>
+      {photo.loading ? <Spinner /> : null}
       <div className='upload-images'>
         <ImageUploader
           withIcon={false}
@@ -52,7 +64,8 @@ const AddPhotos = ({ uploadPhotos, getPhotos, photo, match }) => {
 
 AddPhotos.propTypes = {
   uploadPhotos: PropTypes.func.isRequired,
-  getPhotos: PropTypes.func.isRequired
+  getPhotos: PropTypes.func.isRequired,
+  setPhotoLoading: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -61,5 +74,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { uploadPhotos, getPhotos }
+  { uploadPhotos, getPhotos, setPhotoLoading }
 )(AddPhotos);

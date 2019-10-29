@@ -61,7 +61,11 @@ const Header = ({ auth: { isAuthenticated, loading }, logout }) => {
           <div id='branding'>
             <Link to='/'>
               <h1>
-                <span className='highlight'>Kosela</span> Motors
+                <img
+                  id='main-logo'
+                  src='https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/KoselaMotorsLogo4.png'
+                  alt='Kosela Motors'
+                />
               </h1>
             </Link>
           </div>
