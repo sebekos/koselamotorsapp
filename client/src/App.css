@@ -342,9 +342,12 @@ button {
 
 .gallery-component-title {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   padding-bottom: 10px;
   padding-top: 10px;
+  border: darkgrey solid 1px;
+  border-bottom: none;
+  background: #e6e6e6;
 }
 
 .image-gallery {

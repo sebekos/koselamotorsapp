@@ -39,17 +39,14 @@ const DeletePhotos = ({ deletePhotos, photo: { photos, loading }, match }) => {
     <div className='container'>
       <div></div>
       <div className='delete-container'>
+        {!loading ? (
+          <button onClick={onSave} type='button' className='btn btn-success'>
+            Save
+          </button>
+        ) : null}
         {!loading
           ? delphotos.map((photo, index) => (
               <Fragment key={'deletefrag-' + index}>
-                <button
-                  onClick={onSave}
-                  type='button'
-                  className='btn btn-success'
-                  key={'deletebtn-' + index}
-                >
-                  Save
-                </button>
                 <DeleteItem
                   image={photo}
                   ondelete={onDelete}
