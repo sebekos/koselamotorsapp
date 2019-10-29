@@ -46,14 +46,14 @@ export const getOneGallery = id => async dispatch => {
 };
 
 // Add new gallery
-export const addGallery = name => async dispatch => {
+export const addGallery = formData => async dispatch => {
   try {
     const config = {
       headers: {
         'Content-Type': 'application/json'
       }
     };
-    const res = await axios.post('/api/photo/gallery', name, config);
+    const res = await axios.post('/api/photo/gallery', formData, config);
     dispatch({
       type: ADD_GALLERY,
       payload: res.data

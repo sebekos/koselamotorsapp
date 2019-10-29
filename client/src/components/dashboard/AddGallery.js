@@ -6,18 +6,23 @@ import EditGalleryItem from './EditGalleryItem';
 
 const AddGallery = ({ addGallery, photo: { photos } }) => {
   const [input, setInput] = useState(false);
-  const [group, setGroup] = useState('');
+
+  const [formData, setFormData] = useState({
+    name: '',
+    description: ''
+  });
+
+  const { name, description } = formData;
 
   const onClick = () => {
     setInput(!input);
   };
 
-  const onChange = e => {
-    setGroup(e.target.value);
-  };
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const addGroup = () => {
-    addGallery({ group: group });
+  const addGroup = async () => {
+    await addGallery(formData);
     setInput(false);
   };
 
@@ -37,19 +42,30 @@ const AddGallery = ({ addGallery, photo: { photos } }) => {
         </div>
         {input ? (
           <div className='add-gallery'>
-            <input
-              onChange={onChange}
-              type='text'
-              className='text'
-              placeholder='Gallery name...'
-              value={group}
-            />
-            <button onClick={addGroup} className='btn btn-primary'>
-              Add
-            </button>
-            <button onClick={onCancel} className='btn btn-danger'>
-              Cancel
-            </button>
+            <div className='add-gallery-inputs-container'>
+              <input
+                name='name'
+                onChange={onChange}
+                type='text'
+                className='text'
+                placeholder='Gallery name...'
+                value={name}
+              />
+              <textarea
+                name='description'
+                placeholder='Description...'
+                onChange={onChange}
+                value={description}
+              ></textarea>
+            </div>
+            <div className='add-gallery-btn-container'>
+              <button onClick={addGroup} className='btn btn-primary'>
+                Add
+              </button>
+              <button onClick={onCancel} className='btn btn-danger'>
+                Cancel
+              </button>
+            </div>
           </div>
         ) : null}
         {photos.length > 0

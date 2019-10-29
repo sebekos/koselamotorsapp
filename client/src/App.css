@@ -12,7 +12,6 @@ body {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
   font-variant: petite-caps;
-  letter-spacing: 1px;
   padding: 0;
   margin: 0;
   background-color: #c0c0c0;
@@ -151,6 +150,7 @@ header a:hover {
   grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-content: end;
+  letter-spacing: 1px;
 }
 
 ul {
@@ -194,6 +194,7 @@ ul {
   margin-top: 150px;
   font-size: 45px;
   margin-bottom: 10px;
+  letter-spacing: 1px;
 }
 
 #showcase p {
@@ -350,6 +351,17 @@ button {
   background: #e6e6e6;
 }
 
+.gallery-component-description {
+  text-align: center;
+  font-size: 0.9rem;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border: darkgrey solid 1px;
+  border-top: lightgrey solid 1px;
+  border-bottom: none;
+  background: #e6e6e6;
+}
+
 .image-gallery {
   border: darkgrey solid 1px;
   background: #e6e6e6;
@@ -475,7 +487,21 @@ button {
 }
 
 .add-gallery {
-  display: flex;
+  display: grid;
+  max-width: 400px;
+  margin: auto;
+}
+
+.add-gallery-btn-container {
+  text-align: center;
+}
+
+.add-gallery textarea {
+  height: 200px;
+}
+
+.add-gallery button {
+  margin-top: 5px;
 }
 
 .edit-gallery-item {

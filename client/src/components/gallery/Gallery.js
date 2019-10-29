@@ -7,18 +7,18 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 const Gallery = ({ photo: { photos, loading }, match }) => {
   const [curGallery, setCurGallery] = useState([]);
   const [name, setName] = useState([]);
+  const [description, setDescription] = useState([]);
 
   useEffect(() => {
     setGalleryUp();
   }, [loading, match.params.id]);
 
   const setGalleryUp = () => {
-    console.log(photos);
-    console.log(name);
     photos.forEach(gallery => {
       if (gallery._id === match.params.id) {
         setCurGallery(galleryArray(gallery.photos));
         setName(gallery.name);
+        setDescription(gallery.description);
       }
     });
   };
@@ -32,6 +32,7 @@ const Gallery = ({ photo: { photos, loading }, match }) => {
           ) : (
             <Fragment>
               <div className='gallery-component-title'>{name}</div>
+              <div className='gallery-component-description'>{description}</div>
               <ImageGallery items={curGallery} />
             </Fragment>
           )}

@@ -105,9 +105,14 @@ router.post(
   [
     auth,
     [
-      check('group', 'Length must be greater than 1 and less than 32').isLength(
-        { min: 1, max: 32 }
-      )
+      check('name', 'Name must be greater than 1 and less than 32').isLength({
+        min: 1,
+        max: 32
+      }),
+      check(
+        'description',
+        'Description must be greater than 1 and less than 500 characters'
+      ).isLength({ min: 1, max: 500 })
     ]
   ],
   async (req, res) => {
@@ -116,15 +121,15 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      const photos = await Photos.findOne({ name: req.body.group });
+      const photos = await Photos.findOne({ name: req.body.name });
       if (photos) {
         return res
           .status(400)
           .json({ errors: [{ msg: 'Gallery already exists' }] });
       }
       const photosFields = {};
-      photosFields.name = req.body.group;
-      photosFields.description = 'Test Description';
+      photosFields.name = req.body.name;
+      photosFields.description = req.body.description;
       photosFields.photos = [];
       const field = new Photos(photosFields);
       await field.save();
