@@ -19,6 +19,7 @@ import AddPhotos from './components/gallery/AddPhotos';
 import DeletePhotos from './components/gallery/DeletePhotos';
 import PhotoSortable from './components/reorder/PhotoSortable';
 import GalleryOverview from './components/gallery/GalleryOverview';
+import EditInfo from './components/edit/EditInfo';
 
 //Redux
 import { Provider } from 'react-redux';
@@ -63,6 +64,7 @@ const App = () => {
               path='/sortphotos/:id'
               component={PhotoSortable}
             />
+            <PrivateRoute exact path='/editinfo/:id' component={EditInfo} />
           </Switch>
           <Footer />
         </Fragment>

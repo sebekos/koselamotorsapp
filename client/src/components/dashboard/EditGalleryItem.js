@@ -15,10 +15,13 @@ const EditGalleryItem = ({ details, deleteGallery }) => {
 
   return (
     <div className='form edit-gallery-item'>
-      <div>
-        <p>{details.name}</p>
-      </div>
+      <p>{details.name}</p>
       <div className='edit-gallery-item-buttons'>
+        <div>
+          <Link to={'/editinfo/' + details._id} className='btn btn-primary'>
+            Edit Info
+          </Link>
+        </div>
         <div>
           <Link to={'/addphotos/' + details._id} className='btn btn-success'>
             Add Photos

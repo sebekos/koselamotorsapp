@@ -506,7 +506,7 @@ button {
 
 .edit-gallery-item {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 30% auto;
   width: 100%;
   justify-items: center;
   align-items: center;
@@ -517,7 +517,7 @@ button {
 
 .edit-gallery-item-buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background-color: #ccc;
   text-align: center;
   margin: 0 5px;
