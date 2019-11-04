@@ -558,6 +558,19 @@ button {
   z-index: 1;
 }
 
+.editinfo-container {
+  margin: 20px auto 0;
+  max-width: 400px;
+  border: darkgrey solid 1px;
+  background: #e6e6e6;
+  padding: 4px;
+}
+
+.edit-btn-container {
+  margin-top: 10px;
+  text-align: center;
+}
+
 @media (max-width: 1563px) {
   .gallery-overview {
     grid-template-columns: 1fr 1fr;
@@ -571,7 +584,7 @@ button {
   }
 }
 
-@media (max-width: 1243px) {
+@media (max-width: 1423px) {
   #branding {
     white-space: nowrap;
   }

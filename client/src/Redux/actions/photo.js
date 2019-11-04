@@ -7,7 +7,9 @@ import {
   GET_ONE_GALLERY,
   PHOTO_LOADING,
   ADD_GALLERY,
-  DELETE_GALLERY
+  DELETE_GALLERY,
+  SAVE_EDIT_GALLERY,
+  SAVE_EDIT_FAILURE
 } from './types';
 import axios from 'axios';
 import { setAlert } from './alert';
@@ -134,6 +136,32 @@ export const deleteGallery = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: UPLOAD_FAILURE,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Update gallery info
+export const updateGalleryInfo = formData => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const res = await axios.post('/api/photo/text', formData, config);
+    dispatch({
+      type: SAVE_EDIT_GALLERY,
+      payload: res.data
+    });
+    dispatch(setAlert('Gallery Updated', 'success'));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: SAVE_EDIT_FAILURE,
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }

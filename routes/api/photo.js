@@ -176,4 +176,60 @@ router.post('/delete', [auth], async (req, res) => {
   }
 });
 
+// @route       POST api/photo/text
+// @description Update text field
+// @access      Private
+router.post(
+  '/text',
+  [
+    auth,
+    [
+      check('name', 'Name is required')
+        .not()
+        .isEmpty(),
+      check('description', 'Description is required')
+        .not()
+        .isEmpty()
+    ]
+  ],
+  async (req, res) => {
+    // Check if user has access
+    if (req.user.access != '2') {
+      return res.status(401).json({ msg: 'User not authorized' });
+    }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, description } = req.body;
+
+    // Build text object
+    const textFields = {};
+    if (name) textFields.name = name;
+    if (description) textFields.description = description;
+
+    try {
+      let field = await Photos.findById(req.body.id);
+      // Update
+      if (field) {
+        field = await Photos.findByIdAndUpdate(
+          req.body.id,
+          {
+            $set: {
+              name: req.body.name,
+              description: req.body.description
+            }
+          },
+          { new: true }
+        );
+        return res.json(field);
+      }
+      return res.status(401).json({ msg: 'Gallery not found' });
+    } catch (err) {
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 module.exports = router;

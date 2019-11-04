@@ -8,7 +8,9 @@ import {
   GET_ONE_GALLERY,
   PHOTO_LOADING,
   ADD_GALLERY,
-  DELETE_GALLERY
+  DELETE_GALLERY,
+  SAVE_EDIT_FAILURE,
+  SAVE_EDIT_GALLERY
 } from '../actions/types';
 
 const initialState = {
@@ -94,6 +96,24 @@ export default function(state = initialState, action) {
         loading: false
       };
     case GET_PHOTOS_FAILURE:
+      return {
+        ...state,
+        error: payload,
+        loading: false
+      };
+    case SAVE_EDIT_GALLERY:
+      return {
+        ...state,
+        photos: state.photos.map(group => {
+          if (group._id === payload._id) {
+            return payload;
+          } else {
+            return group;
+          }
+        }),
+        loading: false
+      };
+    case SAVE_EDIT_FAILURE:
       return {
         ...state,
         error: payload,
