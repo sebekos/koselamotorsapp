@@ -357,7 +357,7 @@ button {
   padding-bottom: 10px;
   padding-top: 10px;
   border: darkgrey solid 1px;
-  border-top: lightgrey solid 1px;
+  border-top: #f0f0f0 solid 1px;
   border-bottom: none;
   background: #e6e6e6;
 }
@@ -572,6 +572,13 @@ button {
 }
 
 @media (max-width: 1563px) {
+  .gallery-overview {
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 950px;
+  }
+}
+
+@media (max-width: 1168px) {
   .gallery-overview {
     grid-template-columns: 1fr 1fr;
     max-width: 650px;
