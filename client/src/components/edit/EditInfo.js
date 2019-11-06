@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateGalleryInfo } from '../../Redux/actions/photo';
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const EditInfo = ({ match, photo: { photos, loading }, updateGalleryInfo }) => {
   useEffect(() => {
@@ -64,6 +65,9 @@ const EditInfo = ({ match, photo: { photos, loading }, updateGalleryInfo }) => {
             <button onClick={onSave} className='btn btn-success'>
               Save
             </button>
+            <Link to='/dashboard' className='btn btn-primary'>
+              Dashboard
+            </Link>
           </div>
         </Fragment>
       ) : (

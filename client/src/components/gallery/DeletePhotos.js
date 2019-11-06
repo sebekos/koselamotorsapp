@@ -1,10 +1,16 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import DeleteItem from './DeleteItem';
-import { deletePhotos } from '../../Redux/actions/photo';
+import { deletePhotos, setPhotoLoading } from '../../Redux/actions/photo';
 import { connect } from 'react-redux';
+import Spinner from '../layout/Spinner';
 
-const DeletePhotos = ({ deletePhotos, photo: { photos, loading }, match }) => {
+const DeletePhotos = ({
+  deletePhotos,
+  setPhotoLoading,
+  photo: { photos, loading },
+  match
+}) => {
   const [delphotos, setDelphotos] = useState([]);
 
   useEffect(() => {
@@ -37,14 +43,14 @@ const DeletePhotos = ({ deletePhotos, photo: { photos, loading }, match }) => {
 
   return (
     <div className='container'>
-      <div></div>
+      {loading ? <Spinner /> : null}
       <div className='delete-container'>
-        {!loading ? (
+        {delphotos.length > 0 ? (
           <button onClick={onSave} type='button' className='btn btn-success'>
             Save
           </button>
         ) : null}
-        {!loading
+        {delphotos.length > 0
           ? delphotos.map((photo, index) => (
               <Fragment key={'deletefrag-' + index}>
                 <DeleteItem
@@ -70,5 +76,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deletePhotos }
+  { deletePhotos, setPhotoLoading }
 )(DeletePhotos);

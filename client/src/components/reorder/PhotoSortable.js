@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Sortable from './Sortable';
+import Spinner from '../layout/Spinner';
 
 const PhotoSortable = ({ photo: { photos, loading }, match }) => {
   const [sortphotos, setSortPhotos] = useState([]);
@@ -21,7 +22,7 @@ const PhotoSortable = ({ photo: { photos, loading }, match }) => {
       {!loading && sortphotos.length > 0 ? (
         <Sortable importImages={sortphotos} gallery={match.params.id} />
       ) : (
-        'Loading...'
+        <Spinner />
       )}
     </div>
   );

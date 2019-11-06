@@ -1,10 +1,15 @@
 import React, { useState, Fragment } from 'react';
-import { addGallery } from '../../Redux/actions/photo';
+import { addGallery, setPhotoLoading } from '../../Redux/actions/photo';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import EditGalleryItem from './EditGalleryItem';
+import Spinner from '../layout/Spinner';
+import PropTypes from 'prop-types';
 
-const AddGallery = ({ addGallery, photo: { photos } }) => {
+const AddGallery = ({
+  addGallery,
+  photo: { photos, loading },
+  setPhotoLoading
+}) => {
   const [input, setInput] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -22,6 +27,7 @@ const AddGallery = ({ addGallery, photo: { photos } }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const addGroup = async () => {
+    setPhotoLoading();
     await addGallery(formData);
     setInput(false);
   };
@@ -32,6 +38,7 @@ const AddGallery = ({ addGallery, photo: { photos } }) => {
 
   return (
     <Fragment>
+      {loading ? <Spinner /> : null}
       <div className='form'>
         <div>
           {!input ? (
@@ -59,7 +66,7 @@ const AddGallery = ({ addGallery, photo: { photos } }) => {
               ></textarea>
             </div>
             <div className='add-gallery-btn-container'>
-              <button onClick={addGroup} className='btn btn-primary'>
+              <button onClick={addGroup} className='btn btn-success'>
                 Add
               </button>
               <button onClick={onCancel} className='btn btn-danger'>
@@ -81,7 +88,8 @@ const AddGallery = ({ addGallery, photo: { photos } }) => {
 };
 
 AddGallery.propTypes = {
-  addGallery: PropTypes.func.isRequired
+  addGallery: PropTypes.func.isRequired,
+  setPhotoLoading: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -90,5 +98,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addGallery }
+  { addGallery, setPhotoLoading }
 )(AddGallery);
