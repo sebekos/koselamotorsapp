@@ -11,7 +11,8 @@ import {
     SAVE_EDIT_FAILURE,
     SAVE_EDIT_GALLERY,
     TOGGLE_PROGRESS_BAR,
-    PROGRESS_BAR_VALUE
+    PROGRESS_BAR_VALUE,
+    TOGGLE_ADD_GALLERY
 } from '../actions/types';
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
     loading: true,
     progressbar: false,
     progressbarvalue: 0,
+    showAddGallery: false,
     error: {}
 };
 
@@ -122,6 +124,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 progressbarvalue: payload
+            };
+        case TOGGLE_ADD_GALLERY:
+            return {
+                ...state,
+                showAddGallery: payload
             };
         default:
             return state;

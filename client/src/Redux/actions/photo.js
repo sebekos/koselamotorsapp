@@ -11,7 +11,8 @@ import {
     SAVE_EDIT_GALLERY,
     SAVE_EDIT_FAILURE,
     TOGGLE_PROGRESS_BAR,
-    PROGRESS_BAR_VALUE
+    PROGRESS_BAR_VALUE,
+    TOGGLE_ADD_GALLERY
 } from './types';
 import axios from 'axios';
 import { setAlert } from './alert';
@@ -69,6 +70,10 @@ export const addGallery = formData => async dispatch => {
             payload: res.data
         });
         dispatch(setAlert('Gallery Added', 'success'));
+        dispatch({
+            type: TOGGLE_ADD_GALLERY,
+            payload: false
+        });
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
@@ -224,6 +229,14 @@ export const toggleProgressBar = value => async dispatch => {
 export const progressBarValue = value => async dispatch => {
     dispatch({
         type: PROGRESS_BAR_VALUE,
+        payload: value
+    });
+};
+
+// Toggle add gallery
+export const toggleAddGallery = value => async dispatch => {
+    dispatch({
+        type: TOGGLE_ADD_GALLERY,
         payload: value
     });
 };
