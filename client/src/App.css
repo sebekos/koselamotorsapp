@@ -41,8 +41,19 @@ a {
 }
 
 /* Alerts and buttons */
+.alert-container{
+    position: fixed;
+    z-index: 100;
+    right: 0;
+    margin-right: 10px;
+}
+
+.alert-msg-div{
+    min-width: 300px;
+}
+
 .alert {
-    padding: 0.8rem;
+    padding: 0.3rem;
     margin: 0.2rem 0;
     opacity: 0.9;
     background: var(--light-color);

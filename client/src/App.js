@@ -20,6 +20,7 @@ import DeletePhotos from './components/gallery/DeletePhotos';
 import PhotoSortable from './components/reorder/PhotoSortable';
 import GalleryOverview from './components/gallery/GalleryOverview';
 import EditInfo from './components/edit/EditInfo';
+import Register from './components/auth/Register'
 
 //Redux
 import { Provider } from 'react-redux';
@@ -44,7 +45,9 @@ const App = () => {
         <Fragment>
           <EditModal />
           <Header />
-          <Alert />
+          <div className='alert-container'>
+            <Alert />
+          </div>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/about' component={About} />
@@ -52,6 +55,7 @@ const App = () => {
             <Route exact path='/gallery' component={GalleryOverview} />
             <Route exact path='/gallery/:id' component={Gallery} />
             <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute exact path='/addphotos/:id' component={AddPhotos} />
             <PrivateRoute
