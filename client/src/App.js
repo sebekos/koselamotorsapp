@@ -21,6 +21,7 @@ import PhotoSortable from './components/reorder/PhotoSortable';
 import GalleryOverview from './components/gallery/GalleryOverview';
 import EditInfo from './components/edit/EditInfo';
 import Register from './components/auth/Register'
+import Reset from './components/auth/Reset';
 
 //Redux
 import { Provider } from 'react-redux';
@@ -56,6 +57,7 @@ const App = () => {
             <Route exact path='/gallery/:id' component={Gallery} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
+            <Route exact path='/reset' component={Reset} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute exact path='/addphotos/:id' component={AddPhotos} />
             <PrivateRoute

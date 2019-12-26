@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { login, setAuthLoading } from '../../Redux/actions/auth';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
@@ -61,6 +61,9 @@ const Login = ({
           </div>
           <input type='submit' className='btn btn-success' value='Login' />
         </form>
+        <p className="my-1">
+        Forgot password? <Link to="/reset">Reset password</Link>
+      </p>
       </div>
     </Fragment>
   );
