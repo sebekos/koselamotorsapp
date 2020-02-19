@@ -13,7 +13,7 @@ import {
     TOGGLE_PROGRESS_BAR,
     PROGRESS_BAR_VALUE,
     TOGGLE_ADD_GALLERY
-} from '../actions/types';
+} from "../actions/types";
 
 const initialState = {
     photos: [],

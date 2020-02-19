@@ -13,9 +13,9 @@ import {
     TOGGLE_PROGRESS_BAR,
     PROGRESS_BAR_VALUE,
     TOGGLE_ADD_GALLERY
-} from './types';
-import axios from 'axios';
-import { setAlert } from './alert';
+} from "./types";
+import axios from "axios";
+import { setAlert } from "./alert";
 
 // Get all photos
 export const getPhotos = () => async dispatch => {
@@ -61,15 +61,15 @@ export const addGallery = formData => async dispatch => {
     try {
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             }
         };
-        const res = await axios.post('/api/photo/gallery', formData, config);
+        const res = await axios.post("/api/photo/gallery", formData, config);
         dispatch({
             type: ADD_GALLERY,
             payload: res.data
         });
-        dispatch(setAlert('Gallery Added', 'success'));
+        dispatch(setAlert("Gallery Added", "success"));
         dispatch({
             type: TOGGLE_ADD_GALLERY,
             payload: false
@@ -77,7 +77,7 @@ export const addGallery = formData => async dispatch => {
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: GET_PHOTOS_FAILURE,
@@ -98,7 +98,7 @@ export const uploadPhotos = formData => async dispatch => {
         });
         const res = await axios.post(`/api/photo`, formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                "Content-Type": "multipart/form-data"
             },
             onUploadProgress: progressEvent => {
                 const { loaded, total } = progressEvent;
@@ -116,11 +116,11 @@ export const uploadPhotos = formData => async dispatch => {
             type: UPLOAD_SUCCESS,
             payload: res.data
         });
-        dispatch(setAlert('Photos uploaded', 'success'));
+        dispatch(setAlert("Photos uploaded", "success"));
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: UPLOAD_FAILURE,
@@ -137,19 +137,19 @@ export const deletePhotos = data => async dispatch => {
     try {
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             }
         };
-        const res = await axios.post('/api/photo/delete', data, config);
+        const res = await axios.post("/api/photo/delete", data, config);
         dispatch({
             type: DELETE_PHOTOS,
             payload: res.data
         });
-        dispatch(setAlert('Photos updated', 'success'));
+        dispatch(setAlert("Photos updated", "success"));
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: UPLOAD_FAILURE,
@@ -169,7 +169,7 @@ export const deleteGallery = id => async dispatch => {
             type: DELETE_GALLERY,
             payload: res.data
         });
-        dispatch(setAlert('Gallery deleted', 'success'));
+        dispatch(setAlert("Gallery deleted", "success"));
     } catch (err) {
         dispatch({
             type: UPLOAD_FAILURE,
@@ -186,19 +186,19 @@ export const updateGalleryInfo = formData => async dispatch => {
     try {
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             }
         };
-        const res = await axios.post('/api/photo/text', formData, config);
+        const res = await axios.post("/api/photo/text", formData, config);
         dispatch({
             type: SAVE_EDIT_GALLERY,
             payload: res.data
         });
-        dispatch(setAlert('Gallery Updated', 'success'));
+        dispatch(setAlert("Gallery Updated", "success"));
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: SAVE_EDIT_FAILURE,

@@ -9,8 +9,7 @@
 }
 
 body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-        'Lucida Sans', Arial, sans-serif;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
     font-variant: petite-caps;
     padding: 0;
     margin: 0;
@@ -41,14 +40,14 @@ a {
 }
 
 /* Alerts and buttons */
-.alert-container{
+.alert-container {
     position: fixed;
     z-index: 100;
     right: 0;
     margin-right: 10px;
 }
 
-.alert-msg-div{
+.alert-msg-div {
     min-width: 300px;
 }
 
@@ -177,8 +176,7 @@ ul {
 /* Showcase */
 #showcase {
     min-height: 500px;
-    background: url('https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/showcase.jpg')
-        no-repeat -50px -100px;
+    background: url("https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/showcase.jpg") no-repeat -50px -100px;
     background-position: center center;
     text-align: center;
     color: #c0c0c0;
@@ -186,7 +184,7 @@ ul {
 }
 
 #showcase::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -328,10 +326,10 @@ article#main-col {
     color: #888;
 }
 
-.form input[type='text'],
-.form input[type='email'],
-.form input[type='password'],
-.form input[type='date'],
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"],
+.form input[type="date"],
 .form select,
 .form textarea {
     display: block;
@@ -347,7 +345,7 @@ article#main-col {
     width: 100%;
 }
 
-.form input[type='submit'],
+.form input[type="submit"],
 button {
     font: inherit;
 }

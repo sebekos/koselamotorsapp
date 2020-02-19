@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ResetSchema = new mongoose.Schema({
     email: {
@@ -19,4 +19,4 @@ const ResetSchema = new mongoose.Schema({
     }
 });
 
-module.exports = Reset = mongoose.model('Reset', ResetSchema);
+module.exports = Reset = mongoose.model("Reset", ResetSchema);

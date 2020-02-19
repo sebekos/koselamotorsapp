@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react'
-import Boxes from './Boxes';
-import Showcase from './Showcase';
+import React, { Fragment } from "react";
+import Boxes from "./Boxes";
+import Showcase from "./Showcase";
 
 const Home = () => {
     return (
@@ -8,7 +8,7 @@ const Home = () => {
             <Showcase />
             <Boxes />
         </Fragment>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

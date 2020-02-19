@@ -1,23 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import ImageUploader from 'react-images-upload';
-import {
-    uploadPhotos,
-    setPhotoLoading,
-    getPhotos
-} from '../../Redux/actions/photo';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bulkResize } from '../../utils/photo';
-import Spinner from '../layout/Spinner';
-import ProgressBar from '../layout/ProgressBar';
+import React, { useState, useEffect } from "react";
+import ImageUploader from "react-images-upload";
+import { uploadPhotos, setPhotoLoading, getPhotos } from "../../Redux/actions/photo";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bulkResize } from "../../utils/photo";
+import Spinner from "../layout/Spinner";
+import ProgressBar from "../layout/ProgressBar";
 
-const AddPhotos = ({
-    uploadPhotos,
-    setPhotoLoading,
-    getPhotos,
-    match,
-    photo
-}) => {
+const AddPhotos = ({ uploadPhotos, setPhotoLoading, getPhotos, match, photo }) => {
     const [pictures, setPictures] = useState([]);
     const [uploadBtn, setUploadBtn] = useState(false);
 
@@ -39,7 +29,7 @@ const AddPhotos = ({
         setUploadBtn(false);
         let res = await bulkResize(pictures);
         let formData = new FormData();
-        formData.append('group', match.params.id);
+        formData.append("group", match.params.id);
         res.map((photo, index) => {
             formData.append(`photo-${index}`, photo);
         });
@@ -48,19 +38,19 @@ const AddPhotos = ({
     };
 
     return (
-        <div className='container'>
+        <div className="container">
             {photo.loading ? <Spinner /> : null}
-            <div className='upload-images'>
+            <div className="upload-images">
                 <ImageUploader
                     withIcon={false}
-                    buttonText='Choose images'
+                    buttonText="Choose images"
                     onChange={pictures => onDrop(pictures)}
-                    imgExtension={['.jpg', '.gif', '.png', '.gif', 'jpeg']}
+                    imgExtension={[".jpg", ".gif", ".png", ".gif", "jpeg"]}
                     maxFileSize={30485760}
                     withPreview={true}
                 />
                 {uploadBtn ? (
-                    <button className='btn btn-success' onClick={onUpload}>
+                    <button className="btn btn-success" onClick={onUpload}>
                         Upload images
                     </button>
                 ) : null}
@@ -80,7 +70,4 @@ const mapStateToProps = state => ({
     photo: state.photo
 });
 
-export default connect(
-    mapStateToProps,
-    { uploadPhotos, getPhotos, setPhotoLoading }
-)(AddPhotos);
+export default connect(mapStateToProps, { uploadPhotos, getPhotos, setPhotoLoading })(AddPhotos);

@@ -1,16 +1,13 @@
-import {
-    OPEN_MODAL,
-    CLOSE_MODAL
-} from '../actions/types';
+import { OPEN_MODAL, CLOSE_MODAL } from "../actions/types";
 
 const initialState = {
     modalIsOpen: false,
-    text: '',
-    name: '',
+    text: "",
+    name: "",
     error: {}
-}
+};
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
@@ -30,4 +27,3 @@ export default function (state = initialState, action) {
             return state;
     }
 }
-
