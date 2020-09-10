@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getPhotos } from "../../redux/actions/photo";
 import InventoryItem from "./InventoryItem";
-
 import styled from "styled-components";
 
 const Container = styled.div`
