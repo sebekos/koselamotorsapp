@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { loadUser } from "./Redux/actions/auth";
-import { getText } from "./Redux/actions/text";
-import { getPhotos } from "./Redux/actions/photo";
-import setAuthToken from "./Redux/utils/setAuthToken";
+import { loadUser } from "./redux/actions/auth";
+import { getText } from "./redux/actions/text";
+import { getPhotos } from "./redux/actions/photo";
+import setAuthToken from "./redux/utils/setAuthToken";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
@@ -23,9 +23,9 @@ import EditInfo from "./components/edit/EditInfo";
 import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
 
-//Redux
+//redux
 import { Provider } from "react-redux";
-import store from "./Redux/store";
+import store from "./redux/store";
 
 import "./App.css";
 

@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { deleteGallery } from "../../Redux/actions/photo";
+import { deleteGallery } from "../../redux/actions/photo";
 import PropTypes from "prop-types";
 
 const EditGalleryItem = ({ details, deleteGallery }) => {
-    const onDelete = galleryid => {
+    const onDelete = (galleryid) => {
         var r = window.confirm("This will delete the entire gallery. Press OK to continue");
         if (r != true) return;
         deleteGallery(galleryid);

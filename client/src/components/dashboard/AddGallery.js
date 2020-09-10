@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { addGallery, setPhotoLoading, toggleAddGallery } from "../../Redux/actions/photo";
+import { addGallery, setPhotoLoading, toggleAddGallery } from "../../redux/actions/photo";
 import { connect } from "react-redux";
 import EditGalleryItem from "./EditGalleryItem";
 import Spinner from "../layout/Spinner";
@@ -17,7 +17,7 @@ const AddGallery = ({ addGallery, photo: { photos, loading, showAddGallery }, se
         toggleAddGallery(true);
     };
 
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+    const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const addGroup = async () => {
         setPhotoLoading();
@@ -50,12 +50,7 @@ const AddGallery = ({ addGallery, photo: { photos, loading, showAddGallery }, se
                                 placeholder="Gallery name..."
                                 value={name}
                             />
-                            <textarea
-                                name="description"
-                                placeholder="Description..."
-                                onChange={onChange}
-                                value={description}
-                            ></textarea>
+                            <textarea name="description" placeholder="Description..." onChange={onChange} value={description}></textarea>
                         </div>
                         <div className="add-gallery-btn-container">
                             <button onClick={addGroup} className="btn btn-success">
@@ -83,7 +78,7 @@ AddGallery.propTypes = {
     toggleAddGallery: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     photo: state.photo
 });
 

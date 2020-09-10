@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Redirect, Link } from "react-router-dom";
-import { login, setAuthLoading } from "../../Redux/actions/auth";
+import { login, setAuthLoading } from "../../redux/actions/auth";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
@@ -12,9 +12,9 @@ const Login = ({ auth: { isAuthenticated, loading }, login, setAuthLoading }) =>
     });
     const { email, password } = formData;
 
-    const onChangeHandler = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+    const onChangeHandler = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const onSubmitHandler = async e => {
+    const onSubmitHandler = async (e) => {
         setAuthLoading();
         e.preventDefault();
         login(email, password);
@@ -34,14 +34,7 @@ const Login = ({ auth: { isAuthenticated, loading }, login, setAuthLoading }) =>
                 </p>
                 <form className="form" onSubmit={onSubmitHandler}>
                     <div className="form-group">
-                        <input
-                            type="email"
-                            placeholder="Email Address"
-                            name="email"
-                            value={email}
-                            onChange={onChangeHandler}
-                            required
-                        />
+                        <input type="email" placeholder="Email Address" name="email" value={email} onChange={onChangeHandler} required />
                     </div>
                     <div className="form-group">
                         <input
@@ -70,7 +63,7 @@ Login.propTypes = {
     setAuthLoading: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     auth: state.auth
 });
 

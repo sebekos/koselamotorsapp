@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getPhotos } from "../../Redux/actions/photo";
+import { getPhotos } from "../../redux/actions/photo";
 import GalleryItem from "./GalleryItem";
 import Spinner from "../layout/Spinner";
 
@@ -33,7 +33,7 @@ GalleryOverview.propTypes = {
     getPhotos: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     photo: state.photo
 });
 

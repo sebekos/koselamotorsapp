@@ -1,7 +1,7 @@
 import uuid from "uuid";
-import { SET_ALERT, REMOVE_ALERT, REMOVE_ALL_ALERTS } from "./types";
+import { SET_ALERT, REMOVE_ALERT, REMOVE_ALL_ALERTS } from "../constants/types";
 
-export const setAlert = (msg, alertType, timeout = 5000) => dispatch => {
+export const setAlert = (msg, alertType, timeout = 5000) => (dispatch) => {
     const id = uuid.v4();
     dispatch({
         type: SET_ALERT,
@@ -11,6 +11,6 @@ export const setAlert = (msg, alertType, timeout = 5000) => dispatch => {
     setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);
 };
 
-export const removeAlerts = () => dispatch => {
+export const removeAlerts = () => (dispatch) => {
     dispatch({ type: REMOVE_ALL_ALERTS });
 };

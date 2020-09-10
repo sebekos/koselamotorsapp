@@ -13,12 +13,12 @@ import {
     TOGGLE_PROGRESS_BAR,
     PROGRESS_BAR_VALUE,
     TOGGLE_ADD_GALLERY
-} from "./types";
+} from "../constants/types";
 import axios from "axios";
 import { setAlert } from "./alert";
 
 // Get all photos
-export const getPhotos = () => async dispatch => {
+export const getPhotos = () => async (dispatch) => {
     try {
         const res = await axios.get(`/api/photo`);
         dispatch({
@@ -37,7 +37,7 @@ export const getPhotos = () => async dispatch => {
 };
 
 // Get one gallery
-export const getOneGallery = id => async dispatch => {
+export const getOneGallery = (id) => async (dispatch) => {
     dispatch(setPhotoLoading);
     try {
         const res = await axios.get(`/api/photo/${id}`);
@@ -57,7 +57,7 @@ export const getOneGallery = id => async dispatch => {
 };
 
 // Add new gallery
-export const addGallery = formData => async dispatch => {
+export const addGallery = (formData) => async (dispatch) => {
     try {
         const config = {
             headers: {
@@ -77,7 +77,7 @@ export const addGallery = formData => async dispatch => {
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+            errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: GET_PHOTOS_FAILURE,
@@ -90,7 +90,7 @@ export const addGallery = formData => async dispatch => {
 };
 
 // Upload all photos
-export const uploadPhotos = formData => async dispatch => {
+export const uploadPhotos = (formData) => async (dispatch) => {
     try {
         dispatch({
             type: TOGGLE_PROGRESS_BAR,
@@ -100,7 +100,7 @@ export const uploadPhotos = formData => async dispatch => {
             headers: {
                 "Content-Type": "multipart/form-data"
             },
-            onUploadProgress: progressEvent => {
+            onUploadProgress: (progressEvent) => {
                 const { loaded, total } = progressEvent;
                 dispatch({
                     type: PROGRESS_BAR_VALUE,
@@ -120,7 +120,7 @@ export const uploadPhotos = formData => async dispatch => {
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+            errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: UPLOAD_FAILURE,
@@ -133,7 +133,7 @@ export const uploadPhotos = formData => async dispatch => {
 };
 
 // Delete photos
-export const deletePhotos = data => async dispatch => {
+export const deletePhotos = (data) => async (dispatch) => {
     try {
         const config = {
             headers: {
@@ -149,7 +149,7 @@ export const deletePhotos = data => async dispatch => {
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+            errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: UPLOAD_FAILURE,
@@ -162,7 +162,7 @@ export const deletePhotos = data => async dispatch => {
 };
 
 // Delete gallery
-export const deleteGallery = id => async dispatch => {
+export const deleteGallery = (id) => async (dispatch) => {
     try {
         const res = await axios.delete(`/api/photo/gallery/${id}`);
         dispatch({
@@ -182,7 +182,7 @@ export const deleteGallery = id => async dispatch => {
 };
 
 // Update gallery info
-export const updateGalleryInfo = formData => async dispatch => {
+export const updateGalleryInfo = (formData) => async (dispatch) => {
     try {
         const config = {
             headers: {
@@ -198,7 +198,7 @@ export const updateGalleryInfo = formData => async dispatch => {
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+            errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: SAVE_EDIT_FAILURE,
@@ -211,14 +211,14 @@ export const updateGalleryInfo = formData => async dispatch => {
 };
 
 // Set photo loading true
-export const setPhotoLoading = () => async dispatch => {
+export const setPhotoLoading = () => async (dispatch) => {
     dispatch({
         type: PHOTO_LOADING
     });
 };
 
 // Toggle progress bar
-export const toggleProgressBar = value => async dispatch => {
+export const toggleProgressBar = (value) => async (dispatch) => {
     dispatch({
         type: TOGGLE_PROGRESS_BAR,
         payload: value
@@ -226,7 +226,7 @@ export const toggleProgressBar = value => async dispatch => {
 };
 
 // Progress bar value
-export const progressBarValue = value => async dispatch => {
+export const progressBarValue = (value) => async (dispatch) => {
     dispatch({
         type: PROGRESS_BAR_VALUE,
         payload: value
@@ -234,7 +234,7 @@ export const progressBarValue = value => async dispatch => {
 };
 
 // Toggle add gallery
-export const toggleAddGallery = value => async dispatch => {
+export const toggleAddGallery = (value) => async (dispatch) => {
     dispatch({
         type: TOGGLE_ADD_GALLERY,
         payload: value

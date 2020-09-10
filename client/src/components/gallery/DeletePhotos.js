@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import DeleteItem from "./DeleteItem";
-import { deletePhotos, setPhotoLoading } from "../../Redux/actions/photo";
+import { deletePhotos, setPhotoLoading } from "../../redux/actions/photo";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 
@@ -12,22 +12,22 @@ const DeletePhotos = ({ deletePhotos, setPhotoLoading, photo: { photos, loading 
         let group =
             loading || !photos
                 ? []
-                : photos.filter(gallery => {
+                : photos.filter((gallery) => {
                       return gallery._id === match.params.id;
                   });
         setDelphotos(loading || !photos ? [] : group[0].photos);
     }, [loading, match.params.id]);
 
-    const onDelete = e => {
+    const onDelete = (e) => {
         let newPhotos = [];
         let image = e.target.getAttribute("image");
-        newPhotos = delphotos.filter(item => {
+        newPhotos = delphotos.filter((item) => {
             return item !== image;
         });
         setDelphotos(newPhotos);
     };
 
-    const onSave = e => {
+    const onSave = (e) => {
         e.preventDefault();
         const data = {
             photos: delphotos,
@@ -61,7 +61,7 @@ DeletePhotos.propTypes = {
     deletePhotos: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     photo: state.photo
 });
 

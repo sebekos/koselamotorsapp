@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { setAlert } from "../../Redux/actions/alert";
-import { register } from "../../Redux/actions/auth";
+import { setAlert } from "../../redux/actions/alert";
+import { register } from "../../redux/actions/auth";
 import PropTypes from "prop-types";
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
@@ -16,11 +16,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
     const { name, email, password, password2, registerkey } = formData;
 
-    const onChangeHandler = e => {
+    const onChangeHandler = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const onSubmitHandler = async e => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
         if (password !== password2) {
             setAlert("Passwords do not match", "danger");
@@ -44,31 +44,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                     <input type="text" placeholder="Name" name="name" value={name} onChange={onChangeHandler} />
                 </div>
                 <div className="form-group">
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        name="email"
-                        value={email}
-                        onChange={onChangeHandler}
-                    />
+                    <input type="email" placeholder="Email Address" name="email" value={email} onChange={onChangeHandler} />
                 </div>
                 <div className="form-group">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        value={password}
-                        onChange={onChangeHandler}
-                    />
+                    <input type="password" placeholder="Password" name="password" value={password} onChange={onChangeHandler} />
                 </div>
                 <div className="form-group">
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        name="password2"
-                        value={password2}
-                        onChange={onChangeHandler}
-                    />
+                    <input type="password" placeholder="Confirm Password" name="password2" value={password2} onChange={onChangeHandler} />
                 </div>
                 <div className="form-group">
                     <input
@@ -94,7 +76,7 @@ Register.propTypes = {
     isAuthenticated: PropTypes.bool
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated
 });
 

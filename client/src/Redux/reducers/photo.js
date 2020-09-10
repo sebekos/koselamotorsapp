@@ -13,7 +13,7 @@ import {
     TOGGLE_PROGRESS_BAR,
     PROGRESS_BAR_VALUE,
     TOGGLE_ADD_GALLERY
-} from "../actions/types";
+} from "../constants/types";
 
 const initialState = {
     photos: [],
@@ -25,7 +25,7 @@ const initialState = {
     error: {}
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
@@ -55,7 +55,7 @@ export default function(state = initialState, action) {
         case UPLOAD_SUCCESS:
             return {
                 ...state,
-                photos: state.photos.map(group => {
+                photos: state.photos.map((group) => {
                     if (group._id === payload.group) {
                         group.photos = payload.photos;
                         return group;
@@ -68,7 +68,7 @@ export default function(state = initialState, action) {
         case DELETE_GALLERY:
             return {
                 ...state,
-                photos: state.photos.filter(gallery => {
+                photos: state.photos.filter((gallery) => {
                     return gallery._id !== payload;
                 }),
                 loading: false
@@ -76,7 +76,7 @@ export default function(state = initialState, action) {
         case DELETE_PHOTOS:
             return {
                 ...state,
-                photos: state.photos.map(gallery => {
+                photos: state.photos.map((gallery) => {
                     if (gallery._id === payload._id) {
                         return payload;
                     } else {
@@ -100,7 +100,7 @@ export default function(state = initialState, action) {
         case SAVE_EDIT_GALLERY:
             return {
                 ...state,
-                photos: state.photos.map(group => {
+                photos: state.photos.map((group) => {
                     if (group._id === payload._id) {
                         return payload;
                     } else {

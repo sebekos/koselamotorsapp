@@ -1,9 +1,9 @@
 import axios from "axios";
 import { setAlert } from "./alert";
-import { OPEN_MODAL, CLOSE_MODAL, TEXT_SUCCESS, TEXT_FAILURE } from "./types";
+import { OPEN_MODAL, CLOSE_MODAL, TEXT_SUCCESS, TEXT_FAILURE } from "../constants/types";
 
 // Open modal
-export const openModal = data => dispatch => {
+export const openModal = (data) => (dispatch) => {
     dispatch({
         type: OPEN_MODAL,
         payload: data
@@ -11,14 +11,14 @@ export const openModal = data => dispatch => {
 };
 
 // Close modal
-export const closeModal = () => dispatch => {
+export const closeModal = () => (dispatch) => {
     dispatch({
         type: CLOSE_MODAL
     });
 };
 
 // Add Text or Update
-export const updateText = formData => async dispatch => {
+export const updateText = (formData) => async (dispatch) => {
     try {
         const config = {
             headers: {
@@ -35,7 +35,7 @@ export const updateText = formData => async dispatch => {
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+            errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: TEXT_FAILURE,

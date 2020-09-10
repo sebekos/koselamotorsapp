@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
-import { updateGalleryInfo } from "../../Redux/actions/photo";
+import { updateGalleryInfo } from "../../redux/actions/photo";
 import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const EditInfo = ({ match, photo: { photos, loading }, updateGalleryInfo }) => {
     useEffect(() => {
         if (!loading) {
-            photos.forEach(detail => {
+            photos.forEach((detail) => {
                 if (detail._id === match.params.id) {
                     setFormData({
                         ...formData,
@@ -29,7 +29,7 @@ const EditInfo = ({ match, photo: { photos, loading }, updateGalleryInfo }) => {
 
     const { name, description } = formData;
 
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+    const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const onSave = () => {
         updateGalleryInfo(formData);
@@ -42,13 +42,7 @@ const EditInfo = ({ match, photo: { photos, loading }, updateGalleryInfo }) => {
                     <div className="editinfo-container">
                         <div className="form">
                             <div className="form-group">
-                                <input
-                                    name="name"
-                                    type="text"
-                                    className="edit-title"
-                                    value={name}
-                                    onChange={onChange}
-                                ></input>
+                                <input name="name" type="text" className="edit-title" value={name} onChange={onChange}></input>
                             </div>
                             <div className="form-group">
                                 <textarea
@@ -80,7 +74,7 @@ EditInfo.propTypes = {
     updateGalleryInfo: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     photo: state.photo
 });
 

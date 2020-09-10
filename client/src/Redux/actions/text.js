@@ -1,14 +1,14 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 import { closeModal } from "./modal";
-import { GET_TEXT, TEXT_SUCCESS, TEXT_FAILURE } from "./types";
+import { GET_TEXT, TEXT_SUCCESS, TEXT_FAILURE } from "../constants/types";
 
 // Get all text
-export const getText = () => async dispatch => {
+export const getText = () => async (dispatch) => {
     try {
         const res = await axios.get(`/api/text`);
         let textObj = {};
-        res.data.forEach(item => {
+        res.data.forEach((item) => {
             textObj[item.name] = item.text;
         });
         dispatch({
@@ -24,7 +24,7 @@ export const getText = () => async dispatch => {
 };
 
 // Add Text or Update
-export const updateText = formData => async dispatch => {
+export const updateText = (formData) => async (dispatch) => {
     try {
         const config = {
             headers: {
@@ -41,7 +41,7 @@ export const updateText = formData => async dispatch => {
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+            errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: TEXT_FAILURE,

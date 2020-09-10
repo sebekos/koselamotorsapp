@@ -1,87 +1,151 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
-import { logout } from "../../Redux/actions/auth";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { logout } from "../../redux/actions/auth";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-const Header = ({ auth: { isAuthenticated, loading }, logout }) => {
-    const onLogout = e => {
+const Container = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    width: 100%;
+    height: 6rem;
+    position: fixed;
+    z-index: 1;
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+`;
+
+const LogoContainer = styled.div`
+    font-size: 2rem;
+    color: #3e4444;
+    margin-left: 20rem;
+    @media (max-width: 768px) {
+        margin: auto;
+        font-size: 1.5rem;
+    }
+`;
+
+const LinksContainer = styled.div`
+    display: flex;
+    justify-self: end;
+    margin-right: 20rem;
+    & > a {
+        font-size: 1rem;
+        color: #3e4444;
+        margin-right: 1.5rem;
+        text-decoration: none;
+        &:last-child {
+            margin-right: 1.5rem;
+        }
+    }
+    @media (max-width: 768px) {
+        margin: auto;
+        & > a {
+            font-size: 0.8rem;
+            &:last-child {
+                margin: auto;
+            }
+        }
+    }
+`;
+
+const Logo = () => {
+    return (
+        <LogoContainer>
+            <img id="main-logo" src="https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/KoselaMotorsLogo4.png" alt="Kosela Motors" />
+        </LogoContainer>
+    );
+};
+
+const GuestLinks = ({ currMenu }) => {
+    const links = ["Home", "Services", "Inventory", "Contact"];
+    return (
+        <>
+            {links.map((link, index) => {
+                return (
+                    <Link
+                        route={link}
+                        to={`/${link !== "Home" ? link : ""}`}
+                        key={`guestlinks-${index}`}
+                        className={link.toLowerCase() === currMenu.toLowerCase() ? "active-link" : null}
+                    >
+                        {link}
+                    </Link>
+                );
+            })}
+        </>
+    );
+};
+
+const AuthLinks = ({ onLogout }) => {
+    return (
+        <>
+            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/login" onClick={onLogout}>
+                Logout
+            </Link>
+        </>
+    );
+};
+
+AuthLinks.propTypes = {
+    onLogout: PropTypes.func.isRequired
+};
+
+const Header = ({ isAuthenticated, loading, logout, history }) => {
+    const [currMenu, setCurrMenu] = useState("");
+    const [bottom, setBottom] = useState(false);
+
+    const onLogout = (e) => {
         e.preventDefault();
         logout();
     };
 
-    const authLinks = (
-        <ul>
-            <li>
-                <Link to="/">Home</Link>
-            </li>
+    const listenToScroll = () => {
+        if (window.pageYOffset === 0) {
+            setBottom(false);
+        } else {
+            setBottom(true);
+        }
+    };
 
-            <li>
-                <Link to="/services">Services</Link>
-            </li>
-            <li>
-                <Link to="/gallery">Gallery</Link>
-            </li>
-            <li>
-                <Link to="/about">About</Link>
-            </li>
-            <li>
-                <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-                <a onClick={onLogout} href="#!">
-                    <i className="fas fa-sign-out-alt"></i> <span className="hide-sm">Logout</span>
-                </a>
-            </li>
-        </ul>
-    );
+    useEffect(() => {
+        let currPath = history.location.pathname.split("/")[1];
+        currPath = currPath === "" ? "Główny" : currPath;
+        setCurrMenu(currPath);
+        window.addEventListener("scroll", listenToScroll);
+    }, [history.location.pathname]);
 
-    const guestLinks = (
-        <ul>
-            <li>
-                <Link to="/">Home</Link>
-            </li>
-            <li>
-                <Link to="/services">Services</Link>
-            </li>
-            <li>
-                <Link to="/gallery">Gallery</Link>
-            </li>
-            <li>
-                <Link to="/about">About</Link>
-            </li>
-        </ul>
-    );
+    history.listen((location, action) => {
+        let currPath = location.pathname.split("/")[1];
+        currPath = currPath === "" ? "Home" : currPath;
+        setCurrMenu(currPath);
+    });
 
     return (
-        <header>
-            <div className="container">
-                <div className="navbar">
-                    <div id="branding">
-                        <Link to="/">
-                            <h1>
-                                <img
-                                    id="main-logo"
-                                    src="https://koselamotorsapp.s3.us-east-2.amazonaws.com/img/KoselaMotorsLogo4.png"
-                                    alt="Kosela Motors"
-                                />
-                            </h1>
-                        </Link>
-                    </div>
-                    <nav>{!loading && <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}</nav>
-                </div>
-            </div>
-        </header>
+        <Container className={bottom ? "nav-bottom" : ""}>
+            <Logo />
+            <LinksContainer>{isAuthenticated ? <AuthLinks onLogout={onLogout} /> : <GuestLinks currMenu={currMenu} />}</LinksContainer>
+        </Container>
     );
 };
 
 Header.propTypes = {
     logout: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    isAuthenticated: PropTypes.bool,
+    loading: PropTypes.bool
 };
 
-const mapStateToProps = state => ({
-    auth: state.auth
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading
 });
 
-export default connect(mapStateToProps, { logout })(Header);
+const mapDispatchToProps = {
+    logout
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

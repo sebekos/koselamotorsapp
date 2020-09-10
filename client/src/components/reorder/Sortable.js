@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import arrayMove from "array-move";
 import ImgContainer from "./ImgContainer";
-import { deletePhotos } from "../../Redux/actions/photo";
+import { deletePhotos } from "../../redux/actions/photo";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ const Sortable = ({ importImages, deletePhotos, gallery }) => {
         setImages(arrayMove(images, oldIndex, newIndex));
     };
 
-    const onSave = e => {
+    const onSave = (e) => {
         e.preventDefault();
         const data = {
             photos: images,

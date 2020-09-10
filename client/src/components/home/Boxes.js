@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { openModal } from "../../Redux/actions/modal";
+import { openModal } from "../../redux/actions/modal";
 import PropTypes from "prop-types";
 
 const Boxes = ({ isAuthenticated, openModal, text }) => {
-    const editText = e => {
+    const editText = (e) => {
         if (!isAuthenticated) {
             return;
         }
@@ -56,7 +56,7 @@ Boxes.propTypes = {
     text: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
     text: state.text
 });

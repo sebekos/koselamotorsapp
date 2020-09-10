@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ImageUploader from "react-images-upload";
-import { uploadPhotos, setPhotoLoading, getPhotos } from "../../Redux/actions/photo";
+import { uploadPhotos, setPhotoLoading, getPhotos } from "../../redux/actions/photo";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bulkResize } from "../../utils/photo";
@@ -15,7 +15,7 @@ const AddPhotos = ({ uploadPhotos, setPhotoLoading, getPhotos, match, photo }) =
         getPhotos();
     }, []);
 
-    const onDrop = picture => {
+    const onDrop = (picture) => {
         setPictures(picture);
         if (picture.length > 0) {
             setUploadBtn(true);
@@ -24,7 +24,7 @@ const AddPhotos = ({ uploadPhotos, setPhotoLoading, getPhotos, match, photo }) =
         }
     };
 
-    const onUpload = async e => {
+    const onUpload = async (e) => {
         setPhotoLoading();
         setUploadBtn(false);
         let res = await bulkResize(pictures);
@@ -44,7 +44,7 @@ const AddPhotos = ({ uploadPhotos, setPhotoLoading, getPhotos, match, photo }) =
                 <ImageUploader
                     withIcon={false}
                     buttonText="Choose images"
-                    onChange={pictures => onDrop(pictures)}
+                    onChange={(pictures) => onDrop(pictures)}
                     imgExtension={[".jpg", ".gif", ".png", ".gif", "jpeg"]}
                     maxFileSize={30485760}
                     withPreview={true}
@@ -66,7 +66,7 @@ AddPhotos.propTypes = {
     setPhotoLoading: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     photo: state.photo
 });
 

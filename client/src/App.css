@@ -14,6 +14,13 @@ body {
     padding: 0;
     margin: 0;
     background-color: #c0c0c0;
+    overflow-y: scroll;
+}
+
+/* navbar */
+.nav-bottom {
+    /* border-bottom: 1px solid lightgrey;
+    background-color: lightgrey; */
 }
 
 /* Global */

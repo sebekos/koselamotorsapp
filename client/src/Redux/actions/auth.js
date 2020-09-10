@@ -10,11 +10,11 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     CLEAR_PROFILE
-} from "./types";
+} from "../constants/types";
 import setAuthToken from "../utils/setAuthToken";
 
 // Load user
-export const loadUser = () => async dispatch => {
+export const loadUser = () => async (dispatch) => {
     if (localStorage.token) {
         setAuthToken(localStorage.token);
     }
@@ -33,7 +33,7 @@ export const loadUser = () => async dispatch => {
 };
 
 // Register User
-export const register = ({ name, email, password, registerkey }) => async dispatch => {
+export const register = ({ name, email, password, registerkey }) => async (dispatch) => {
     const config = {
         headers: {
             "Content-Type": "application/json"
@@ -51,7 +51,7 @@ export const register = ({ name, email, password, registerkey }) => async dispat
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+            errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
         }
         dispatch({
             type: REGISTER_FAIL
@@ -60,7 +60,7 @@ export const register = ({ name, email, password, registerkey }) => async dispat
 };
 
 // Login User
-export const login = (email, password) => async dispatch => {
+export const login = (email, password) => async (dispatch) => {
     const config = {
         headers: {
             "Content-Type": "application/json"
@@ -80,7 +80,7 @@ export const login = (email, password) => async dispatch => {
         const errors = err.response.data.errors;
 
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+            errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
         }
 
         dispatch({
@@ -90,13 +90,13 @@ export const login = (email, password) => async dispatch => {
 };
 
 // Logout / Clear profile
-export const logout = () => dispatch => {
+export const logout = () => (dispatch) => {
     dispatch({ type: CLEAR_PROFILE });
     dispatch({ type: LOGOUT });
 };
 
 // Set photo loading true
-export const setAuthLoading = () => async dispatch => {
+export const setAuthLoading = () => async (dispatch) => {
     dispatch({
         type: AUTH_LOADING
     });

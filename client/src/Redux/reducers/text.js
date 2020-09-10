@@ -1,4 +1,4 @@
-import { GET_TEXT, TEXT_SUCCESS, TEXT_FAILURE } from "../actions/types";
+import { GET_TEXT, TEXT_SUCCESS, TEXT_FAILURE } from "../constants/types";
 
 const initialState = {
     fields: {},
@@ -6,7 +6,7 @@ const initialState = {
     error: {}
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     const { type, payload } = action;
     switch (type) {
         case GET_TEXT:

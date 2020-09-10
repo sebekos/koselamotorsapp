@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { closeModal } from "../../Redux/actions/modal";
-import { updateText } from "../../Redux/actions/text";
+import { closeModal } from "../../redux/actions/modal";
+import { updateText } from "../../redux/actions/text";
 
 Modal.setAppElement(document.getElementById("root"));
 
 const EditModal = ({ closeModal, modal: { modalIsOpen, text, name }, updateText }) => {
     const [formText, setFormText] = useState(text);
 
-    const onChangeHandler = e => setFormText(e.target.value);
+    const onChangeHandler = (e) => setFormText(e.target.value);
 
     const customStyles = {
         content: {
@@ -25,7 +25,7 @@ const EditModal = ({ closeModal, modal: { modalIsOpen, text, name }, updateText 
         overlay: { zIndex: 10 }
     };
 
-    const onSave = e => {
+    const onSave = (e) => {
         e.preventDefault();
         let form = {
             name: name,
@@ -65,7 +65,7 @@ EditModal.propTypes = {
     updateText: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     modal: state.modal
 });
 
