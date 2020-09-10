@@ -10,15 +10,13 @@ import Footer from "./components/layout/Footer";
 import Home from "./components/home/Home";
 import Services from "./components/services/Services";
 import Gallery from "./components/gallery/Gallery";
-import About from "./components/about/About";
+import Contact from "./components/contact/Contact";
 import Login from "./components/auth/Login";
-import Alert from "./components/layout/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
-import EditModal from "./components/modal/EditModal";
 import AddPhotos from "./components/gallery/AddPhotos";
 import DeletePhotos from "./components/gallery/DeletePhotos";
 import PhotoSortable from "./components/reorder/PhotoSortable";
-import GalleryOverview from "./components/gallery/GalleryOverview";
+import Inventory from "./components/inventory/Inventory";
 import EditInfo from "./components/edit/EditInfo";
 import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
@@ -43,29 +41,23 @@ const App = () => {
     return (
         <Provider store={store}>
             <Router>
-                <Fragment>
-                    <EditModal />
-                    <Header />
-                    <div className="alert-container">
-                        <Alert />
-                    </div>
-                    <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/about" component={About} />
-                        <Route exact path="/services" component={Services} />
-                        <Route exact path="/gallery" component={GalleryOverview} />
-                        <Route exact path="/gallery/:id" component={Gallery} />
-                        <Route exact path="/login" component={Login} />
-                        <Route exact path="/register" component={Register} />
-                        <Route exact path="/reset" component={Reset} />
-                        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                        <PrivateRoute exact path="/addphotos/:id" component={AddPhotos} />
-                        <PrivateRoute exact path="/deletephotos/:id" component={DeletePhotos} />
-                        <PrivateRoute exact path="/sortphotos/:id" component={PhotoSortable} />
-                        <PrivateRoute exact path="/editinfo/:id" component={EditInfo} />
-                    </Switch>
-                    <Footer />
-                </Fragment>
+                <Header />
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/contact" component={Contact} />
+                    <Route exact path="/services" component={Services} />
+                    <Route exact path="/inventory" component={Inventory} />
+                    <Route exact path="/gallery/:id" component={Gallery} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/reset" component={Reset} />
+                    <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                    <PrivateRoute exact path="/addphotos/:id" component={AddPhotos} />
+                    <PrivateRoute exact path="/deletephotos/:id" component={DeletePhotos} />
+                    <PrivateRoute exact path="/sortphotos/:id" component={PhotoSortable} />
+                    <PrivateRoute exact path="/editinfo/:id" component={EditInfo} />
+                </Switch>
+                <Footer />
             </Router>
         </Provider>
     );

@@ -1,64 +1,35 @@
 import React from "react";
-import { connect } from "react-redux";
-import { openModal } from "../../redux/actions/modal";
-import PropTypes from "prop-types";
+import ServiceItem from "./ServiceItem";
+import styled from "styled-components";
 
-const Boxes = ({ isAuthenticated, openModal, text }) => {
-    const editText = (e) => {
-        if (!isAuthenticated) {
-            return;
-        }
-        const data = {
-            name: e.target.getAttribute("name"),
-            text: e.target.textContent
-        };
-        openModal(data);
-    };
+const Container = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: max-content;
+    margin: 2rem auto 0;
+    text-align: center;
+`;
 
+const Boxes = () => {
     return (
-        <section id="boxes">
-            <div className="container">
-                <div className="box">
-                    <i className="fas fa-car-crash fa-4x"></i>
-                    <h3 onClick={editText} name="servicetitle1">
-                        {text.fields.servicetitle1}
-                    </h3>
-                    <p onClick={editText} name="box1">
-                        {text.fields.box1}
-                    </p>
-                </div>
-                <div className="box">
-                    <i className="fas fa-tools fa-4x"></i>
-                    <h3 onClick={editText} name="servicetitle2">
-                        {text.fields.servicetitle2}
-                    </h3>
-                    <p onClick={editText} name="box2">
-                        {text.fields.box2}
-                    </p>
-                </div>
-                <div className="box">
-                    <i className="fas fa-toolbox fa-4x"></i>
-                    <h3 onClick={editText} name="servicetitle3">
-                        {text.fields.servicetitle3}
-                    </h3>
-                    <p onClick={editText} name="box3">
-                        {text.fields.box3}
-                    </p>
-                </div>
-            </div>
-        </section>
+        <Container>
+            <ServiceItem
+                icon="fas fa-car-crash fa-7x"
+                title="Maintenance"
+                text="Stay up to date with regular maintenance and affordable auto service when you bring your new or used vehicle"
+            />
+            <ServiceItem
+                icon="fas fa-tools fa-7x"
+                title="Engine Work"
+                text="We rebuild long and short block engines, cylinder heads and crankshafts and afterwards they are equivalent or better than new"
+            />
+            <ServiceItem
+                icon="fas fa-toolbox fa-7x"
+                title="Custom Builds"
+                text="When only a one-of-a-kind car will do, custom car builds are the answer. Kosela Motorsports has constructed many vehicles from the ground up"
+            />
+        </Container>
     );
 };
 
-Boxes.propTypes = {
-    openModal: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool,
-    text: PropTypes.object.isRequired
-};
-
-const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    text: state.text
-});
-
-export default connect(mapStateToProps, { openModal })(Boxes);
+export default Boxes;

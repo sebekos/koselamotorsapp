@@ -1,78 +1,80 @@
 import React from "react";
-import { connect } from "react-redux";
-import { openModal } from "../../redux/actions/modal";
-import PropTypes from "prop-types";
+import styled from "styled-components";
+import ServicesPng from "../../img/services.png";
 
-const Services = ({ isAuthenticated, openModal, text }) => {
-    const editText = (e) => {
-        if (!isAuthenticated) {
-            return;
-        }
-        const data = {
-            name: e.target.getAttribute("name"),
-            text: e.target.textContent
-        };
-        openModal(data);
-    };
+const Container = styled.div`
+    padding-top: 6rem;
+    min-height: 100vh;
+`;
 
+const VehicleServicesContainer = styled.div`
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: auto;
+    align-items: center;
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+`;
+
+const ImgContainer = styled.div`
+    max-width: 650px;
+    padding: 5rem 3rem;
+    @media (max-width: 768px) {
+        display: none;
+    }
+`;
+
+const Img = styled.img`
+    max-width: 400px;
+    height: auto;
+`;
+
+const Image = () => {
     return (
-        <section id="services">
-            <div className="container">
-                <div className="services-container">
-                    <div className="servicebox">
-                        <div className="service-icon">
-                            <i className="fas fa-car-crash fa-7x"></i>
-                        </div>
-                        <div className="service-description">
-                            <h3 onClick={editText} name="servicetitle1">
-                                {text.fields.servicetitle1}
-                            </h3>
-                            <p onClick={editText} name="service1">
-                                {text.fields.service1}
-                            </p>
-                        </div>
-                    </div>
-                    <div className="servicebox">
-                        <div className="service-icon">
-                            <i className="fas fa-tools fa-7x"></i>
-                        </div>
-                        <div className="service-description">
-                            <h3 onClick={editText} name="servicetitle2">
-                                {text.fields.servicetitle2}
-                            </h3>
-                            <p onClick={editText} name="service2">
-                                {text.fields.service2}
-                            </p>
-                        </div>
-                    </div>
-                    <div className="servicebox">
-                        <div className="service-icon">
-                            <i className="fas fa-toolbox fa-7x"></i>
-                        </div>
-                        <div className="service-description">
-                            <h3 onClick={editText} name="servicetitle3">
-                                {text.fields.servicetitle3}
-                            </h3>
-                            <p onClick={editText} name="service3">
-                                {text.fields.service3}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <ImgContainer>
+            <Img src={ServicesPng} />
+        </ImgContainer>
     );
 };
 
-Services.propTypes = {
-    openModal: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool,
-    text: PropTypes.object.isRequired
+const TextContainer = styled.div`
+    text-align: center;
+    max-width: 650px;
+    padding: 5rem 3rem;
+`;
+
+const TextTitle = styled.div`
+    font-size: 2rem;
+    padding: 0rem 0 1rem;
+`;
+
+const TextDesc = styled.div`
+    font-size: 1rem;
+`;
+
+const Text = () => {
+    return (
+        <TextContainer>
+            <TextTitle>Services</TextTitle>
+            <TextDesc>
+                Witamy na stronie www.pytlewski.pl. Wszystkie aktualne informacje dotyczące strony będą podawane tutaj pod zdjęciem młyna.
+                Zapraszamy ponownie...
+            </TextDesc>
+        </TextContainer>
+    );
 };
 
-const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    text: state.text
-});
+const Services = () => {
+    return (
+        <Container>
+            <VehicleServicesContainer>
+                <Image />
+                <Text />
+            </VehicleServicesContainer>
+        </Container>
+    );
+};
 
-export default connect(mapStateToProps, { openModal })(Services);
+export default Services;

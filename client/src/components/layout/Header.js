@@ -21,7 +21,7 @@ const Container = styled.div`
 const LogoContainer = styled.div`
     font-size: 2rem;
     color: #3e4444;
-    margin-left: 20rem;
+    margin-left: 6rem;
     @media (max-width: 768px) {
         margin: auto;
         font-size: 1.5rem;
@@ -31,7 +31,7 @@ const LogoContainer = styled.div`
 const LinksContainer = styled.div`
     display: flex;
     justify-self: end;
-    margin-right: 20rem;
+    margin-right: 6rem;
     & > a {
         font-size: 1rem;
         color: #3e4444;
@@ -95,7 +95,7 @@ AuthLinks.propTypes = {
     onLogout: PropTypes.func.isRequired
 };
 
-const Header = ({ isAuthenticated, loading, logout, history }) => {
+const Header = ({ isAuthenticated, logout, history }) => {
     const [currMenu, setCurrMenu] = useState("");
     const [bottom, setBottom] = useState(false);
 
@@ -114,7 +114,7 @@ const Header = ({ isAuthenticated, loading, logout, history }) => {
 
     useEffect(() => {
         let currPath = history.location.pathname.split("/")[1];
-        currPath = currPath === "" ? "Główny" : currPath;
+        currPath = currPath === "" ? "Home" : currPath;
         setCurrMenu(currPath);
         window.addEventListener("scroll", listenToScroll);
     }, [history.location.pathname]);
@@ -126,7 +126,7 @@ const Header = ({ isAuthenticated, loading, logout, history }) => {
     });
 
     return (
-        <Container className={bottom ? "nav-bottom" : ""}>
+        <Container className={bottom || currMenu !== "Home" ? "nav-bottom" : ""}>
             <Logo />
             <LinksContainer>{isAuthenticated ? <AuthLinks onLogout={onLogout} /> : <GuestLinks currMenu={currMenu} />}</LinksContainer>
         </Container>
