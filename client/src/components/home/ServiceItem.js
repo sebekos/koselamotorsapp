@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { Card, CardContent } from "@material-ui/core";
-import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -23,7 +23,7 @@ const CardContentContainer = styled(CardContent)`
 const Item = ({ icon, title, text }) => {
     return (
         <Container>
-            <CardContainer key={uuid()}>
+            <CardContainer key={v4()}>
                 <CardContentContainer>
                     <div>
                         <i className={icon}></i>
