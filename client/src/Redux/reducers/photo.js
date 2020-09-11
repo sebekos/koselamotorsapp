@@ -22,6 +22,7 @@ const initialState = {
     progressbar: false,
     progressbarvalue: 0,
     showAddGallery: false,
+    fetchPhotos: true,
     error: {}
 };
 
@@ -44,7 +45,8 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 photos: payload,
-                loading: false
+                loading: false,
+                fetchPhotos: false
             };
         case GET_ONE_GALLERY:
             return {

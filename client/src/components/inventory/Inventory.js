@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
     padding: 7rem 0 0;
+    min-height: 100vh;
 `;
 
 const InventoriesContainer = styled.div`
@@ -35,9 +36,11 @@ const InventoryContainer = ({ photos }) => {
     );
 };
 
-const Inventory = ({ getPhotos, photo: { photos, loading } }) => {
+const Inventory = ({ getPhotos, photos, loading, fetchPhotos }) => {
     useEffect(() => {
-        getPhotos();
+        if (!loading && fetchPhotos) {
+            getPhotos();
+        }
     }, []);
 
     return (
@@ -53,7 +56,10 @@ Inventory.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    photo: state.photo
+    photo: state.photo,
+    photos: state.photo.photos,
+    loading: state.photo.loading,
+    fetchPhotos: state.photo.fetchPhotos
 });
 
 const mapDispatchToProps = {

@@ -1,9 +1,8 @@
 import React from "react";
 import { Card } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-
 import { v4 } from "uuid";
+import styled from "styled-components";
 
 const Container = styled.div`
     margin: auto;
@@ -32,7 +31,7 @@ const ImageContainer = styled.div`
     overflow: hidden;
     width: 300px;
     background-color: black;
-    border-right: 1px solid grey;
+    border-right: 1px solid lightgrey;
 `;
 
 const Image = styled.img`

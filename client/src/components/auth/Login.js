@@ -1,21 +1,46 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
-import { login, setAuthLoading } from "../../redux/actions/auth";
+import { login } from "../../redux/actions/auth";
 import { connect } from "react-redux";
-import Spinner from "../layout/Spinner";
+import { TextField, Button } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Spinner from "../universal/Spinner";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
-const Login = ({ auth: { isAuthenticated, loading }, login, setAuthLoading }) => {
+const Container = styled.div`
+    padding: 6rem 0 0;
+    min-height: 100vh;
+`;
+
+const LoginContainer = styled.div`
+    width: max-content;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
+const FormContainer = styled.form`
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    & > div {
+        margin: 0 0 1rem 0;
+    }
+`;
+
+const Login = ({ isAuthenticated, loading, login }) => {
     const [formData, setFormData] = useState({
         email: "",
         password: ""
     });
     const { email, password } = formData;
 
-    const onChangeHandler = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+    const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const onSubmitHandler = async (e) => {
-        setAuthLoading();
+    const onSubmit = async (e) => {
         e.preventDefault();
         login(email, password);
     };
@@ -25,46 +50,40 @@ const Login = ({ auth: { isAuthenticated, loading }, login, setAuthLoading }) =>
     }
 
     return (
-        <Fragment>
-            <div className="form-container">
-                {loading ? <Spinner /> : null}
-                <h1 className="large text-primary">Sign In</h1>
-                <p className="lead">
-                    <i className="fas fa-user"></i> Sign Into Your Account
-                </p>
-                <form className="form" onSubmit={onSubmitHandler}>
-                    <div className="form-group">
-                        <input type="email" placeholder="Email Address" name="email" value={email} onChange={onChangeHandler} required />
-                    </div>
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            name="password"
-                            minLength="6"
-                            value={password}
-                            onChange={onChangeHandler}
-                            required
-                        />
-                    </div>
-                    <input type="submit" className="btn btn-success" value="Login" />
-                </form>
-                <p className="my-1">
-                    Forgot password? <Link to="/reset">Reset password</Link>
-                </p>
-            </div>
-        </Fragment>
+        <Container>
+            <LoginContainer>
+                {loading && <Spinner />}
+                <FormContainer onSubmit={onSubmit}>
+                    <TextField name="email" type="text" onChange={onChange} value={email} label="Email" variant="filled" />
+                    <TextField name="password" type="password" onChange={onChange} value={password} label="Password" variant="filled" />
+                    <Button type="submit" onClick={onSubmit} variant="contained" color="primary">
+                        Login
+                    </Button>
+                    <Link to="/register" style={{ textDecoration: "none" }}>
+                        <Typography component="div">
+                            <Box fontSize="fontSize" m={1}>
+                                Don't have an account? Register
+                            </Box>
+                        </Typography>
+                    </Link>
+                </FormContainer>
+            </LoginContainer>
+        </Container>
     );
 };
 
 Login.propTypes = {
     login: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    setAuthLoading: PropTypes.func.isRequired
+    auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    auth: state.auth
+    isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading
 });
 
-export default connect(mapStateToProps, { login, setAuthLoading })(Login);
+const mapDispatchToProps = {
+    login
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
