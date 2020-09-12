@@ -20,6 +20,7 @@ import Inventory from "./components/inventory/Inventory";
 import EditInfo from "./components/edit/EditInfo";
 import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
+import ScrollToTop from "./utils/scrollToTop";
 
 //redux
 import { Provider } from "react-redux";
@@ -41,6 +42,7 @@ const App = () => {
     return (
         <Provider store={store}>
             <Router>
+                <ScrollToTop />
                 <Header />
                 <Switch>
                     <Route exact path="/" component={Home} />

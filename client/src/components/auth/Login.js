@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const LoginContainer = styled.div`
     width: max-content;
-    position: fixed;
+    position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);

@@ -1,26 +1,23 @@
 import React from "react";
-import EditModal from "../modal/EditModal";
 import AddGallery from "./AddGallery";
-import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import styled from "styled-components";
+
+const Container = styled.div`
+    padding: 6rem 0 0;
+`;
 
 const Dashboard = ({ photo }) => {
     return (
-        <section className="dashboard">
+        <Container className="dashboard">
             <div className="container">
-                {photo.loading ? <Spinner /> : null}
-                <div className="instructions">
-                    <h1>Edit Text</h1>
-                    <p>Go to any page, double click on any text box then save.</p>
-                </div>
                 <div className="instructions">
                     <h1>Photo Tools</h1>
                     <AddGallery />
                 </div>
-                <EditModal />
             </div>
-        </section>
+        </Container>
     );
 };
 
@@ -28,7 +25,7 @@ Dashboard.propTypes = {
     photo: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     photo: state.photo
 });
 
