@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { loadUser } from "./redux/actions/auth";
 import { getText } from "./redux/actions/text";
 import { getPhotos } from "./redux/actions/photo";
+import { ToastContainer, Slide } from "react-toastify";
+
 import setAuthToken from "./redux/utils/setAuthToken";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import Header from "./components/layout/Header";
@@ -21,6 +23,9 @@ import EditInfo from "./components/edit/EditInfo";
 import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
 import ScrollToTop from "./utils/scrollToTop";
+
+//css
+import "react-toastify/dist/ReactToastify.min.css";
 
 //redux
 import { Provider } from "react-redux";
@@ -42,6 +47,7 @@ const App = () => {
     return (
         <Provider store={store}>
             <Router>
+                <ToastContainer hideProgressBar pauseOnHover={false} transition={Slide} />
                 <ScrollToTop />
                 <Header />
                 <Switch>
