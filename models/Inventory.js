@@ -26,8 +26,7 @@ const InventorySchema = new mongoose.Schema({
         default: Date.now
     },
     soldAt: {
-        type: Date,
-        default: Date.now
+        type: Date
     }
 });
 

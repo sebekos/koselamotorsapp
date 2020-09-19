@@ -1,8 +1,9 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getPhotos } from "../../redux/actions/photo";
-import InventoryItem from "./InventoryItem";
+import { getInventory } from "../../redux/actions/inventory";
+import { v4 } from "uuid";
+import Spinner from "../universal/Spinner";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -17,53 +18,51 @@ const InventoriesContainer = styled.div`
     margin: auto;
 `;
 
-const InventoryContainer = ({ photos }) => {
+const InventoryItem = () => {
+    return <div>Inventory Item</div>;
+};
+
+const InventoryContainer = ({ car_items, loading }) => {
+    if (!loading && car_items.length === 0) return <div>No Items</div>;
     return (
         <InventoriesContainer>
-            {photos.length > 0 ? (
-                <Fragment>
-                    {photos.map((item, index) => {
-                        if (item.photos.length === 0) {
-                            return null;
-                        }
-                        return <InventoryItem key={"gi-" + index} data={item} />;
-                    })}
-                </Fragment>
-            ) : (
-                <p>No Photos</p>
-            )}
+            {car_items.map((item) => (
+                <InventoryItem key={v4()} />
+            ))}
         </InventoriesContainer>
     );
 };
 
-const Inventory = ({ getPhotos, photos, loading, fetchPhotos }) => {
-    useEffect(() => {
-        if (!loading && fetchPhotos) {
-            getPhotos();
+const Inventory = ({ getInventory, loading, car_items, fetch_car_items }) => {
+    useLayoutEffect(() => {
+        if (!loading && fetch_car_items) {
+            getInventory();
         }
     }, []);
 
     return (
         <Container>
-            {loading && <p>loading...</p>}
-            <InventoryContainer photos={photos} />
+            {loading && <Spinner />}
+            <InventoryContainer car_items={car_items} loading={loading} />
         </Container>
     );
 };
 
 Inventory.propTypes = {
-    getPhotos: PropTypes.func.isRequired
+    getInventory: PropTypes.func.isRequired,
+    loading: PropTypes.bool,
+    car_items: PropTypes.array,
+    fetch_car_items: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
-    photo: state.photo,
-    photos: state.photo.photos,
-    loading: state.photo.loading,
-    fetchPhotos: state.photo.fetchPhotos
+    car_items: state.inventory.car_items,
+    loading: state.inventory.loading,
+    fetch_car_items: state.inventory.fetch_car_items
 });
 
 const mapDispatchToProps = {
-    getPhotos
+    getInventory
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

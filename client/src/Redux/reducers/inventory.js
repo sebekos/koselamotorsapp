@@ -3,6 +3,7 @@ import { GET_INVENTORY, GET_INVENTORY_FAIL, INVENTORY_LOADING, ADD_INVENTORY, AD
 const initialState = {
     car_items: [],
     loading: false,
+    fetch_car_items: true,
     error: {}
 };
 
@@ -14,7 +15,8 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 car_items: payload,
-                loading: false
+                loading: false,
+                fetch_car_items: false
             };
         case INVENTORY_LOADING:
             return {

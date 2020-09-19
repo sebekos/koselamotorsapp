@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { loadUser } from "./redux/actions/auth";
 import { getText } from "./redux/actions/text";
@@ -40,8 +40,6 @@ if (localStorage.token) {
 const App = () => {
     useEffect(() => {
         store.dispatch(loadUser());
-        store.dispatch(getText());
-        store.dispatch(getPhotos());
     }, []);
 
     return (
