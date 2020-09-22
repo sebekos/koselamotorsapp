@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getInventory } from "../../redux/actions/inventory";
+import { Card } from "@material-ui/core";
 import { v4 } from "uuid";
 import Spinner from "../universal/Spinner";
 import styled from "styled-components";
@@ -18,8 +19,26 @@ const InventoriesContainer = styled.div`
     margin: auto;
 `;
 
+const StyledCard = styled(Card)`
+    margin: auto;
+    border: 1px solid #e8e8e8;
+    max-width: 700px;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+`;
+
+const ImageContainer = styled.div``;
+
+const InfoContainer = styled.div``;
+
 const InventoryItem = () => {
-    return <div>Inventory Item</div>;
+    return (
+        <StyledCard>
+            <ImageContainer>Image</ImageContainer>
+            <InfoContainer>Info</InfoContainer>
+        </StyledCard>
+    );
 };
 
 const InventoryContainer = ({ car_items, loading }) => {

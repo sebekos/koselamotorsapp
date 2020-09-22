@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import { updateGalleryInfo } from "../../redux/actions/photo";
-import Spinner from "../layout/Spinner";
+import Spinner from "../universal/Spinner";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 

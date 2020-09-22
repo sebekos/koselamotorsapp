@@ -4,7 +4,7 @@ import { uploadPhotos, setPhotoLoading, getPhotos } from "../../redux/actions/ph
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bulkResize } from "../../utils/photo";
-import Spinner from "../layout/Spinner";
+import Spinner from "../universal/Spinner";
 import ProgressBar from "../layout/ProgressBar";
 
 const AddPhotos = ({ uploadPhotos, setPhotoLoading, getPhotos, match, photo }) => {

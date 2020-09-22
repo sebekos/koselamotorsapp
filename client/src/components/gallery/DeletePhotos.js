@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import DeleteItem from "./DeleteItem";
 import { deletePhotos, setPhotoLoading } from "../../redux/actions/photo";
 import { connect } from "react-redux";
-import Spinner from "../layout/Spinner";
+import Spinner from "../universal/Spinner";
 
 const DeletePhotos = ({ deletePhotos, setPhotoLoading, photo: { photos, loading }, match }) => {
     const [delphotos, setDelphotos] = useState([]);
