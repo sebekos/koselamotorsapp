@@ -20,7 +20,7 @@ const Dashboard = ({ getInventory, car_items, loading, fetch_car_items }) => {
         <Container className="dashboard">
             {loading && <Spinner />}
             <AddInventory />
-            <EditInventory car_items={car_items} />
+            <EditInventory car_items={car_items} loading={loading} />
         </Container>
     );
 };

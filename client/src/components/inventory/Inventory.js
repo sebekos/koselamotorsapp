@@ -13,41 +13,80 @@ const Container = styled.div`
 `;
 
 const InventoriesContainer = styled.div`
-    display: grid;
-    grid-template-columns: 1fr;
     width: 1000px;
     margin: auto;
 `;
 
 const StyledCard = styled(Card)`
-    margin: auto;
+    margin: 0.5rem auto;
     border: 1px solid #e8e8e8;
     max-width: 700px;
-    padding: 1rem;
+    padding: 0.3rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 300px auto;
 `;
 
-const ImageContainer = styled.div``;
+const ImageContainer = styled.div`
+    max-height: 200px;
+    width: 300px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: black;
+`;
 
-const InfoContainer = styled.div``;
+const Image = styled.img`
+    width: 300px;
+    min-height: 200px;
+    margin: auto;
+    @media (max-width: 680px) {
+        width: fit-content;
+        border-right: none;
+    }
+`;
 
-const InventoryItem = () => {
+const InfoContainer = styled.div`
+    padding: 0.3rem;
+`;
+
+const TitleText = styled.div`
+    font-size: 1rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;
+
+const BodyText = styled.div`
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;
+
+const InventoryItem = ({ name, description }) => {
     return (
         <StyledCard>
-            <ImageContainer>Image</ImageContainer>
-            <InfoContainer>Info</InfoContainer>
+            <ImageContainer>
+                <Image />
+            </ImageContainer>
+            <InfoContainer>
+                <TitleText>{name}</TitleText>
+                <BodyText>{description}</BodyText>
+            </InfoContainer>
         </StyledCard>
     );
+};
+
+InventoryItem.propTypes = {
+    name: PropTypes.string,
+    description: PropTypes.string
 };
 
 const InventoryContainer = ({ car_items, loading }) => {
     if (!loading && car_items.length === 0) return <div>No Items</div>;
     return (
         <InventoriesContainer>
-            {car_items.map((item) => (
-                <InventoryItem key={v4()} />
-            ))}
+            {car_items.map((item) => {
+                const { name, description } = item;
+                return <InventoryItem key={v4()} name={name} description={description} />;
+            })}
         </InventoriesContainer>
     );
 };

@@ -2,42 +2,109 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { v4 } from "uuid";
-import { Card } from "@material-ui/core";
+import { Card, Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div``;
 
 const StyledCard = styled(Card)`
-    margin: auto;
+    margin: 0.5rem auto;
     border: 1px solid #e8e8e8;
     max-width: 700px;
-    padding: 1rem;
+    padding: 0.3rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 300px auto;
 `;
 
-const ImageContainer = styled.div``;
+const ImageContainer = styled.div`
+    max-height: 200px;
+    width: 300px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: black;
+`;
 
-const InfoContainer = styled.div``;
+const Image = styled.img`
+    width: 300px;
+    min-height: 200px;
+    margin: auto;
+    @media (max-width: 680px) {
+        width: fit-content;
+        border-right: none;
+    }
+`;
+
+const InfoContainer = styled.div`
+    padding: 0.3rem;
+`;
+
+const TitleText = styled.div`
+    font-size: 1rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3rem;
+`;
+
+const BodyText = styled.div`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    & > button {
+        margin-bottom: 0.5rem;
+    }
+`;
+
+const MainButton = styled(Button)`
+    width: 175px;
+`;
+
+const InventoryItem = ({ name, history, id }) => {
+    return (
+        <StyledCard>
+            <ImageContainer>
+                <Image />
+            </ImageContainer>
+            <InfoContainer>
+                <TitleText>{name}</TitleText>
+                <BodyText>
+                    <MainButton onClick={() => history.push(`/addphotos/${id}`)} variant="contained" color="primary">
+                        Add Photos
+                    </MainButton>
+                    <MainButton variant="contained" color="primary">
+                        Edit Info
+                    </MainButton>
+                    <MainButton variant="contained" color="primary">
+                        Sort Photos
+                    </MainButton>
+                    <MainButton variant="contained" color="primary">
+                        Delete Car
+                    </MainButton>
+                    <MainButton variant="contained" color="primary">
+                        Delete Images
+                    </MainButton>
+                </BodyText>
+            </InfoContainer>
+        </StyledCard>
+    );
+};
 
 const Empty = () => {
     return <div>No Items</div>;
 };
 
-const InventoryItem = () => {
-    return (
-        <StyledCard>
-            <ImageContainer>Image</ImageContainer>
-            <InfoContainer>Info</InfoContainer>
-        </StyledCard>
-    );
-};
+const EditInventory = ({ car_items, loading }) => {
+    const history = useHistory();
 
-const EditInventory = ({ car_items }) => {
-    if (car_items.length === 0) return <Empty />;
+    if (!loading && car_items.length === 0) return <Empty />;
+
     return (
         <Container>
             {car_items.map((item) => {
-                return <InventoryItem key={v4()} item={item} />;
+                const { _id, name } = item;
+                return <InventoryItem key={v4()} item={item} history={history} name={name} id={_id} />;
             })}
         </Container>
     );

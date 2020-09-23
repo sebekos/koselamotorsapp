@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { loadUser } from "./redux/actions/auth";
-import { getText } from "./redux/actions/text";
-import { getPhotos } from "./redux/actions/photo";
 import { ToastContainer, Slide } from "react-toastify";
 
 import setAuthToken from "./redux/utils/setAuthToken";
@@ -11,11 +9,10 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Home from "./components/home/Home";
 import Services from "./components/services/Services";
-import Gallery from "./components/gallery/Gallery";
 import Contact from "./components/contact/Contact";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
-import AddPhotos from "./components/gallery/AddPhotos";
+import AddPhotos from "./components/addphotos/AddPhotos";
 import DeletePhotos from "./components/gallery/DeletePhotos";
 import PhotoSortable from "./components/reorder/PhotoSortable";
 import Inventory from "./components/inventory/Inventory";
@@ -24,10 +21,10 @@ import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
 import ScrollToTop from "./utils/scrollToTop";
 
-//css
+// css
 import "react-toastify/dist/ReactToastify.min.css";
 
-//redux
+// redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
@@ -53,7 +50,6 @@ const App = () => {
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/services" component={Services} />
                     <Route exact path="/inventory" component={Inventory} />
-                    <Route exact path="/gallery/:id" component={Gallery} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/reset" component={Reset} />
