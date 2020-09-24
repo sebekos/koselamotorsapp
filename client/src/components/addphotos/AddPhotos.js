@@ -4,6 +4,7 @@ import { Button } from "@material-ui/core";
 import { bulkResize } from "../../utils/photo";
 import { LinearProgress } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { v4 } from "uuid";
 import axios from "axios";
 import styled from "styled-components";
 import PropTypes from "prop-types";
@@ -135,6 +136,8 @@ const AddMedia = ({ match }) => {
             });
     };
 
+    const onRemove = (e) => setImages(images.filter((item) => e.target.getAttribute("value") !== item.dataURL));
+
     return (
         <Container>
             <ImageUploading
@@ -145,6 +148,8 @@ const AddMedia = ({ match }) => {
                 acceptType={[]}
                 onError={onError}
                 onUpload={onUpload}
+                onRemove={onRemove}
+                value={images}
             >
                 {({ imageList, onImageUpload, onImageRemoveAll, errors }) => (
                     <div>
@@ -169,8 +174,10 @@ const AddMedia = ({ match }) => {
                         </ButtonsContainer>
                         <ImagesContainer>
                             {imageList.map((image) => (
-                                <ImageContainer key={image.key}>
-                                    <RemoveButton onClick={image.onRemove}>X</RemoveButton>
+                                <ImageContainer key={v4()}>
+                                    <RemoveButton onClick={onRemove} value={image.dataURL}>
+                                        X
+                                    </RemoveButton>
                                     <ImagePreview src={image.dataURL} alt="img" />
                                 </ImageContainer>
                             ))}
