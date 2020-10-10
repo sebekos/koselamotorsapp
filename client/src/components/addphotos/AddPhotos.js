@@ -166,7 +166,7 @@ const AddMedia = ({ match }) => {
                             <Button onClick={onImageRemoveAll} variant="contained" color="secondary">
                                 Remove all images
                             </Button>
-                            <Link to="/addeditgallery" style={{ textDecoration: "none" }}>
+                            <Link to="/dashboard" style={{ textDecoration: "none" }}>
                                 <Button variant="contained" color="default">
                                     Back
                                 </Button>

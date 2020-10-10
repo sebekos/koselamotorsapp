@@ -1,19 +1,19 @@
 import React from "react";
+import { Dimmer, Loader } from "semantic-ui-react";
 import styled from "styled-components";
-import { CircularProgress } from "@material-ui/core";
 
-const CircularContainer = styled.div`
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+const Container = styled.div`
+    max-height: inherit;
 `;
 
-const Spinner = () => {
+const Spinner = ({ shown, dimmer = false }) => {
+    if (!dimmer) return <Loader active={shown} />;
     return (
-        <CircularContainer>
-            <CircularProgress />
-        </CircularContainer>
+        <Container>
+            <Dimmer active={dimmer} inverted>
+                <Loader />
+            </Dimmer>
+        </Container>
     );
 };
 

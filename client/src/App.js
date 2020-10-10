@@ -16,13 +16,14 @@ import AddPhotos from "./components/addphotos/AddPhotos";
 import DeletePhotos from "./components/gallery/DeletePhotos";
 import PhotoSortable from "./components/reorder/PhotoSortable";
 import Inventory from "./components/inventory/Inventory";
-import EditInfo from "./components/edit/EditInfo";
+import EditInfo from "./components/editinfo/EditInfo";
 import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
 import ScrollToTop from "./utils/scrollToTop";
 
 // css
 import "react-toastify/dist/ReactToastify.min.css";
+import "semantic-ui-css/semantic.min.css";
 
 // redux
 import { Provider } from "react-redux";

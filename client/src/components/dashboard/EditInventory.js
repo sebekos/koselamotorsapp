@@ -2,19 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { v4 } from "uuid";
-import { Card, Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-
-const Container = styled.div``;
-
-const StyledCard = styled(Card)`
-    margin: 0.5rem auto;
-    border: 1px solid #e8e8e8;
-    max-width: 700px;
-    padding: 0.3rem;
-    display: grid;
-    grid-template-columns: 300px auto;
-`;
+import { Grid, Button, Container, Segment } from "semantic-ui-react";
 
 const ImageContainer = styled.div`
     max-height: 200px;
@@ -34,9 +23,7 @@ const Image = styled.img`
     }
 `;
 
-const InfoContainer = styled.div`
-    padding: 0.3rem;
-`;
+const InfoContainer = styled.div``;
 
 const TitleText = styled.div`
     font-size: 1rem;
@@ -51,43 +38,33 @@ const BodyText = styled.div`
     text-overflow: ellipsis;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-row-gap: 0.5rem;
     justify-items: center;
     & > button {
-        margin-bottom: 0.5rem;
+        width: 95%;
+        margin: 0.5rem;
     }
-`;
-
-const MainButton = styled(Button)`
-    width: 175px;
 `;
 
 const InventoryItem = ({ name, history, id }) => {
     return (
-        <StyledCard>
-            <ImageContainer>
-                <Image />
-            </ImageContainer>
-            <InfoContainer>
-                <TitleText>{name}</TitleText>
-                <BodyText>
-                    <MainButton onClick={() => history.push(`/addphotos/${id}`)} variant="contained" color="primary">
-                        Add Photos
-                    </MainButton>
-                    <MainButton variant="contained" color="primary">
-                        Edit Info
-                    </MainButton>
-                    <MainButton variant="contained" color="primary">
-                        Sort Photos
-                    </MainButton>
-                    <MainButton variant="contained" color="primary">
-                        Delete Car
-                    </MainButton>
-                    <MainButton variant="contained" color="primary">
-                        Delete Images
-                    </MainButton>
-                </BodyText>
-            </InfoContainer>
-        </StyledCard>
+        <Grid.Column style={{ width: "max-content", margin: ".3rem 0" }}>
+            <Segment>
+                <ImageContainer>
+                    <Image />
+                </ImageContainer>
+                <InfoContainer>
+                    <TitleText>{name}</TitleText>
+                    <BodyText>
+                        <Button onClick={() => history.push(`/addphotos/${id}`)}>Add Photos</Button>
+                        <Button onClick={() => history.push(`/editinfo/${id}`)}>Edit Info</Button>
+                        <Button>Sort Photos</Button>
+                        <Button color="red">Delete Car</Button>
+                        <Button>Delete Images</Button>
+                    </BodyText>
+                </InfoContainer>
+            </Segment>
+        </Grid.Column>
     );
 };
 
@@ -102,10 +79,12 @@ const EditInventory = ({ car_items, loading }) => {
 
     return (
         <Container>
-            {car_items.map((item) => {
-                const { _id, name } = item;
-                return <InventoryItem key={v4()} item={item} history={history} name={name} id={_id} />;
-            })}
+            <Grid className="centered">
+                {car_items.map((item) => {
+                    const { _id, name } = item;
+                    return <InventoryItem key={v4()} item={item} history={history} name={name} id={_id} />;
+                })}
+            </Grid>
         </Container>
     );
 };

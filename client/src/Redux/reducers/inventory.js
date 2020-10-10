@@ -1,8 +1,22 @@
-import { GET_INVENTORY, GET_INVENTORY_FAIL, INVENTORY_LOADING, ADD_INVENTORY, ADD_INVENTORY_FAIL } from "../constants/types";
+import {
+    GET_INVENTORY,
+    GET_ONE_INVENTORY,
+    GET_INVENTORY_FAIL,
+    INVENTORY_LOADING,
+    ADD_INVENTORY,
+    ADD_INVENTORY_FAIL,
+    ADD_INVENTORY_LOADING,
+    UPDATE_INVENTORY,
+    UPDATE_INVENTORY_LOADING,
+    UPDATE_INVENTORY_FAIL
+} from "../constants/types";
 
 const initialState = {
     car_items: [],
+    car_item: {},
     loading: false,
+    add_inventory_loading: false,
+    update_inventory_loading: false,
     fetch_car_items: true,
     error: {}
 };
@@ -18,23 +32,48 @@ export default function (state = initialState, action) {
                 loading: false,
                 fetch_car_items: false
             };
+        case GET_ONE_INVENTORY:
+            return {
+                ...state,
+                car_item: payload,
+                loading: false
+            };
         case INVENTORY_LOADING:
             return {
                 ...state,
                 loading: payload
             };
+        case ADD_INVENTORY_LOADING:
+            return {
+                ...state,
+                add_inventory_loading: payload
+            };
+        case UPDATE_INVENTORY_LOADING:
+            return {
+                ...state,
+                update_inventory_loading: true
+            };
         case ADD_INVENTORY:
             return {
                 ...state,
                 car_items: [payload, ...state.car_items],
-                loading: false
+                add_inventory_loading: false
+            };
+        case UPDATE_INVENTORY:
+            return {
+                ...state,
+                car_items: [payload, ...state.car_items],
+                update_inventory_loading: false
             };
         case GET_INVENTORY_FAIL:
         case ADD_INVENTORY_FAIL:
+        case UPDATE_INVENTORY_FAIL:
             return {
                 ...state,
                 error: payload,
-                loading: false
+                loading: false,
+                add_inventory_loading: false,
+                update_inventory_loading: false
             };
         default:
             return state;

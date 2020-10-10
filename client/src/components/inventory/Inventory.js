@@ -2,46 +2,17 @@ import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getInventory } from "../../redux/actions/inventory";
-import { Card } from "@material-ui/core";
 import { v4 } from "uuid";
 import Spinner from "../universal/Spinner";
 import styled from "styled-components";
 
+import { Grid, Segment, Image } from "semantic-ui-react";
+
 const Container = styled.div`
     padding: 7rem 0 0;
     min-height: 100vh;
-`;
-
-const InventoriesContainer = styled.div`
-    width: 1000px;
     margin: auto;
-`;
-
-const StyledCard = styled(Card)`
-    margin: 0.5rem auto;
-    border: 1px solid #e8e8e8;
-    max-width: 700px;
-    padding: 0.3rem;
-    display: grid;
-    grid-template-columns: 300px auto;
-`;
-
-const ImageContainer = styled.div`
-    max-height: 200px;
-    width: 300px;
-    box-sizing: border-box;
-    overflow: hidden;
-    background-color: black;
-`;
-
-const Image = styled.img`
-    width: 300px;
-    min-height: 200px;
-    margin: auto;
-    @media (max-width: 680px) {
-        width: fit-content;
-        border-right: none;
-    }
+    max-width: 80%;
 `;
 
 const InfoContainer = styled.div`
@@ -62,15 +33,15 @@ const BodyText = styled.div`
 
 const InventoryItem = ({ name, description }) => {
     return (
-        <StyledCard>
-            <ImageContainer>
-                <Image />
-            </ImageContainer>
-            <InfoContainer>
-                <TitleText>{name}</TitleText>
-                <BodyText>{description}</BodyText>
-            </InfoContainer>
-        </StyledCard>
+        <Grid.Column mobile={16} tablet={8} computer={4}>
+            <Segment>
+                <Image src="https://lh3.googleusercontent.com/coMv1dl31PCfEs6essJoEUwVryaqKHKQvENdZ_WYpN-PXa8Qfitkg3grQxIVN22W5A" />
+                <InfoContainer>
+                    <TitleText>{name}</TitleText>
+                    <BodyText>{description}</BodyText>
+                </InfoContainer>
+            </Segment>
+        </Grid.Column>
     );
 };
 
@@ -82,12 +53,12 @@ InventoryItem.propTypes = {
 const InventoryContainer = ({ car_items, loading }) => {
     if (!loading && car_items.length === 0) return <div>No Items</div>;
     return (
-        <InventoriesContainer>
+        <Grid>
             {car_items.map((item) => {
                 const { name, description } = item;
                 return <InventoryItem key={v4()} name={name} description={description} />;
             })}
-        </InventoriesContainer>
+        </Grid>
     );
 };
 
@@ -100,7 +71,7 @@ const Inventory = ({ getInventory, loading, car_items, fetch_car_items }) => {
 
     return (
         <Container>
-            {loading && <Spinner />}
+            <Spinner shown={loading} />
             <InventoryContainer car_items={car_items} loading={loading} />
         </Container>
     );

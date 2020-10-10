@@ -3,44 +3,27 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../redux/actions/alert";
 import { register } from "../../redux/actions/auth";
-import { TextField, Button } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const Container = styled.div`
-    padding: 6rem 0 0;
+import { Button, Form, Segment } from "semantic-ui-react";
+
+const StyledContainer = styled.div`
+    padding: 10rem 0 0;
     min-height: 100vh;
+    margin: auto;
 `;
 
-const LoginContainer = styled.div`
-    width: max-content;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-`;
-
-const FormContainer = styled.form`
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    & > div {
-        margin: 0 0 1rem 0;
-    }
-`;
-
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ setAlert, register, isAuthenticated, loading }) => {
     const [formData, setFormData] = useState({
-        name: "",
         email: "",
         password: "",
         password2: "",
         registerkey: ""
     });
 
-    const { name, email, password, password2, registerkey } = formData;
+    const { email, password, password2, registerkey } = formData;
 
     const onChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,7 +34,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         if (password !== password2) {
             setAlert("Passwords do not match", "danger");
         } else {
-            register({ name, email, password, registerkey });
+            register({ email, password, registerkey });
         }
     };
 
@@ -60,40 +43,51 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
 
     return (
-        <Container>
-            <LoginContainer>
-                <FormContainer onSubmit={onSubmit}>
-                    <TextField name="email" type="text" onChange={onChange} value={email} label="Email" variant="filled" />
-                    <TextField name="password" type="password" onChange={onChange} value={password} label="Password" variant="filled" />
-                    <TextField
-                        name="password2"
-                        type="password"
-                        onChange={onChange}
-                        value={password2}
-                        label="Confirm Password"
-                        variant="filled"
-                    />
-                    <TextField
-                        name="registerkey"
-                        type="password"
-                        onChange={onChange}
-                        value={registerkey}
-                        label="Register Key"
-                        variant="filled"
-                    />
-                    <Button type="submit" onClick={onSubmit} variant="contained" color="primary">
+        <StyledContainer style={{ maxWidth: 500 }}>
+            <Segment>
+                <Form onSubmit={onSubmit} loading={loading}>
+                    <Form.Field>
+                        <Form.Input fluid label="Email" placeholder="Email" onChange={onChange} name="email" value={email} type="email" />
+                    </Form.Field>
+                    <Form.Field>
+                        <Form.Input
+                            fluid
+                            label="Password"
+                            placeholder="Password"
+                            onChange={onChange}
+                            name="password"
+                            value={password}
+                            type="password"
+                        />
+                    </Form.Field>
+                    <Form.Field>
+                        <Form.Input
+                            fluid
+                            label="Retype Password"
+                            placeholder="Password"
+                            onChange={onChange}
+                            name="password2"
+                            value={password2}
+                            type="password"
+                        />
+                    </Form.Field>
+                    <Form.Field>
+                        <Form.Input
+                            fluid
+                            label="Register Key"
+                            placeholder="Register Key"
+                            onChange={onChange}
+                            name="registerkey"
+                            value={registerkey}
+                            type="password"
+                        />
+                    </Form.Field>
+                    <Button type="submit" onClick={onSubmit}>
                         Register
                     </Button>
-                    <Link to="/login" style={{ textDecoration: "none" }}>
-                        <Typography component="div">
-                            <Box fontSize="fontSize" m={1}>
-                                Have an account? Login
-                            </Box>
-                        </Typography>
-                    </Link>
-                </FormContainer>
-            </LoginContainer>
-        </Container>
+                </Form>
+            </Segment>
+        </StyledContainer>
     );
 };
 
@@ -104,7 +98,10 @@ Register.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading
 });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+const mapDispatchToProps = { setAlert, register };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

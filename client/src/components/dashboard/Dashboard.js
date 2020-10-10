@@ -7,6 +7,8 @@ import { getInventory } from "../../redux/actions/inventory";
 import Spinner from "../universal/Spinner";
 import styled from "styled-components";
 
+import { Divider } from "semantic-ui-react";
+
 const Container = styled.div`
     padding: 7rem 0 0;
     min-height: 100vh;
@@ -18,8 +20,9 @@ const Dashboard = ({ getInventory, car_items, loading, fetch_car_items }) => {
     }, []);
     return (
         <Container className="dashboard">
-            {loading && <Spinner />}
+            <Spinner shown={loading} />
             <AddInventory />
+            <Divider style={{ margin: "1rem 3rem" }} />
             <EditInventory car_items={car_items} loading={loading} />
         </Container>
     );
