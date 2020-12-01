@@ -3,16 +3,16 @@ const router = express.Router();
 const multiparty = require("multiparty");
 const { uuid } = require("uuidv4");
 const fs = require("fs");
-const auth = require("../middleware/auth");
+const auth = require("../../middleware/auth");
 const AWS = require("aws-sdk");
 const bluebird = require("bluebird");
 const FileType = require("file-type");
 const dotenv = require("dotenv");
 require("dotenv").config();
 
-const Photos = require("../../models/Photos");
+const Inventory = require("../../models/Inventory");
 
-// configure the keys for accessing AWS
+// configure the keys for accessing AWS test
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
