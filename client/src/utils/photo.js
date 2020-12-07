@@ -22,7 +22,7 @@ export const reSizerThumbnail = (picture) => {
         Resizer.imageFileResizer(
             picture,
             600, //800
-            250, //1100
+            400, //1100
             "JPEG",
             50,
             0,

@@ -27,6 +27,10 @@ const InventorySchema = new mongoose.Schema({
     },
     soldAt: {
         type: Date
+    },
+    deleted: {
+        type: Number,
+        default: 0
     }
 });
 

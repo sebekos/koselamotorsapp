@@ -56,6 +56,7 @@ const ImageContainer = styled.div`
 
 const ProgressContainer = styled.div`
     margin: 1rem auto;
+    max-width: 400px;
 `;
 
 const Progress = ({ progress }) => {
@@ -140,17 +141,7 @@ const AddMedia = ({ match }) => {
 
     return (
         <Container>
-            <ImageUploading
-                onChange={onChange}
-                maxNumber={maxNumber}
-                multiple
-                maxFileSize={maxMbFileSize}
-                acceptType={[]}
-                onError={onError}
-                onUpload={onUpload}
-                onRemove={onRemove}
-                value={images}
-            >
+            <ImageUploading onChange={onChange} maxNumber={maxNumber} multiple maxFileSize={maxMbFileSize} acceptType={[]} onError={onError} onUpload={onUpload} onRemove={onRemove} value={images}>
                 {({ imageList, onImageUpload, onImageRemoveAll, errors }) => (
                     <div>
                         <Errors>
@@ -161,11 +152,14 @@ const AddMedia = ({ match }) => {
                         </Errors>
                         <ButtonsContainer>
                             <Button onClick={onImageUpload} variant="contained">
-                                Add images
+                                Add photos
                             </Button>
-                            <Button onClick={onImageRemoveAll} variant="contained" color="secondary">
-                                Remove all images
-                            </Button>
+                            {imageList.length > 0 && (
+                                <Button onClick={onImageRemoveAll} variant="contained" color="secondary">
+                                    Remove all photos
+                                </Button>
+                            )}
+
                             <Link to="/dashboard" style={{ textDecoration: "none" }}>
                                 <Button variant="contained" color="default">
                                     Back

@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { v4 } from "uuid";
 import { useHistory } from "react-router-dom";
 import { Grid, Button, Container, Segment } from "semantic-ui-react";
+import { deleteInventory } from "../../redux/actions/inventory";
+import { connect } from "react-redux";
 
 const ImageContainer = styled.div`
     max-height: 200px;
@@ -46,12 +48,17 @@ const BodyText = styled.div`
     }
 `;
 
-const InventoryItem = ({ name, history, id }) => {
+const InventoryItem = ({ name, history, id, deleteInventory, thumbnail }) => {
+    const onDelete = () => {
+        const r = window.confirm("Press OK to confirm delete");
+        if (r !== true) return;
+        deleteInventory(id);
+    };
     return (
         <Grid.Column style={{ width: "max-content", margin: ".3rem 0" }}>
             <Segment>
                 <ImageContainer>
-                    <Image />
+                    <Image src={thumbnail} />
                 </ImageContainer>
                 <InfoContainer>
                     <TitleText>{name}</TitleText>
@@ -59,7 +66,9 @@ const InventoryItem = ({ name, history, id }) => {
                         <Button onClick={() => history.push(`/addphotos/${id}`)}>Add Photos</Button>
                         <Button onClick={() => history.push(`/editinfo/${id}`)}>Edit Info</Button>
                         <Button>Sort Photos</Button>
-                        <Button color="red">Delete Car</Button>
+                        <Button onClick={onDelete} color="red">
+                            Delete Car
+                        </Button>
                         <Button>Delete Images</Button>
                     </BodyText>
                 </InfoContainer>
@@ -69,10 +78,10 @@ const InventoryItem = ({ name, history, id }) => {
 };
 
 const Empty = () => {
-    return <div>No Items</div>;
+    return <div style={{ width: "100%", textAlign: "center" }}>No Inventory</div>;
 };
 
-const EditInventory = ({ car_items, loading }) => {
+const EditInventory = ({ car_items, loading, deleteInventory }) => {
     const history = useHistory();
 
     if (!loading && car_items.length === 0) return <Empty />;
@@ -81,8 +90,10 @@ const EditInventory = ({ car_items, loading }) => {
         <Container>
             <Grid className="centered">
                 {car_items.map((item) => {
-                    const { _id, name } = item;
-                    return <InventoryItem key={v4()} item={item} history={history} name={name} id={_id} />;
+                    const { _id, name, photos } = item;
+                    const thumbIndex = photos.findIndex((element) => element.includes("thumb"));
+                    const thumbnail = photos[thumbIndex];
+                    return <InventoryItem key={v4()} item={item} history={history} name={name} id={_id} deleteInventory={deleteInventory} thumbnail={thumbnail} />;
                 })}
             </Grid>
         </Container>
@@ -93,4 +104,8 @@ EditInventory.propTypes = {
     car_items: PropTypes.array
 };
 
-export default EditInventory;
+const mapDispatchToProps = {
+    deleteInventory
+};
+
+export default connect(null, mapDispatchToProps)(EditInventory);

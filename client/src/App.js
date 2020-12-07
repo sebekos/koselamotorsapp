@@ -16,6 +16,7 @@ import AddPhotos from "./components/addphotos/AddPhotos";
 import DeletePhotos from "./components/gallery/DeletePhotos";
 import PhotoSortable from "./components/reorder/PhotoSortable";
 import Inventory from "./components/inventory/Inventory";
+import InventorySingle from "./components/inventory/InventorySingle";
 import EditInfo from "./components/editinfo/EditInfo";
 import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
@@ -51,6 +52,7 @@ const App = () => {
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/services" component={Services} />
                     <Route exact path="/inventory" component={Inventory} />
+                    <Route exact path="/inventory/:id" component={InventorySingle} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/reset" component={Reset} />

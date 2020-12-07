@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getInventory } from "../../redux/actions/inventory";
 import { v4 } from "uuid";
+import { Link } from "react-router-dom";
 import Spinner from "../universal/Spinner";
 import styled from "styled-components";
 
@@ -31,16 +32,18 @@ const BodyText = styled.div`
     text-overflow: ellipsis;
 `;
 
-const InventoryItem = ({ name, description }) => {
+const InventoryItem = ({ name, description, thumbnail, inventory_id }) => {
     return (
         <Grid.Column mobile={16} tablet={8} computer={4}>
-            <Segment>
-                <Image src="https://lh3.googleusercontent.com/coMv1dl31PCfEs6essJoEUwVryaqKHKQvENdZ_WYpN-PXa8Qfitkg3grQxIVN22W5A" />
-                <InfoContainer>
-                    <TitleText>{name}</TitleText>
-                    <BodyText>{description}</BodyText>
-                </InfoContainer>
-            </Segment>
+            <Link to={`/inventory/${inventory_id}`}>
+                <Segment>
+                    <Image size="medium" src={thumbnail} />
+                    <InfoContainer>
+                        <TitleText>{name}</TitleText>
+                        <BodyText>{description}</BodyText>
+                    </InfoContainer>
+                </Segment>
+            </Link>
         </Grid.Column>
     );
 };
@@ -55,8 +58,10 @@ const InventoryContainer = ({ car_items, loading }) => {
     return (
         <Grid>
             {car_items.map((item) => {
-                const { name, description } = item;
-                return <InventoryItem key={v4()} name={name} description={description} />;
+                const { _id, name, description, photos } = item;
+                const thumbIndex = photos.findIndex((element) => element.includes("thumb"));
+                const thumbnail = photos[thumbIndex];
+                return <InventoryItem key={v4()} name={name} description={description} thumbnail={thumbnail} inventory_id={_id} />;
             })}
         </Grid>
     );

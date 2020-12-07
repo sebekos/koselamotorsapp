@@ -8,7 +8,9 @@ import {
     ADD_INVENTORY_LOADING,
     UPDATE_INVENTORY,
     UPDATE_INVENTORY_LOADING,
-    UPDATE_INVENTORY_FAIL
+    UPDATE_INVENTORY_FAIL,
+    DELETE_INVENTORY,
+    DELETE_INVENTORY_FAIL
 } from "../constants/types";
 
 const initialState = {
@@ -65,9 +67,16 @@ export default function (state = initialState, action) {
                 car_items: [payload, ...state.car_items],
                 update_inventory_loading: false
             };
+        case DELETE_INVENTORY:
+            return {
+                ...state,
+                car_items: state.car_items.filter((o) => o._id != payload._id),
+                loading: false
+            };
         case GET_INVENTORY_FAIL:
         case ADD_INVENTORY_FAIL:
         case UPDATE_INVENTORY_FAIL:
+        case DELETE_INVENTORY_FAIL:
             return {
                 ...state,
                 error: payload,

@@ -8,7 +8,9 @@ import {
     ADD_INVENTORY_LOADING,
     UPDATE_INVENTORY,
     UPDATE_INVENTORY_LOADING,
-    UPDATE_INVENTORY_FAIL
+    UPDATE_INVENTORY_FAIL,
+    DELETE_INVENTORY,
+    DELETE_INVENTORY_FAIL
 } from "../constants/types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -106,6 +108,27 @@ export const updateInventory = (formData) => async (dispatch) => {
         }
         dispatch({
             type: UPDATE_INVENTORY_FAIL,
+            payload: {
+                msg: err.response.statusText,
+                status: err.response.status
+            }
+        });
+    }
+};
+
+// Get one inventory
+export const deleteInventory = (inventory_id) => async (dispatch) => {
+    dispatch(setInventoryLoading(true));
+    try {
+        const res = await axios.post(`/api/inventory/delete/${inventory_id}`);
+        dispatch({
+            type: DELETE_INVENTORY,
+            payload: res.data
+        });
+    } catch (err) {
+        toast.error(err.response.statusText);
+        dispatch({
+            type: DELETE_INVENTORY_FAIL,
             payload: {
                 msg: err.response.statusText,
                 status: err.response.status

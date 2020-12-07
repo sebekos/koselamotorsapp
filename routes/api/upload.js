@@ -44,14 +44,15 @@ router.post("/", auth, (req, res) => {
 
         // Constants
         const photoCnt = Object.keys(files).length;
-        const gallery_id = fields.gallery_id;
+        const gallery_id = fields.gallery_id[0];
 
         // Error check
         if (error) throw new Error(error);
         if (photoCnt % 2 !== 0 || photoCnt < 2) throw new Error("File error");
 
         // Check gallery permissions
-        const gallery = await Gallery.findOne({ where: { id: gallery_id } });
+        const gallery = await Inventory.findById(gallery_id);
+        if (!gallery) throw new Error("Inventory does not exist");
         const { userId } = req;
         const { createdUser } = gallery;
         if (userId !== createdUser) {
@@ -65,7 +66,7 @@ router.post("/", auth, (req, res) => {
                 let fieldName = files[photo][0].fieldName;
                 let path = files[photo][0].path;
                 let buffer = fs.readFileSync(path);
-                let type = await FileType.fromBuffer(buffer);
+                let type = await FileType(buffer);
                 let curUuid = uuid();
                 let fileName = `gallery/${gallery_id}/${curUuid}-${fieldName}`;
                 return new Promise((resolve, reject) => resolve(uploadFile(buffer, fileName, type)));
@@ -80,7 +81,7 @@ router.post("/", auth, (req, res) => {
                 console.log(err);
                 return res.status(400).json({ errors: [{ msg: "S3 Error" }] });
             });
-        await Photos.findByIdAndUpdate(fields.group[0], { $set: { photos: photoArray } }, { new: true });
+        await Inventory.findByIdAndUpdate(gallery_id, { $set: { photos: returnUrls } }, { new: true });
         return res.status(200).send(returnUrls);
     });
 });

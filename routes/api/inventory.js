@@ -128,4 +128,27 @@ router.post(
     }
 );
 
+// @route       POST api/inventory/delete/:id
+// @description Delete inventory
+// @access      Private
+router.post("/delete/:id", [auth], async (req, res) => {
+    const inventory_id = req.params.id;
+    try {
+        const inventoryFields = {
+            deleted: 1
+        };
+        // Check if exists
+        let inventory = await Inventory.findById(inventory_id);
+        if (!inventory) {
+            return res.status(401).json({ msg: "Inventory not found" });
+        }
+        // Update inventory
+        inventory = await Inventory.findByIdAndUpdate(inventory_id, { $set: inventoryFields }, { new: true });
+        res.json(inventory);
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send(error);
+    }
+});
+
 module.exports = router;
