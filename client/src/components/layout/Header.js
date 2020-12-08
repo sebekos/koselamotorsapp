@@ -66,12 +66,7 @@ const GuestLinks = ({ currMenu }) => {
         <>
             {links.map((link, index) => {
                 return (
-                    <Link
-                        route={link}
-                        to={`/${link !== "Home" ? link : ""}`}
-                        key={`guestlinks-${index}`}
-                        className={link.toLowerCase() === currMenu.toLowerCase() ? "active-link" : null}
-                    >
+                    <Link route={link} to={`/${link !== "Home" ? link : ""}`} key={`guestlinks-${index}`} className={link.toLowerCase() === currMenu.toLowerCase() ? "active-link" : null}>
                         {link}
                     </Link>
                 );

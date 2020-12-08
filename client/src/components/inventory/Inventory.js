@@ -7,13 +7,21 @@ import { Link } from "react-router-dom";
 import Spinner from "../universal/Spinner";
 import styled from "styled-components";
 
-import { Grid, Segment, Image } from "semantic-ui-react";
-
 const Container = styled.div`
-    padding: 7rem 0 0;
+    padding: 8rem 0 0;
     min-height: 100vh;
     margin: auto;
-    max-width: 80%;
+    width: max-content;
+`;
+
+const MainTitle = styled.div`
+    font-size: 3rem;
+    color: #3e4444;
+    text-align: center;
+    padding: 0rem 0 1rem;
+    width: 100%;
+    background-color: white;
+    font-weight: bold;
 `;
 
 const InfoContainer = styled.div`
@@ -25,26 +33,69 @@ const TitleText = styled.div`
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #333;
+    font-weight: bold;
+    padding: 5px;
 `;
 
 const BodyText = styled.div`
+    flex: 1;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #333;
+    width: 100%;
+    border-top: 1px solid lightgrey;
+    padding: 5px;
 `;
 
-const InventoryItem = ({ name, description, thumbnail, inventory_id }) => {
+const ImageContainerMain = styled.div`
+    height: 300px;
+    min-width: 450px;
+    overflow: hidden;
+    width: fit-content;
+    cursor: pointer;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+`;
+
+const ImageSrcMain = styled.img`
+    height: 298px;
+    width: 448px;
+    object-fit: cover;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+`;
+
+const ImageMain = ({ img }) => {
     return (
-        <Grid.Column mobile={16} tablet={8} computer={4}>
-            <Link to={`/inventory/${inventory_id}`}>
-                <Segment>
-                    <Image size="medium" src={thumbnail} />
-                    <InfoContainer>
-                        <TitleText>{name}</TitleText>
-                        <BodyText>{description}</BodyText>
-                    </InfoContainer>
-                </Segment>
-            </Link>
-        </Grid.Column>
+        <ImageContainerMain>
+            <ImageSrcMain src={img} alt="photo" />
+        </ImageContainerMain>
+    );
+};
+
+const ItemContainer = styled.div`
+    width: 450px;
+    margin: 1rem 0.5rem auto;
+    border: 1px solid lightgrey;
+    border-radius: 7px;
+`;
+
+const InventoryItem = ({ name, description, thumbnail, inventory_id, status }) => {
+    return (
+        <Link style={{ padding: 0 }} to={`/inventory/${inventory_id}`}>
+            <ItemContainer>
+                {/* <Image size="medium" src={thumbnail} /> */}
+                <ImageMain img={thumbnail} />
+                <InfoContainer>
+                    <TitleText>
+                        {status} - {name}
+                    </TitleText>
+                    <BodyText>{description}</BodyText>
+                </InfoContainer>
+            </ItemContainer>
+        </Link>
     );
 };
 
@@ -53,17 +104,28 @@ InventoryItem.propTypes = {
     description: PropTypes.string
 };
 
+const GridContainer = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    @media (max-width: 1400px) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 925px) {
+        grid-template-columns: 1fr 1fr;
+    }
+`;
+
 const InventoryContainer = ({ car_items, loading }) => {
     if (!loading && car_items.length === 0) return <div>No Items</div>;
     return (
-        <Grid>
+        <GridContainer>
             {car_items.map((item) => {
-                const { _id, name, description, photos } = item;
+                const { _id, name, description, photos, status } = item;
                 const thumbIndex = photos.findIndex((element) => element.includes("thumb"));
                 const thumbnail = photos[thumbIndex];
-                return <InventoryItem key={v4()} name={name} description={description} thumbnail={thumbnail} inventory_id={_id} />;
+                return <InventoryItem key={v4()} name={name} description={description} thumbnail={thumbnail} inventory_id={_id} status={status} />;
             })}
-        </Grid>
+        </GridContainer>
     );
 };
 
@@ -77,6 +139,7 @@ const Inventory = ({ getInventory, loading, car_items, fetch_car_items }) => {
     return (
         <Container>
             <Spinner shown={loading} />
+            <MainTitle>Inventory</MainTitle>
             <InventoryContainer car_items={car_items} loading={loading} />
         </Container>
     );

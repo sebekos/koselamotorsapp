@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
     margin: auto;
+    max-width: 1900px;
 `;
 
 const MainBackground = styled.div`
