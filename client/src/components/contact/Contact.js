@@ -15,6 +15,9 @@ const MainTitle = styled.div`
     width: 100%;
     background-color: white;
     font-weight: bold;
+    @media (max-width: 768px) {
+        padding: 1rem 0 2rem;
+    }
 `;
 
 const ContactInfoContainer = styled.div`
@@ -31,6 +34,9 @@ const ContactInfoContainer = styled.div`
 const ContactCol = styled.div`
     width: fit-content;
     margin: auto;
+    @media (max-width: 768px) {
+        padding: 3rem;
+    }
 `;
 
 const ContactTitle = styled.div`

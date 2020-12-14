@@ -12,6 +12,9 @@ const Container = styled.div`
     min-height: 100vh;
     margin: auto;
     width: max-content;
+    @media (max-width: 768px) {
+        padding: 9rem 0 0;
+    }
 `;
 
 const ImageContainerThumb = styled.div`
@@ -110,6 +113,9 @@ const Info = ({ name, description }) => {
 const CarContainer = styled.div`
     display: grid;
     grid-template-columns: 500px 500px;
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
 const ThumbsContainer = styled.div`
@@ -119,6 +125,7 @@ const ThumbsContainer = styled.div`
     grid-template-columns: repeat(5, 200px);
     @media (max-width: 768px) {
         grid-template-columns: repeat(2, 200px);
+        margin: 2rem auto;
     }
 `;
 

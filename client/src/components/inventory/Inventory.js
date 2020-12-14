@@ -22,6 +22,9 @@ const MainTitle = styled.div`
     width: 100%;
     background-color: white;
     font-weight: bold;
+    @media (max-width: 768px) {
+        padding: 1rem 0 2rem;
+    }
 `;
 
 const InfoContainer = styled.div`
@@ -112,6 +115,9 @@ const GridContainer = styled.div`
     }
     @media (max-width: 925px) {
         grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
     }
 `;
 

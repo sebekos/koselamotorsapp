@@ -16,6 +16,9 @@ const MainTitle = styled.div`
     width: 100%;
     background-color: white;
     font-weight: bold;
+    @media (max-width: 768px) {
+        padding: 1rem 0 2rem;
+    }
 `;
 
 const VehicleServicesContainer = styled.div`
@@ -34,7 +37,7 @@ const ImgContainer = styled.div`
     max-width: 650px;
     padding: 5rem 3rem;
     @media (max-width: 768px) {
-        display: none;
+        padding: 0rem;
     }
 `;
 
@@ -62,6 +65,9 @@ const Image2 = () => {
 const TextContainer = styled.div`
     max-width: 650px;
     padding: 5rem 3rem;
+    @media (max-width: 768px) {
+        padding: 1rem;
+    }
 `;
 
 const TextTitle = styled.div`

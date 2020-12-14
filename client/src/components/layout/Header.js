@@ -15,6 +15,7 @@ const Container = styled.div`
     z-index: 1;
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
+        height: 7rem;
     }
 `;
 

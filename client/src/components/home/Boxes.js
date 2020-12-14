@@ -8,16 +8,15 @@ const Container = styled.div`
     width: max-content;
     margin: 2rem auto 0;
     text-align: center;
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 `;
 
 const Boxes = () => {
     return (
         <Container>
-            <ServiceItem
-                icon="fas fa-car-crash fa-7x"
-                title="Maintenance"
-                text="Stay up to date with regular maintenance and affordable auto service when you bring your new or used vehicle"
-            />
+            <ServiceItem icon="fas fa-car-crash fa-7x" title="Maintenance" text="Stay up to date with regular maintenance and affordable auto service when you bring your new or used vehicle" />
             <ServiceItem
                 icon="fas fa-tools fa-7x"
                 title="Engine Work"

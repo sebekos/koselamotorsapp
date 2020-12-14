@@ -15,7 +15,7 @@ const MainBackground = styled.div`
     background-size: auto;
     background-color: lightgrey;
     @media (max-width: 768px) {
-        min-height: 300px;
+        min-height: 500px;
         background-size: cover;
     }
 `;
