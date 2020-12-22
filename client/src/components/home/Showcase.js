@@ -66,7 +66,7 @@ const Showcase = () => {
         <Container>
             <MainBackground />
             <InsideContainer>
-                <WelcomeContainer>Welcome To Motors Motors</WelcomeContainer>
+                <WelcomeContainer>Welcome To Kosela Motors</WelcomeContainer>
 
                 <BtnContainer>
                     <Btn onClick={() => history.push("/Inventory")} style={{ margin: 5 }}>
