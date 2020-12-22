@@ -9,10 +9,14 @@ const Container = styled.div`
 `;
 
 const CardContainer = styled(Card)`
-    width: 250px;
-    height: 300px;
+    width: 600px;
+    height: 350px;
     margin: 10px;
     border: 1px solid #e8e8e8;
+    @media (max-width: 768px) {
+        width: auto;
+        height: auto;
+    }
 `;
 
 const CardContentContainer = styled(CardContent)`
@@ -20,24 +24,17 @@ const CardContentContainer = styled(CardContent)`
     height: 100%;
 `;
 
-const Item = ({ icon, data: { title, text } }) => {
+const Item = ({ title, text }) => {
     return (
         <Container>
             <CardContainer key={v4()}>
                 <CardContentContainer>
-                    <div>
-                        <i className={icon}></i>
-                    </div>
                     <Typography style={{ marginTop: ".5rem", fontWeight: "bold", fontSize: 20 }} gutterBottom align="center">
                         {title}
                     </Typography>
-                    {text.map((o) => {
-                        return (
-                            <Typography style={{ marginTop: ".5rem", fontSize: 15 }} gutterBottom>
-                                {o}
-                            </Typography>
-                        );
-                    })}
+                    <Typography style={{ marginTop: ".5rem", fontSize: 15 }} gutterBottom>
+                        {text}
+                    </Typography>
                 </CardContentContainer>
             </CardContainer>
         </Container>
