@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ServiceItem from "./ContactItem";
 
 const Container = styled.div`
     padding: 8rem 0 0;
@@ -23,11 +24,12 @@ const MainTitle = styled.div`
 const ContactInfoContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
-    max-width: 800px;
+    max-width: 600px;
     margin: 5rem auto 5rem;
     text-align: center;
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
+        margin: 1rem auto;
     }
 `;
 
@@ -35,38 +37,26 @@ const ContactCol = styled.div`
     width: fit-content;
     margin: auto;
     @media (max-width: 768px) {
-        padding: 3rem;
-    }
-`;
-
-const ContactTitle = styled.div`
-    font-size: 1.7rem;
-    font-weight: bold;
-`;
-
-const ContactBody = styled.p`
-    font-size: 1.3rem;
-    @media (max-width: 768px) {
-        font-size: 1rem;
+        padding: 1rem;
     }
 `;
 
 const ContactInfo = () => {
+    const item1Text = {
+        title: "Direct",
+        text: ["Adam Kosela", "(630) 433 - 8701", "email: akosela@netscape.net", "instgram@akosela"]
+    };
+    const item2Text = {
+        title: "Location",
+        text: ["Downers Grove", "Intersection I355/I88", "123 Test St"]
+    };
     return (
         <ContactInfoContainer>
             <ContactCol>
-                <ContactTitle>Direct</ContactTitle>
-                <ContactBody>Adam Kosela</ContactBody>
-                <ContactBody>(630) 433 - 8701</ContactBody>
-                <ContactBody>email akosela@netscape.net</ContactBody>
-                <ContactBody>instgram@akosela</ContactBody>
+                <ServiceItem icon="fas fa-phone fa-7x" data={item1Text} />
             </ContactCol>
             <ContactCol>
-                <ContactTitle>Location</ContactTitle>
-                <ContactBody>Downers Grove</ContactBody>
-                <ContactBody>Intersection I355/I88</ContactBody>
-                <ContactBody>123 Test St</ContactBody>
-                <ContactBody>Info</ContactBody>
+                <ServiceItem icon="fas fa-map-signs fa-7x" data={item2Text} />
             </ContactCol>
         </ContactInfoContainer>
     );

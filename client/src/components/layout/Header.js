@@ -5,6 +5,10 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+const MaxWidth = styled.div`
+    width: 1532px;
+`;
+
 const Container = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -122,10 +126,12 @@ const Header = ({ isAuthenticated, logout, history }) => {
     });
 
     return (
-        <Container className={bottom || currMenu !== "Home" ? "nav-bottom" : ""}>
-            <Logo />
-            <LinksContainer>{isAuthenticated ? <AuthLinks onLogout={onLogout} /> : <GuestLinks currMenu={currMenu} />}</LinksContainer>
-        </Container>
+        <MaxWidth>
+            <Container className={bottom || currMenu !== "Home" ? "nav-bottom" : ""}>
+                <Logo />
+                <LinksContainer>{isAuthenticated ? <AuthLinks onLogout={onLogout} /> : <GuestLinks currMenu={currMenu} />}</LinksContainer>
+            </Container>
+        </MaxWidth>
     );
 };
 
