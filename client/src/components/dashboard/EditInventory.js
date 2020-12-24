@@ -63,13 +63,14 @@ const InventoryItem = ({ name, history, id, deleteInventory, thumbnail }) => {
                 <InfoContainer>
                     <TitleText>{name}</TitleText>
                     <BodyText>
+                        <Button onClick={() => history.push(`/inventory/${id}`)}>View</Button>
                         <Button onClick={() => history.push(`/addphotos/${id}`)}>Add Photos</Button>
                         <Button onClick={() => history.push(`/editinfo/${id}`)}>Edit Info</Button>
                         <Button>Sort Photos</Button>
                         <Button onClick={onDelete} color="red">
                             Delete Car
                         </Button>
-                        <Button>Delete Images</Button>
+                        <Button onClick={() => history.push(`/deletephotos/${id}`)}>Delete Images</Button>
                     </BodyText>
                 </InfoContainer>
             </Segment>

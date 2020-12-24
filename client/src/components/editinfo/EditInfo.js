@@ -56,14 +56,7 @@ export class EditInfo extends Component {
                 <Segment style={{ maxWidth: 700, margin: "auto" }}>
                     <Form onSubmit={this.onSubmit} loading={this.props.loading || this.props.update_loading}>
                         <Form.Group widths="equal">
-                            <Form.Input
-                                fluid
-                                label="Title"
-                                placeholder="Title"
-                                onChange={this.onChange}
-                                name="name"
-                                value={this.state.name}
-                            />
+                            <Form.Input fluid label="Title" placeholder="Title" onChange={this.onChange} name="name" value={this.state.name} />
                         </Form.Group>
                         <Form.TextArea
                             label="Description"
@@ -71,24 +64,12 @@ export class EditInfo extends Component {
                             onChange={this.onChange}
                             name="description"
                             value={this.state.description}
-                            style={{ maxHeight: 100 }}
+                            style={{ maxHeight: 300 }}
                         />
                         <Form.Group inline>
                             <label>Status</label>
-                            <Form.Radio
-                                label="For Sale"
-                                value="For Sale"
-                                checked={this.state.status === "For Sale"}
-                                onChange={this.onRadio}
-                                name="status"
-                            />
-                            <Form.Radio
-                                label="Sold"
-                                value="Sold"
-                                checked={this.state.status === "Sold"}
-                                onChange={this.onRadio}
-                                name="status"
-                            />
+                            <Form.Radio label="For Sale" value="For Sale" checked={this.state.status === "For Sale"} onChange={this.onRadio} name="status" />
+                            <Form.Radio label="Sold" value="Sold" checked={this.state.status === "Sold"} onChange={this.onRadio} name="status" />
                         </Form.Group>
                         <Form.Group inline>
                             <Form.Button type="submit" disabled={this.props.loading}>

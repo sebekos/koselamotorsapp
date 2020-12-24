@@ -51,6 +51,10 @@ const ImageContainerMain = styled.div`
     cursor: pointer;
     background-color: lightgrey;
     border-top-left-radius: 7px;
+    @media (max-width: 550px) {
+        height: 300px;
+        min-width: 425px;
+    }
 `;
 
 const ImageSrcMain = styled.img`
@@ -59,6 +63,10 @@ const ImageSrcMain = styled.img`
     width: 498px;
     object-fit: cover;
     border-top-left-radius: 7px;
+    @media (max-width: 550px) {
+        height: 300px;
+        width: 425px;
+    }
 `;
 
 const ImageMain = ({ img, onClickThumbnail }) => {
@@ -76,6 +84,9 @@ const InfoContainer = styled.div`
     border: 1px solid lightgrey;
     border-top-right-radius: 7px;
     overflow-y: scroll;
+    @media (max-width: 550px) {
+        min-width: 425px;
+    }
 `;
 
 const TitleContainer = styled.div`

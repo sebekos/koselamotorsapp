@@ -13,7 +13,7 @@ import Contact from "./components/contact/Contact";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import AddPhotos from "./components/addphotos/AddPhotos";
-import DeletePhotos from "./components/gallery/DeletePhotos";
+import DeletePhotos from "./components/deletephotos/DeletePhotos";
 import PhotoSortable from "./components/reorder/PhotoSortable";
 import Inventory from "./components/inventory/Inventory";
 import InventorySingle from "./components/inventory/InventorySingle";

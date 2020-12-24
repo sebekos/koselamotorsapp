@@ -44,11 +44,20 @@ const ContactCol = styled.div`
 const ContactInfo = () => {
     const item1Text = {
         title: "Direct",
-        text: ["Adam Kosela", "(630) 433 - 8701", "email: akosela@netscape.net", "instgram@akosela"]
+        text: [
+            { type: "text", text: "Adam Kosela" },
+            { type: "phone", text: "(630) 433 - 8701" },
+            { type: "email", text: "akosela@netscape.net" },
+            { type: "text", text: "instagram@akosela" }
+        ]
     };
     const item2Text = {
         title: "Location",
-        text: ["Downers Grove", "Intersection I355/I88", "123 Test St"]
+        text: [
+            { type: "text", text: "Intersection I355/I88" },
+            { type: "text", text: "Downers Grove" },
+            { type: "text", text: "Illinois, 60516" }
+        ]
     };
     return (
         <ContactInfoContainer>

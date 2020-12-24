@@ -10,7 +10,9 @@ import {
     UPDATE_INVENTORY_LOADING,
     UPDATE_INVENTORY_FAIL,
     DELETE_INVENTORY,
-    DELETE_INVENTORY_FAIL
+    DELETE_INVENTORY_FAIL,
+    REMOVE_MEDIA,
+    SAVE_MEDIA_FAILED
 } from "../constants/types";
 
 const initialState = {
@@ -67,6 +69,15 @@ export default function (state = initialState, action) {
                 car_items: [payload, ...state.car_items],
                 update_inventory_loading: false
             };
+        case REMOVE_MEDIA:
+            return {
+                ...state,
+                car_item: {
+                    ...state.car_item,
+                    photos: state.car_item.photos.filter((o) => !o.includes(payload))
+                },
+                update_inventory_loading: false
+            };
         case DELETE_INVENTORY:
             return {
                 ...state,
@@ -77,6 +88,7 @@ export default function (state = initialState, action) {
         case ADD_INVENTORY_FAIL:
         case UPDATE_INVENTORY_FAIL:
         case DELETE_INVENTORY_FAIL:
+        case SAVE_MEDIA_FAILED:
             return {
                 ...state,
                 error: payload,

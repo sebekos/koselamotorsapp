@@ -30,11 +30,17 @@ const InsideContainer = styled.div`
     -ms-transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
-    background-color: rgba(55, 54, 51, 0.7);
     overflow: hidden;
-    box-shadow: 0px 0px 25px 25px rgba(55, 54, 51, 0.7);
+    background-color: rgba(55, 54, 51, 0.6);
+    box-shadow: 0px 0px 25px 25px rgba(55, 54, 51, 0.6);
     padding: 2rem;
     border-radius: 3rem;
+    @media (max-width: 768px) {
+        white-space: normal;
+        line-height: 3rem;
+        background-color: rgba(55, 54, 51, 0.4);
+        box-shadow: 0px 0px 25px 25px rgba(55, 54, 51, 0.4);
+    }
 `;
 
 const WelcomeContainer = styled.div`

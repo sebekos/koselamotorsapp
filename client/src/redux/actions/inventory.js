@@ -10,7 +10,10 @@ import {
     UPDATE_INVENTORY_LOADING,
     UPDATE_INVENTORY_FAIL,
     DELETE_INVENTORY,
-    DELETE_INVENTORY_FAIL
+    DELETE_INVENTORY_FAIL,
+    REMOVE_MEDIA,
+    SAVE_MEDIA,
+    SAVE_MEDIA_FAILED
 } from "../constants/types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -135,6 +138,36 @@ export const deleteInventory = (inventory_id) => async (dispatch) => {
             }
         });
     }
+};
+
+// Get one inventory
+export const saveMedia = (photos, inventory_id) => async (dispatch) => {
+    dispatch(setInventoryLoading(true));
+    try {
+        const body = {
+            photos
+        };
+        await axios.post(`/api/inventory/savemedia/${inventory_id}`, body);
+        toast.success("Photos updated");
+    } catch (err) {
+        toast.error(err.response.statusText);
+        dispatch({
+            type: SAVE_MEDIA_FAILED,
+            payload: {
+                msg: err.response.statusText,
+                status: err.response.status
+            }
+        });
+    }
+    dispatch(setInventoryLoading(false));
+};
+
+// Remove a photo
+export const removeMedia = (url) => async (dispatch) => {
+    dispatch({
+        type: REMOVE_MEDIA,
+        payload: url
+    });
 };
 
 // Set inventory loading true

@@ -82,7 +82,7 @@ const GoToGalleryContainer = styled.div`
 const GoToGallery = ({ gallery_id }) => {
     return (
         <GoToGalleryContainer>
-            <Link to={`/viewgallery/${gallery_id}`}>
+            <Link to={`/inventory/${gallery_id}`}>
                 <Button variant="contained">Go To Gallery</Button>
             </Link>
         </GoToGalleryContainer>
@@ -116,8 +116,9 @@ const AddMedia = ({ match }) => {
         let formData = new FormData();
         formData.append("gallery_id", match.params.id);
         res.forEach((photo, index) => {
-            formData.append(`reg-${index}`, photo.reg);
-            formData.append(`thumb-${index}`, photo.thumbnail);
+            let tempId = v4();
+            formData.append(`${tempId}-reg-${index}`, photo.reg);
+            formData.append(`${tempId}-thumb-${index}`, photo.thumbnail);
         });
         await axios
             .post(`/api/upload`, formData, {

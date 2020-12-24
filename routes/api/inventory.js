@@ -128,6 +128,30 @@ router.post(
     }
 );
 
+// @route       POST api/inventory/savemedia/:id
+// @description Save media
+// @access      Private
+router.post("/savemedia/:id", [auth], async (req, res) => {
+    const inventory_id = req.params.id;
+    const photos = req.body.photos;
+    try {
+        const inventoryFields = {
+            photos
+        };
+        // Check if exists
+        let inventory = await Inventory.findById(inventory_id);
+        if (!inventory) {
+            return res.status(401).json({ msg: "Inventory not found" });
+        }
+        // Update inventory
+        inventory = await Inventory.findByIdAndUpdate(inventory_id, { $set: inventoryFields }, { new: true });
+        res.json(inventory);
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send(error);
+    }
+});
+
 // @route       POST api/inventory/delete/:id
 // @description Delete inventory
 // @access      Private

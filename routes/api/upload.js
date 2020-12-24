@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const multiparty = require("multiparty");
-const { uuid } = require("uuidv4");
 const fs = require("fs");
 const auth = require("../../middleware/auth");
 const AWS = require("aws-sdk");
@@ -67,8 +66,7 @@ router.post("/", auth, (req, res) => {
                 let path = files[photo][0].path;
                 let buffer = fs.readFileSync(path);
                 let type = await FileType(buffer);
-                let curUuid = uuid();
-                let fileName = `gallery/${gallery_id}/${curUuid}-${fieldName}`;
+                let fileName = `gallery/${gallery_id}/${fieldName}`;
                 return new Promise((resolve, reject) => resolve(uploadFile(buffer, fileName, type)));
             })
         )
@@ -81,7 +79,8 @@ router.post("/", auth, (req, res) => {
                 console.log(err);
                 return res.status(400).json({ errors: [{ msg: "S3 Error" }] });
             });
-        await Inventory.findByIdAndUpdate(gallery_id, { $set: { photos: returnUrls } }, { new: true });
+        let newPhotos = gallery.photos.concat(returnUrls);
+        await Inventory.findByIdAndUpdate(gallery_id, { $set: { photos: newPhotos } }, { new: true });
         return res.status(200).send(returnUrls);
     });
 });

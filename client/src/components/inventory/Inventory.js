@@ -60,6 +60,10 @@ const ImageContainerMain = styled.div`
     cursor: pointer;
     border-top-right-radius: 7px;
     border-top-left-radius: 7px;
+    @media (max-width: 550px) {
+        height: 300px;
+        width: 375px;
+    }
 `;
 
 const ImageSrcMain = styled.img`
@@ -68,6 +72,10 @@ const ImageSrcMain = styled.img`
     object-fit: cover;
     border-top-right-radius: 7px;
     border-top-left-radius: 7px;
+    @media (max-width: 550px) {
+        height: 300px;
+        width: 375px;
+    }
 `;
 
 const ImageMain = ({ img }) => {
@@ -83,6 +91,9 @@ const ItemContainer = styled.div`
     margin: 1rem 0.5rem auto;
     border: 1px solid lightgrey;
     border-radius: 7px;
+    @media (max-width: 550px) {
+        width: 375px;
+    }
 `;
 
 const InventoryItem = ({ name, description, thumbnail, inventory_id, status }) => {

@@ -20,6 +20,35 @@ const CardContentContainer = styled(CardContent)`
     height: 100%;
 `;
 
+const types = (type, text) => {
+    switch (type) {
+        case "text":
+            return (
+                <Typography style={{ marginTop: ".5rem", fontSize: 15 }} gutterBottom>
+                    {text}
+                </Typography>
+            );
+        case "email":
+            return (
+                <Typography style={{ marginTop: ".5rem", fontSize: 15 }} gutterBottom>
+                    <a href={`mailto:${text}`}>{text}</a>
+                </Typography>
+            );
+        case "phone":
+            return (
+                <Typography style={{ marginTop: ".5rem", fontSize: 15 }} gutterBottom>
+                    <a href="tel:1-630-433-8701">{text}</a>
+                </Typography>
+            );
+        default:
+            return (
+                <Typography style={{ marginTop: ".5rem", fontSize: 15 }} gutterBottom>
+                    {text}
+                </Typography>
+            );
+    }
+};
+
 const Item = ({ icon, data: { title, text } }) => {
     return (
         <Container>
@@ -32,11 +61,9 @@ const Item = ({ icon, data: { title, text } }) => {
                         {title}
                     </Typography>
                     {text.map((o) => {
-                        return (
-                            <Typography style={{ marginTop: ".5rem", fontSize: 15 }} gutterBottom>
-                                {o}
-                            </Typography>
-                        );
+                        const { type, text } = o;
+
+                        return <div key={v4()}>{types(type, text)}</div>;
                     })}
                 </CardContentContainer>
             </CardContainer>
