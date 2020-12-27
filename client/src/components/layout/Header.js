@@ -4,6 +4,7 @@ import { logout } from "../../redux/actions/auth";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { v4 } from "uuid";
 
 const MaxWidth = styled.div`
     width: 1532px;
@@ -66,13 +67,20 @@ const Logo = () => {
 };
 
 const GuestLinks = ({ currMenu }) => {
-    const links = ["Home", "Services", "Inventory", "Contact"];
+    const links = {
+        Home: "",
+        "About Us": "aboutus",
+        Services: "services",
+        Inventory: "inventory",
+        Contact: "contact"
+    };
+    const linksArray = Object.keys(links);
     return (
         <>
-            {links.map((link, index) => {
+            {linksArray.map((o) => {
                 return (
-                    <Link route={link} to={`/${link !== "Home" ? link : ""}`} key={`guestlinks-${index}`} className={link.toLowerCase() === currMenu.toLowerCase() ? "active-link" : null}>
-                        {link}
+                    <Link key={v4()} to={`/${links[o]}`} className={links[o] === currMenu.toLowerCase() ? "active-link" : null}>
+                        {o}
                     </Link>
                 );
             })}
@@ -83,6 +91,7 @@ const GuestLinks = ({ currMenu }) => {
 const AuthLinks = ({ onLogout }) => {
     return (
         <>
+            <Link to="/inventory">Inventory</Link>
             <Link to="/dashboard">Dashboard</Link>
             <Link to="/login" onClick={onLogout}>
                 Logout
@@ -114,20 +123,18 @@ const Header = ({ isAuthenticated, logout, history }) => {
 
     useEffect(() => {
         let currPath = history.location.pathname.split("/")[1];
-        currPath = currPath === "" ? "Home" : currPath;
         setCurrMenu(currPath);
         window.addEventListener("scroll", listenToScroll);
     }, [history.location.pathname]);
 
     history.listen((location, action) => {
         let currPath = location.pathname.split("/")[1];
-        currPath = currPath === "" ? "Home" : currPath;
         setCurrMenu(currPath);
     });
 
     return (
         <MaxWidth>
-            <Container className={bottom || currMenu !== "Home" ? "nav-bottom" : ""}>
+            <Container className={bottom || currMenu !== "" ? "nav-bottom" : ""}>
                 <Logo />
                 <LinksContainer>{isAuthenticated ? <AuthLinks onLogout={onLogout} /> : <GuestLinks currMenu={currMenu} />}</LinksContainer>
             </Container>

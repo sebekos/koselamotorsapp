@@ -1,5 +1,5 @@
 import React from "react";
-import LandingImage from "../../img/showcase2.jpg";
+import LandingImage from "../../img/showcase3.jpeg";
 import styled from "styled-components";
 import { Button } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
@@ -12,7 +12,7 @@ const Container = styled.div`
 const MainBackground = styled.div`
     background-image: url(${LandingImage});
     min-height: 100vh;
-    background-position: center top 0rem;
+    background-position: 50% 60%;
     background-repeat: no-repeat;
     background-size: auto;
     background-color: lightgrey;
@@ -40,6 +40,8 @@ const InsideContainer = styled.div`
         line-height: 3rem;
         background-color: rgba(55, 54, 51, 0.4);
         box-shadow: 0px 0px 25px 25px rgba(55, 54, 51, 0.4);
+        padding: 0rem;
+        border-radius: 1rem;
     }
 `;
 
@@ -53,6 +55,7 @@ const WelcomeContainer = styled.div`
     @media (max-width: 768px) {
         white-space: normal;
         line-height: 3rem;
+        white-space: normal;
     }
 `;
 
@@ -64,6 +67,9 @@ const BtnContainer = styled.div`
 
 const Btn = styled(Button)`
     margin: 1rem;
+    @media (max-width: 768px) {
+        padding: 0.1rem;
+    }
 `;
 
 const Showcase = () => {
@@ -75,11 +81,14 @@ const Showcase = () => {
                 <WelcomeContainer>Welcome To Kosela Motors</WelcomeContainer>
 
                 <BtnContainer>
-                    <Btn onClick={() => history.push("/Inventory")} style={{ margin: 5 }}>
-                        View Inventory
+                    <Btn onClick={() => history.push("/AboutUs")} style={{ margin: 5 }}>
+                        About Us
                     </Btn>
                     <Btn onClick={() => history.push("/Services")} style={{ margin: 5 }}>
                         My Services
+                    </Btn>
+                    <Btn onClick={() => history.push("/Inventory")} style={{ margin: 5 }}>
+                        View Inventory
                     </Btn>
                 </BtnContainer>
             </InsideContainer>

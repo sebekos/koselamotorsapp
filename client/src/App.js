@@ -21,6 +21,7 @@ import EditInfo from "./components/editinfo/EditInfo";
 import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
 import ScrollToTop from "./utils/scrollToTop";
+import About from "./components/about/About";
 
 // css
 import "react-toastify/dist/ReactToastify.min.css";
@@ -50,6 +51,7 @@ const App = () => {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/contact" component={Contact} />
+                    <Route exact path="/aboutus" component={About} />
                     <Route exact path="/services" component={Services} />
                     <Route exact path="/inventory" component={Inventory} />
                     <Route exact path="/inventory/:id" component={InventorySingle} />

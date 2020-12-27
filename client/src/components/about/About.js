@@ -1,55 +1,30 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { openModal } from "../../redux/actions/modal";
+import styled from "styled-components";
 
-const About = ({ isAuthenticated, openModal, text }) => {
-    const editText = (e) => {
-        if (!isAuthenticated) {
-            return;
-        }
-        const data = {
-            name: e.target.getAttribute("name"),
-            text: e.target.textContent
-        };
-        openModal(data);
-    };
+const Container = styled.div`
+    padding-top: 8rem;
+    min-height: 100vh;
+`;
 
+const MainTitle = styled.div`
+    font-size: 3rem;
+    color: #3e4444;
+    text-align: center;
+    padding: 0rem 0 1rem;
+    width: 100%;
+    background-color: white;
+    font-weight: bold;
+    @media (max-width: 1000px) {
+        padding: 1rem 0 2rem;
+    }
+`;
+
+const About = () => {
     return (
-        <section id="main">
-            <div className="container">
-                <article id="main-col">
-                    <h1 onClick={editText} name="abouttitle" className="page-title">
-                        {text.fields.abouttitle}
-                    </h1>
-                    <p onClick={editText} name="about">
-                        {text.fields.about}
-                    </p>
-                </article>
-                <aside id="sidebar">
-                    <div className="dark">
-                        <h3 onClick={editText} name="whatwedotitle">
-                            {text.fields.whatwedotitle}
-                        </h3>
-                        <p onClick={editText} name="whatwedo">
-                            {text.fields.whatwedo}
-                        </p>
-                    </div>
-                </aside>
-            </div>
-        </section>
+        <Container>
+            <MainTitle>About Us</MainTitle>
+        </Container>
     );
 };
 
-About.propTypes = {
-    openModal: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool,
-    text: PropTypes.object.isRequired
-};
-
-const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    text: state.text
-});
-
-export default connect(mapStateToProps, { openModal })(About);
+export default About;
