@@ -134,7 +134,7 @@ const Header = ({ isAuthenticated, logout, history }) => {
 
     return (
         <MaxWidth>
-            <Container className={bottom || currMenu !== "" ? "nav-bottom" : ""}>
+            <Container className={currMenu !== "" ? "nav-bottom" : ""}>
                 <Logo />
                 <LinksContainer>{isAuthenticated ? <AuthLinks onLogout={onLogout} /> : <GuestLinks currMenu={currMenu} />}</LinksContainer>
             </Container>

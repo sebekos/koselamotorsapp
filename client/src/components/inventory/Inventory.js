@@ -27,6 +27,18 @@ const MainTitle = styled.div`
     }
 `;
 
+const Desc = styled.div`
+    font-size: 1.2rem;
+    color: #3e4444;
+    text-align: center;
+    padding: 1rem 0 0rem;
+    width: 100%;
+    background-color: white;
+    @media (max-width: 768px) {
+        padding: 1rem 0 2rem;
+    }
+`;
+
 const InfoContainer = styled.div`
     padding: 0.3rem;
 `;
@@ -75,6 +87,7 @@ const ImageSrcMain = styled.img`
     @media (max-width: 550px) {
         height: 300px;
         width: 375px;
+        overflow: hidden;
     }
 `;
 
@@ -157,6 +170,7 @@ const Inventory = ({ getInventory, loading, car_items, fetch_car_items }) => {
         <Container>
             <Spinner shown={loading} />
             <MainTitle>Inventory</MainTitle>
+            <Desc>Every year we selected a unique...</Desc>
             <InventoryContainer car_items={car_items} loading={loading} />
         </Container>
     );

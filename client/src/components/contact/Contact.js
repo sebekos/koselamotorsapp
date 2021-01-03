@@ -21,6 +21,18 @@ const MainTitle = styled.div`
     }
 `;
 
+const Desc = styled.div`
+    font-size: 1.2rem;
+    color: #3e4444;
+    text-align: center;
+    padding: 1rem 0 0rem;
+    width: 100%;
+    background-color: white;
+    @media (max-width: 768px) {
+        padding: 1rem 0 2rem;
+    }
+`;
+
 const ContactInfoContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -75,6 +87,7 @@ const Contact = () => {
     return (
         <Container>
             <MainTitle>Contact</MainTitle>
+            <Desc>Currently operating by appointment only</Desc>
             <ContactInfo />
         </Container>
     );

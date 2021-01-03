@@ -31,7 +31,9 @@ const VehicleServicesContainer = styled.div`
     align-items: center;
     justify-items: center;
     @media (max-width: 1000px) {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        width: 95%;
     }
 `;
 

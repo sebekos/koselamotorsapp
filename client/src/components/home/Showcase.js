@@ -59,6 +59,20 @@ const WelcomeContainer = styled.div`
     }
 `;
 
+const DescContainer = styled.div`
+    font-size: 1.2rem;
+    color: white;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+    white-space: nowrap;
+    @media (max-width: 768px) {
+        white-space: normal;
+        line-height: 1.3rem;
+        white-space: normal;
+    }
+`;
+
 const BtnContainer = styled.div`
     display: flex;
     width: max-content;
@@ -79,7 +93,7 @@ const Showcase = () => {
             <MainBackground />
             <InsideContainer>
                 <WelcomeContainer>Welcome To Kosela Motors</WelcomeContainer>
-
+                <DescContainer>Chicago's Premier Boutique Style Subarau, Audi, and VW Service</DescContainer>
                 <BtnContainer>
                     <Btn onClick={() => history.push("/AboutUs")} style={{ margin: 5 }}>
                         About Us
