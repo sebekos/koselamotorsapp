@@ -23,7 +23,7 @@
         "express-validator": "^6.2.0",
         "file-type": "^12.3.0",
         "fs": "0.0.1-security",
-        "jsonwebtoken": "^8.5.1",
+        "jsonwebtoken": "^9.0.0",
         "mongoose": "^5.7.7",
         "multiparty": "^4.2.1",
         "nodemailer": "^6.4.2",
